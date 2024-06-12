@@ -1,0 +1,70 @@
+/* h2ログイン情報 */
+// ドライバクラス
+    org.h2.Driver
+//JDBC URL
+    jdbc:h2:file:C:/pleiades/workspace/data/famiLink
+//
+
+/* アカウントDB */
+CREATE TABLE accounts ( 
+    user_id VARCHAR(20) NOT NULL, //ユーザーID
+    mail VARCHAR(100) NOT NULL,   //メールアドレス
+    pw VARCHAR(20) NOT NULL,  //PW
+    nickname VARCHAR(20), //ニックネーム
+    pr_group INTEGER, //初期グループ
+    PRIMARY KEY  (user_id) 
+); 
+
+/* グループDB */
+CREATE TABLE groups ( 
+    ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
+    group_name VARCHAR(20) NOT NULL,
+    user_id VARCHAR(20),
+    editer BOOLEAN,
+    icon VARCHAR(100),
+    PRIMARY KEY  (ID) 
+); 
+
+/* タスクDB */
+CREATE TABLE tasks ( 
+    ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
+    group_number INTEGER, 
+    task VARCHAR(30),
+    contents VARCHAR(200),
+    today TIMESTAMP,
+    register VARCHAR(20),
+    to VARCHAR(20),
+    checkbox BOOLEAN,
+    manual_link VARCHAR(30),
+    PRIMARY KEY  (ID) 
+); 
+
+/* 予定DB */
+CREATE TABLE schedules ( 
+    ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
+    group_number INTEGER,
+    task VARCHAR(30) ,
+    contents VARCHAR(200),
+    today TIMESTAMP,
+    register VARCHAR(20),
+    PRIMARY KEY  (ID) 
+); 
+
+/* マニュアルDB */
+CREATE TABLE manuals ( 
+    id INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
+    group_number INTEGER,
+    manual_name VARCHAR(30),
+    PRIMARY KEY  (ID) 
+); 
+
+/* 項目DB */
+CREATE TABLE items ( 
+  id  INTEGER AUTO_INCREMENT(1),
+  manual_id	INTEGER,
+  heading	VARCHAR(30)		,
+  contents  VARCHAR(200)		,
+  image VARCHAR(100)		,
+  regist_day		Date		,
+  PRIMARY KEY(ID)
+); 
