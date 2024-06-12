@@ -15,6 +15,8 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
+			<form><!--  -->
+			</form>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
