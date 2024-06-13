@@ -89,7 +89,7 @@ public class ItemsDAO {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 				// SQL文を準備する
-				String sql = "UPDATE Items SET heading=?, contents=?, image=?, regist_day=?, WHERE id=?";
+				String sql = "UPDATE Items SET heading=?, contents=?, image=?, regist_day=? WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -112,6 +112,7 @@ public class ItemsDAO {
 					pStmt.setString(3, null);
 				}
 					pStmt.setDate(4, manualupdate.getRegist_day());
+					pStmt.setInt(5, manualupdate.getId());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
