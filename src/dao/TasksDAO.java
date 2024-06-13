@@ -186,7 +186,7 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE Tasks SET task=?, contens=?, today=?, register=?, to=?, WHERE id=?";
+			String sql = "UPDATE Tasks SET task=?, contents=?, today=?, register=?, to=? WHERE id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
@@ -265,7 +265,7 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM Bc WHERE number=?";
+			String sql = "DELETE FROM Tasks WHERE id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
