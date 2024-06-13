@@ -20,7 +20,7 @@
 			<table>
 			<tr>
 			  <td>
-			<input type="file" name="image">
+			<input type="file" name="images">
 			  </td>
 			  <td>
 			<input type="text" name="name" placeholder= "グループ名">
