@@ -16,6 +16,10 @@ public class Groups implements Serializable {
 
 	}
 
+	public Groups(String user_ID) {
+		super();
+		this.user_ID = user_ID;
+	}
 
 	//引数ありのコンストラクタ
 	public Groups(int id, String group_name, String user_ID, boolean editer, String icon) {
