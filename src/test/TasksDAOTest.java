@@ -16,7 +16,7 @@ public class TasksDAOTest {
 
 		int upDelNumber = 0;		// 後で更新および削除する番号
 		System.out.println("<< insertメソッドのテスト（1件のレコードを登録します）>>");
-		Tasks insRec = new Tasks(0, 0, "Task", "Contents", date, "From", "to", true, "");
+		Tasks insRec = new Tasks(7, 0, "Task", "Contents", date, "From", "to", true, "");
 		if (dao.insert(insRec)) {
 			System.out.println("登録成功！");
 			tasksList = dao.select(insRec);
@@ -46,7 +46,7 @@ public class TasksDAOTest {
 
 		// updateメソッドのテスト
 		System.out.println("<< updateメソッドのテスト（1件のレコードを更新します）>>");
-		Tasks upRec = new Tasks(upDelNumber, 0, "更新", "更新", date, "更新", "更新", true, "");
+		Tasks upRec = new Tasks(7, 0, "更新", "更新", date, "更新", "更新", true, "");
 		if (dao.update(upRec)) {
 			System.out.println("更新成功！");
 			tasksList = dao.select(upRec);
