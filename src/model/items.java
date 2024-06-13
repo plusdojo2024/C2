@@ -2,7 +2,8 @@ package model;
 
 import java.io.Serializable;
 
-public class items implements Serializable {
+public class Items implements Serializable {
+
 
 	//field
 	private int id; //管理番号
@@ -14,12 +15,12 @@ public class items implements Serializable {
 
 	//引数なしのconstructor
 
-	public items() {
+	public Items() {
 
 	}
 
 	//constructor
-	public items(int id, int manual_id, String heading, String contents, String image, java.sql.Date regist_day) {
+	public Items(int id, int manual_id, String heading, String contents, String image, java.sql.Date regist_day) {
 		super();
 		this.id = id;
 		this.manual_id = manual_id;
@@ -77,7 +78,6 @@ public class items implements Serializable {
 	public void setRegist_day(java.sql.Date regist_day) {
 		this.regist_day = regist_day;
 	}
-
 
 
 }

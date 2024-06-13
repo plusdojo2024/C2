@@ -11,6 +11,14 @@ public class Manuals implements Serializable {
 	public Manuals() {
 		//処理なし
 	}
+
+	public Manuals(String manual_name) {
+		//manuals_nameだけ
+		super();
+		this.manual_name = manual_name;
+
+	}
+
 	public Manuals(int id, int group_number, String manual_name) {
 		super();
 		this.id = id;
