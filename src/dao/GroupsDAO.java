@@ -25,7 +25,7 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO famiLink VALUES (NULL, ?, ?, ?)";
+			String sql = "INSERT INTO groups VALUES (NULL, ?, ?, true, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -37,17 +37,17 @@ public class GroupsDAO {
 				pStmt.setString(1, "（未設定）");
 			}
 
-			//iconの登録
-			if (card.getIcon() != null && !card.getIcon().equals("")) {
-				pStmt.setString(2, card.getIcon());
+			//アカウントの登録
+			if (card.getUser_ID() != null && !card.getUser_ID().equals("")) {
+				pStmt.setString(2, card.getUser_ID());
 			}
 			else {
 				pStmt.setString(2, "（未設定）");
 			}
 
-			//アカウントの登録
-			if (card.getUser_ID() != null && !card.getUser_ID().equals("")) {
-				pStmt.setString(3, card.getUser_ID());
+			//アイコンの登録
+			if (card.getIcon() != null && !card.getIcon().equals("")) {
+				pStmt.setString(3, card.getIcon());
 			}
 			else {
 				pStmt.setString(3, "（未設定）");
@@ -96,7 +96,7 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE famiLink SET group_name=?, icon=?,editer=?";
+			String sql = "UPDATE groups SET group_name=?, icon=?,editer=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -150,7 +150,7 @@ public class GroupsDAO {
 	}
 
 	// 引数user_IDで指定されたレコードを削除し、成功したらtrueを返す
-	public boolean delete(int user_ID) {
+	public boolean delete(String user_ID) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -162,11 +162,11 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM Bc WHERE user_ID=?";
+			String sql = "DELETE FROM groups WHERE user_ID=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, user_ID);
+			pStmt.setString(1, user_ID);
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -208,8 +208,10 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT * FROM Groups WHEHR user_ID";
+			String sql = "SELECT * FROM groups WHERE user_ID  =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, "%" + card.getUser_ID() + "%");
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
