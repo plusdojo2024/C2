@@ -14,6 +14,7 @@ public class Groups implements Serializable {
 	//引数無しのコンストラクタ
 	public Groups() {
 
+
 	}
 
 	public Groups(String user_ID) {
