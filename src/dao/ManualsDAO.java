@@ -25,7 +25,7 @@ public class ManualsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql ="SELECT * FROM Manuals WHERE manual_name LIKE ?";
+			String sql ="SELECT * FROM Manuals WHERE manual_name LIKE ? AND group_number = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -36,6 +36,14 @@ public class ManualsDAO {
 			else {
 				pStmt.setString(1, "%");
 			}
+
+			if (manualitems.getGroup_number() !=0) {
+				pStmt.setInt(2, manualitems.getGroup_number());
+			}
+			else {
+				pStmt.setInt(2, 0);
+			}
+
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();

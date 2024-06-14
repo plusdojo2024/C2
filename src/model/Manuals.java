@@ -20,11 +20,10 @@ public class Manuals implements Serializable {
 
 	}
 
-	public Manuals(int id, int group_number, String manual_name) {
+	public Manuals(String manual_name, int pr_group) {
 		super();
-		this.id = id;
-		this.group_number = group_number;
 		this.manual_name = manual_name;
+		this.group_number = pr_group;
 	}
 //メソッド
 	public int getId() {
