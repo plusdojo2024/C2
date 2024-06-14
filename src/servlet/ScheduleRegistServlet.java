@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,24 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.TasksDAO;
-import model.LoginUser;
-import model.Tasks;
+import dao.SchedulesDAO;
+import model.Schedules;
+
 
 /**
- * Servlet implementation class TaskServlet
+ * Servlet implementation class ScheduleRegistServlet
  */
-@WebServlet("/TaskServlet")
-public class TaskServlet extends HttpServlet {
+@WebServlet("/ScheduleRegistServlet")
+public class ScheduleRegistServlet extends HttpServlet {
+
+
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TaskServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,16 +30,13 @@ public class TaskServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
 
-		LoginUser login = (LoginUser)session.getAttribute("id_group");
-		request.setAttribute("id_group",login);
-
-		// taskページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
+		// 登録ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_resist.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -53,29 +44,35 @@ public class TaskServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user_Id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String to = request.getParameter("to");
+		String task = request.getParameter("task");
+		String contents = request.getParameter("contents");
+		String register = request.getParameter("register");
+
+		// セッションパラメーター
+		int group_number =(int)session.getAttribute("group_number");
+
 
 		// 登録処理を行う
-		TasksDAO bTask = new TasksDAO();
-		List<Tasks> cardList = bTask.select(to);
-
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("cardList", cardList);
+		SchedulesDAO sDao = new SchedulesDAO();
+		if (sDao.insert(new Schedules(0, group_number, task, contents, register))) {	// 登録成功
+			request.setAttribute("result", "登録しました。");
+		}
+		else {												// 登録失敗
+			request.setAttribute("result", "登録できませんでした。");
+		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
 		dispatcher.forward(request, response);
 
 	}
-
 }

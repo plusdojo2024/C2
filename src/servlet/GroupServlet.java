@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.TasksDAO;
-import model.LoginUser;
-import model.Tasks;
+import dao.GroupsDAO;
 
 /**
- * Servlet implementation class TaskServlet
+ * Servlet implementation class GroupServlet
  */
-@WebServlet("/TaskServlet")
-public class TaskServlet extends HttpServlet {
+@WebServlet("/GroupServlet")
+public class GroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TaskServlet() {
+    public GroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,48 +31,46 @@ public class TaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
-		LoginUser login = (LoginUser)session.getAttribute("id_group");
-		request.setAttribute("id_group",login);
+		//ユーザーごとに所属しているグループのデータを取得
+		int login = (int)session.getAttribute("user_ID");
 
-		// taskページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
+		//GroupsDAOに処理してもらう
+		GroupsDAO abc = new GroupsDAO();
+
+		request.setAttribute("user_ID", abc.select (login));
+
+		// グループ一覧ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
 		dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user_Id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
-		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String to = request.getParameter("to");
 
-		// 登録処理を行う
-		TasksDAO bTask = new TasksDAO();
-		List<Tasks> cardList = bTask.select(to);
 
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("cardList", cardList);
 
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
-		dispatcher.forward(request, response);
-
+		doGet(request, response);
 	}
 
 }

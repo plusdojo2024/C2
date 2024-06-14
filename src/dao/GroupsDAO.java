@@ -250,5 +250,59 @@ public class GroupsDAO {
 		// 結果を返す
 		return cardList;
 	}
+
+
+public List<Groups> select(int card) {
+	Connection conn = null;
+	List<Groups> cardList = new ArrayList<Groups>();
+
+	try {
+		// JDBCドライバを読み込む
+		Class.forName("org.h2.Driver");
+
+		// データベースに接続する
+		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+		// SQL文を準備する
+		String sql = "SELECT * FROM groups WHERE user_ID  =?";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+
+		pStmt.setInt(1, card);
+
+		// SQL文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+
+		// 結果表をコレクションにコピーする
+		while (rs.next()) {
+			Groups record = new Groups(
+			rs.getString("user_ID")
+			);
+			cardList.add(record);
+		}
+	}
+
+	catch (SQLException e) {
+		e.printStackTrace();
+		cardList = null;
+	}
+	catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		cardList = null;
+	}
+	finally {
+		// データベースを切断
+		if (conn != null) {
+			try {
+				conn.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				cardList = null;
+			}
+		}
+	}
+
+	// 結果を返す
+	return cardList;
+}
 }
 
