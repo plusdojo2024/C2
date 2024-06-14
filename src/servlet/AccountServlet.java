@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.LoginUser;
+import dao.AccountsDAO;
+import model.Accounts;
 
 /**
  * Servlet implementation class AccountServlet
@@ -37,16 +39,17 @@ public class AccountServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
 		dispatcher.forward(request, response);
 
-		//ユーザー情報の現在の情報を持ってくる。
+		//ユーザー情報の現在の情報を持ってくるselect
 		HttpSession session = request.getSession();
-		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
+		String user_ID = (String)session.getAttribute("user_ID");
 		System.out.println(session.getAttribute("user_ID"));
+
 		// 検索処理を行う
-//		AccountsDAO accountDao = new AccountsDAO();
-//        List<Accounts> accountList = accountDao.select(new Accounts(user_ID,mail,pw,nickname));
+		AccountsDAO accountDao = new AccountsDAO();
+        List<Accounts> accountList = accountDao.pr_account(new Accounts(user_ID));
 
 		// 検索結果をリクエストスコープに格納する
-//		request.setAttribute("accountList", accountList);
+		request.setAttribute("accountList", accountList);
 
 	}
 

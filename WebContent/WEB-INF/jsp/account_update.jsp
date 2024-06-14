@@ -23,14 +23,14 @@
           			<tr>
             			<td>
               				<label>User ID<br>
-                				<input type="text" name="userId">
+                				<input type="text" name="user_ID" value="${e.user_ID} }">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>Mail<br>
-                				<input type="text" name="mail">
+                				<input type="text" name="mail" value="${e.mail} }">
               				</label>
             			</td>
           			</tr>
