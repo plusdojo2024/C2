@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.TasksDAO;
-import model.LoginUser;
-import model.Tasks;
+import dao.ItemsDAO;
+import model.Items;
 
 /**
- * Servlet implementation class TaskUpdateServlet
+ * Servlet implementation class ManualUpdateServlet
  */
-@WebServlet("/TaskUpdateServlet")
-public class TaskUpdateServlet extends HttpServlet {
+@WebServlet("/ManualUpdateServlet")
+public class ManualUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TaskUpdateServlet() {
+    public ManualUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,12 +36,12 @@ public class TaskUpdateServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/C2/LoginServlet");
+			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
 
-		// taskページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
+		// manualUpdateページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -52,7 +51,7 @@ public class TaskUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_id") == null) {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
@@ -60,22 +59,19 @@ public class TaskUpdateServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		int number = Integer.parseInt(request.getParameter("id"));
-		LoginUser login = (LoginUser)session.getAttribute("group_id");
-		String task = request.getParameter("task");
+		String task = request.getParameter("group_id");
+		int group_id = Integer.parseInt(task);
+		String heading = request.getParameter("header");
 		String contents = request.getParameter("contents");
+		String images = request.getParameter("images");
 		String today = request.getParameter("today");
-		String register = request.getParameter("register");
-		String to = request.getParameter("zipcode");
-		String checkbox = request.getParameter("checkbox");
-		String manual_link = request.getParameter("manual_link");
-		java.sql.Date date = Date.valueOf(today);
-		boolean boo1 = Boolean.valueOf(checkbox);
 
-		TasksDAO bTask = new TasksDAO();
+		java.sql.Date date = Date.valueOf(today);
+
+		ItemsDAO bManuals = new ItemsDAO();
 		// 登録処理を行う
 		if (request.getParameter("submit").equals("更新")) {
-			if (bTask.update(new Tasks(0, login.getGroupId(), task, contents, date, register, to,
-					boo1, manual_link))) {	// 登録成功
+			if (bManuals.update(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
 				request.setAttribute("result", "レコードを登録しました。");
 			}
 			else {												// 登録失敗
@@ -83,7 +79,7 @@ public class TaskUpdateServlet extends HttpServlet {
 			}
 		}
 		else {
-			if (bTask.delete(number)) {	// 削除成功
+			if (bManuals.delete(number)) {	// 削除成功
 				request.setAttribute("result", "レコードを削除しました。");
 			}
 			else {						// 削除失敗
@@ -95,5 +91,5 @@ public class TaskUpdateServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
 		dispatcher.forward(request, response);
 	}
-}
 
+}
