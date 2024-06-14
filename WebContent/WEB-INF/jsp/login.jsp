@@ -16,7 +16,7 @@
 		</header>
 
 		<main>
-			<form id="login_form" method="get" action="/C2/AccountServlet">
+			<form id="login_form" method="post" action="/C2/LoginServlet">
 			  <table>
 			    <tr>
 			      <td>
