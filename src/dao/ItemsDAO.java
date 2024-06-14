@@ -47,14 +47,26 @@ public class ItemsDAO {
 			}
 				pStmt.setDate(4, manualregist.getRegist_day());
 
+
+			//Manualsに項目を一つ増やす
+			String sql2 = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+			// SQL文を完成させる
+
+			pStmt2.setString(1, manualregist.getGroup_number());
+
+			pStmt2.setString(2, manualregist.getManual_Name());
+
 			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
+			if (pStmt2.executeUpdate() == 1) {
 				result = true;
 				}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -89,35 +101,44 @@ public class ItemsDAO {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 				// SQL文を準備する
-				String sql = "UPDATE Items SET heading=?, contents=?, image=?, regist_day=? WHERE id=?";
-				PreparedStatement pStmt = conn.prepareStatement(sql);
+				String sql = "DELETE FROM items WHERE manual_id=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);;
+
 
 				// SQL文を完成させる
-				if (manualupdate.getHeading() != null && !manualupdate.getHeading().equals("")) {
-					pStmt.setString(1, manualupdate.getHeading());
-				}
-				else {
-					pStmt.setString(1, null);
-				}
-				if (manualupdate.getContents() != null && !manualupdate.getContents().equals("")) {
-					pStmt.setString(2, manualupdate.getContents());
-				}
-				else {
-					pStmt.setString(2, null);
-				}
-				if (manualupdate.getImage() != null && !manualupdate.getImage().equals("")) {
-					pStmt.setString(3, manualupdate.getImage());
-				}
-				else {
-					pStmt.setString(3, null);
-				}
-					pStmt.setDate(4, manualupdate.getRegist_day());
-					pStmt.setInt(5, manualupdate.getId());
+				pStmt.setInt(1, manualupdate.getManual_id());
 
-				// SQL文を実行する
+				// SQL文を実行する　一件登録できたら成功
 				if (pStmt.executeUpdate() == 1) {
 					result = true;
 				}
+
+				//insertのバージョンを作る
+				String sql2 = "INSERT INTO Items VALUES (NULL,NULL, ?, ?, ?, ?)";
+				PreparedStatement pStmt3 = conn.prepareStatement(sql2);
+
+				// SQL文を完成させる
+				if (manualupdate.getHeading() != null && !manualupdate.getHeading().equals("")) {
+					pStmt3.setString(1, manualupdate.getHeading());
+				}
+				else {
+					pStmt3.setString(1, "（未設定）");
+				}
+				if (manualupdate.getContents() != null && !manualupdate.getContents().equals("")) {
+					pStmt3.setString(2, manualupdate.getContents());
+				}
+				else {
+					pStmt3.setString(2, "（未設定）");
+				}
+				if (manualupdate.getImage() != null && !manualupdate.getImage().equals("")) {
+					pStmt3.setString(3, manualupdate.getImage());
+				}
+				else {
+					pStmt3.setString(3, "（未設定）");
+				}
+					pStmt3.setDate(4, manualupdate.getRegist_day());
+
+
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
@@ -136,14 +157,12 @@ public class ItemsDAO {
 					}
 				}
 			}
-
 			// 結果を返す
-			return result;
+						return result;
 		}
 
 
-
-	// マニュアルを削除し、成功したらtrueを返す
+		// マニュアルを削除して、成功したらtrueを返す
 		public boolean delete(int id) {
 			Connection conn = null;
 			boolean result = false;
