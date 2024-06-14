@@ -96,7 +96,7 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE groups SET group_name=?, icon=?,editer=?";
+			String sql = "UPDATE groups SET group_name=?, icon=?,editer=? where id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -120,6 +120,7 @@ public class GroupsDAO {
 
 			pStmt.setBoolean(3, card.isEditer());
 
+			pStmt.setInt(4, card.getId());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {

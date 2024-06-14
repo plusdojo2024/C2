@@ -25,7 +25,7 @@ public class ManualsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql ="SELECT * FROM Bc WHERE manual_name LIKE ?";
+			String sql ="SELECT * FROM Manuals WHERE manual_name LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
