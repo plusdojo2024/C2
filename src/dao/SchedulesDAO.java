@@ -24,7 +24,7 @@ public class SchedulesDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO schedules VALUES (NULL, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO schedules VALUES (NULL, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -44,8 +44,6 @@ public class SchedulesDAO {
 			else {
 				pStmt.setString(3, "（未設定）");
 			}
-
-			pStmt.setDate(4, s_detail.getToday());		//まだここは未定
 
 			pStmt.setString(5, s_detail.getRegister());	//まだここは未定
 

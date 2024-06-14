@@ -12,7 +12,7 @@ public class SchedulesDAOTest {
 		// insertメソッドのテスト
 		int upDelNumber = 0;		// 後で更新および削除する番号
 		System.out.println("<< insertメソッドのテスト（1件のレコードを登録します）>>");
-		Schedules insRec = new Schedules(0, 0, "挿入", "挿入", null, "挿入");
+		Schedules insRec = new Schedules(0, 0, "挿入", "挿入", "挿入");
 		if (dao.insert(insRec)) {
 			System.out.println("登録成功！");
 		}
@@ -24,7 +24,7 @@ public class SchedulesDAOTest {
 		// updateメソッドのテスト
 		System.out.println("<< updateメソッドのテスト（1件のレコードを更新します）>>");
 
-		Schedules upRec = new Schedules(1, 0, "更新", "更新", null, "更新");
+		Schedules upRec = new Schedules(1, 0, "更新", "更新", "更新");
 		if (dao.update(upRec)) {
 			System.out.println("更新成功！");
 		}
