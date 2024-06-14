@@ -31,8 +31,8 @@
 	          <td><input type="file" name="images" placeholder="画像"></td>
 	          <td><button>-</button><br></td>
 	        </tr>
-	        <tr><td><button>+</button><br></td></tr>
-	        <tr><td><input type="submit" id="" name="manual_regist" value="登録"></td></tr>
+	        <tr><td><button>+</button><br></td>
+	        <td><input type="submit" id="" name="manual_regist" value="登録"></td></tr>
         </table>
       </form>
 		</main>
