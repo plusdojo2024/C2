@@ -36,6 +36,23 @@ public class GroupUpdateServlet extends HttpServlet {
 			return;
 		}
 
+		// 登録ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_update.jsp");
+		dispatcher.forward(request, response);
+	}
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// // もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/famiLink/LoginServlet");
+			return;
+		}
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String group_name = request.getParameter("group_name");
@@ -72,18 +89,6 @@ public class GroupUpdateServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
 		dispatcher.forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// // もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
-			return;
-		}
-
-	}
-
 }
+
+
