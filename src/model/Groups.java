@@ -33,6 +33,12 @@ public class Groups implements Serializable {
 		this.icon = icon;
 	}
 
+	//引数三つのコンストラクタ
+	public Groups(String group_name, String icon) {
+		super();
+		this.group_name = group_name;
+		this.icon = icon;
+	}
 
 	//ゲッターとセッターの登録
 	public int getId() {

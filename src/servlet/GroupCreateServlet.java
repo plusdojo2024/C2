@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ItemsDAO;
-import model.Items;
+import dao.GroupsDAO;
+import model.Groups;
 
 /**
- * Servlet implementation class ManualRegistServlet
+ * Servlet implementation class GroupCreateServlet
  */
-@WebServlet("/ManualRegistServlet")
-public class ManualRegistServlet extends HttpServlet {
+@WebServlet("/GroupCreateServlet")
+public class GroupCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManualRegistServlet() {
+    public GroupCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,53 +32,52 @@ public class ManualRegistServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user_ID") == null) {
-			response.sendRedirect("/C2/LoginServlet");
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
 
-		// manual_resist.jspページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_regist.jsp");
+		//グループ新規登録ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/create_group.jsp");
 		dispatcher.forward(request, response);
+
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/C2/LoginServlet");
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String task = request.getParameter("group_id");
-		int group_id = Integer.parseInt(task);
-		String heading = request.getParameter("header");
-		String contents = request.getParameter("contents");
-		String images = request.getParameter("images");
-		String today = request.getParameter("today");
-
-		java.sql.Date date = Date.valueOf(today);
-
+		String group_name = request.getParameter("name");
+		String icon = request.getParameter("images");
 
 		// 登録処理を行う
-		ItemsDAO bItems = new ItemsDAO();
-		if (bItems.insert(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
+		GroupsDAO abc = new GroupsDAO();
+		if (abc.insert(new Groups(group_name,icon))) {
 			request.setAttribute("result", "レコードを登録しました。");
 		}
-		else {												// 登録失敗
-			request.setAttribute("result", "レコードを登録できませんでした。");
+		else {
+			request.setAttribute("result", "レコードの登録できません。");
 		}
 
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_regist.jsp");
-		dispatcher.forward(request, response);
-	}
+		//登録後にグループ一覧画面にフォワードする。
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
+				dispatcher.forward(request, response);
+			}
 
-}
+
+ 	}
+

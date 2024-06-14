@@ -16,11 +16,11 @@
 		</header>
 		<main>
       <p>Manual List</p>
-      <form method="post" action="/C2/ManuelUpdateServlet">
+      <form method="post" action="/C2/ManualServlet">
         <input type="search">
         <input type="submit" id="search" name="search" value="search">
       </form>
-      <a href="/C2/ManuelRegistServlrt">+</a>
+      <a href="/C2/ManualRegistServlet">+</a>
       <table>
         <tr><th>お風呂掃除</th></tr>
         <tr><th>洗濯</th></tr>

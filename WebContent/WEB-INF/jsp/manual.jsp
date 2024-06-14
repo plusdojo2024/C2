@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -16,16 +17,21 @@
 		</header>
 		<main>
       <p>Manual List</p>
-      <form method="post" action="/C2/ManualUpdateServlet">
+      <form method="post" action="/C2/ManualServlet">
         <input type="search">
         <input type="submit" id="search" name="search" value="search">
       </form>
       <a href="/C2/ManualRegistServlet">+</a>
-      <table>
-        <tr><th>お風呂掃除</th></tr>
-        <tr><th>洗濯</th></tr>
-        <tr><th>棚の整理</th></tr>
-      </table>
+
+
+      <c:forEach var="e" items="${cardList}" >
+      <table class="table">
+        <tr>
+          <td>
+            <input type="text" name="manual_name" value="${e.manual_name}" readonly="readonly">
+          </td>
+        </tr>
+      </c:forEach>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
