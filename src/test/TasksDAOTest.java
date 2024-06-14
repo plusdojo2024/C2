@@ -19,10 +19,6 @@ public class TasksDAOTest {
 		Tasks insRec = new Tasks(7, 0, "Task", "Contents", date, "From", "to", true, "");
 		if (dao.insert(insRec)) {
 			System.out.println("登録成功！");
-			tasksList = dao.select(insRec);
-			for (Tasks card : tasksList) {
-				upDelNumber = card.getId();;	// 最後のレコードを後で更新および削除する
-			}
 		}
 		else {
 			System.out.println("登録失敗！");
@@ -31,7 +27,7 @@ public class TasksDAOTest {
 
 		// selectメソッドのテスト
 		System.out.println("<< selectメソッドのテスト（すべてのレコードを検索します）>>");
-		tasksList = dao.select(new Tasks());
+		tasksList = dao.select("to");
 		for (Tasks card : tasksList) {
 			System.out.println("ID：" + card.getId());
 			System.out.println("グループナンバー:" + card.getGroup_number());
@@ -49,7 +45,7 @@ public class TasksDAOTest {
 		Tasks upRec = new Tasks(7, 0, "更新", "更新", date, "更新", "更新", true, "");
 		if (dao.update(upRec)) {
 			System.out.println("更新成功！");
-			tasksList = dao.select(upRec);
+			tasksList = dao.select("To");
 		}
 		else {
 			System.out.println("更新失敗！");
