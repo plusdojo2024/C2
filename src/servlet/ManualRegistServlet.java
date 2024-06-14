@@ -40,8 +40,8 @@ public class ManualRegistServlet extends HttpServlet {
 			return;
 		}
 
-		// manual_resist.jspページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_regist.jsp");
+		// manual_regist.jspページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_resist.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -78,7 +78,7 @@ public class ManualRegistServlet extends HttpServlet {
 		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_regist.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_resist.jsp");
 		dispatcher.forward(request, response);
 	}
 
