@@ -12,7 +12,7 @@ import model.Accounts;
 
 public class AccountsDAO {
 	//アカウント設定の際の現在のアカウント情報を持ってくるselect
-		public List<Accounts> select (Accounts account) {
+		public List<Accounts> pr_account (Accounts account) {
 			Connection conn = null;
 			List<Accounts> accountsList = new ArrayList<Accounts>();
 
