@@ -21,7 +21,7 @@
 			    <tr>
 			      <td>
 					<label>UserID<br>
-					<input type="text" name="id">
+					<input type="text" name="user_ID">
 					</label>
 			      </td>
 			    </tr>

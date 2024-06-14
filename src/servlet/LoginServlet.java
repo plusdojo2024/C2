@@ -51,13 +51,14 @@ public class LoginServlet extends HttpServlet {
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("user_ID", new LoginUser(user_ID));
-
+			System.out.println("成功");
 			// マニュアルサーブレットにリダイレクトする
 			response.sendRedirect("/C2/ManualServlet");
 		}
 		else {									// ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 			request.setAttribute("result","ログイン失敗！");
+			System.out.println("失敗");
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
