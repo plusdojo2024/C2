@@ -5,7 +5,6 @@ import java.sql.Date;
 
 public class Schedules implements Serializable {
 
-
 	//field
 	private int id;					//管理番号
 	private int group_number;		//グループDB_管理番号

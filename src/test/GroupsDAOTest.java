@@ -4,7 +4,6 @@ import java.util.List;
 import dao.GroupsDAO;
 import model.Groups;
 
-
 public class GroupsDAOTest {
 	public static void main(String[] args) {
 		GroupsDAO dao = new GroupsDAO();
