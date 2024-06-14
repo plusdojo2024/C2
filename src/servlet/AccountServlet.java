@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.LoginUser;
+
 /**
  * Servlet implementation class AccountServlet
  */
@@ -37,7 +39,7 @@ public class AccountServlet extends HttpServlet {
 
 		//ユーザー情報の現在の情報を持ってくる。
 		HttpSession session = request.getSession();
-	String user_ID = String.toString(session.getAttribute("user_ID"));
+		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
 		System.out.println(session.getAttribute("user_ID"));
 		// 検索処理を行う
 //		AccountsDAO accountDao = new AccountsDAO();
