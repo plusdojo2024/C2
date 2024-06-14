@@ -16,6 +16,11 @@ public class Accounts implements Serializable {
 		//処理なし
 	}
 
+	public Accounts(String user_ID) {
+		super();
+		this.user_ID = user_ID;
+	}
+
 	public Accounts(String user_ID,String pw) {
 		super();
 		this.user_ID = user_ID;
