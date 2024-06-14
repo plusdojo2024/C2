@@ -1,5 +1,6 @@
 package model;
 
+
 import java.io.Serializable;
 
 public class Manuals implements Serializable {
@@ -7,7 +8,7 @@ public class Manuals implements Serializable {
 	private int id;
 	private int group_number;
 	private String manual_name;
-//コンストラクタ‐
+//コンストラクタ
 	public Manuals() {
 		//処理なし
 	}
