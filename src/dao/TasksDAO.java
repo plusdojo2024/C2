@@ -14,7 +14,7 @@ import model.Tasks;
 public class TasksDAO {
 
 	//タスクの検索:select
-	public List<Tasks> select(Tasks list) {
+	public List<Tasks> select(String list) {
 		Connection conn = null;
 		List<Tasks> tasksList = new ArrayList<Tasks>();
 
@@ -33,8 +33,8 @@ public class TasksDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
-			if (list.getTo() != null) {
-				pStmt.setString(1, "%" + list.getTo() + "%");
+			if (list != null) {
+				pStmt.setString(1, "%" + list + "%");
 			}
 			else {
 				pStmt.setString(1, "%");
