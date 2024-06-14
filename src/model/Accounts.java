@@ -1,5 +1,6 @@
 package model;
 
+
 import java.io.Serializable;
 
 public class Accounts implements Serializable {
@@ -26,7 +27,13 @@ public class Accounts implements Serializable {
 		this.pr_group = pr_group;
 		this.user_ID = user_ID;
 	}
-
+	public Accounts(String user_ID, String mail, String pw, String nickname) {
+		super();
+		this.user_ID = user_ID;
+		this.mail = mail;
+		this.pw = pw;
+		this.nickname = nickname;
+	}
 	public Accounts(String user_ID, String mail, String pw, String nickname, int pr_group) {
 		super();
 		this.user_ID = user_ID;

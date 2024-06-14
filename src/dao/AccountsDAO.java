@@ -5,10 +5,75 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Accounts;
 
 public class AccountsDAO {
+	//アカウント設定の際の現在のアカウント情報を持ってくるselect
+		public List<Accounts> select (Accounts account) {
+			Connection conn = null;
+			List<Accounts> accountsList = new ArrayList<Accounts>();
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+				// SQL文を準備する
+				String sql ="SELECT * FROM Accounts WHERE user_ID = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+
+//				if (account.getUser_ID() != null) {
+//					pStmt.setString(1,account.getUser_ID());
+//				}
+//				else {
+//					pStmt.setString(1, "%");
+//				}
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					Accounts record = new Accounts(
+					rs.getString("user_ID"),
+					rs.getString("meil"),
+					rs.getString("pw"),
+					rs.getString("nickname")
+					);
+					accountsList.add(record);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				accountsList = null;
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				accountsList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						accountsList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return accountsList;
+		}
 	//ログインできるならtrueを返す
 	public boolean isLoginOK(Accounts account) {
 		Connection conn = null;
