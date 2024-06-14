@@ -15,7 +15,7 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-      <form method="post" action="/C2/ManuelRegistServlet.">
+      <form method="post" action="/C2/ManualRegistServlet.">
       	<table>
 	        <tr><td>new manual<br></td></tr>
 	        <tr><td>キッチン掃除<br></td></tr>
