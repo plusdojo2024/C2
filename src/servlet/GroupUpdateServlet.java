@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.SchedulesDAO;
-import model.Schedules;
+import dao.GroupsDAO;
+import model.Groups;
+
 
 /**
- * Servlet implementation class ScheduleUpdateServlet
+ * Servlet implementation class GroupUpdateServlet
  */
-@WebServlet("/ScheduleUpdateServlet")
-public class ScheduleUpdateServlet extends HttpServlet {
+@WebServlet("/GroupUpdateServlet")
+public class GroupUpdateServlet extends HttpServlet {
 
 
 	private static final long serialVersionUID = 1L;
+
 
 
 	/**
@@ -29,48 +31,27 @@ public class ScheduleUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user_ID") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
-			return;
-		}
-
-		// 登録ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_update.jsp");
-		dispatcher.forward(request, response);
-	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user_ID") == null) {
+		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		int id = Integer.parseInt(request.getParameter("id"));
-		String task = request.getParameter("task");
-		String contents = request.getParameter("contents");
-		String register = request.getParameter("register");
-
-		// セッションパラメーター
-		int group_number =(int)session.getAttribute("group_number");
-
+		String group_name = request.getParameter("group_name");
+		String user_ID = request.getParameter("user_ID");
+		Boolean editer = Boolean.valueOf(request.getParameter("editer"));
+		String icon = request.getParameter("icon");
 
 
 		// 更新または削除を行う
-		SchedulesDAO sDao = new SchedulesDAO();
+		GroupsDAO sDao = new GroupsDAO();
 		System.out.println("「"+request.getParameter("submit")+"」");
 
 		//"Update" == "更新"
 		if (request.getParameter("submit").equals("Update")) {
 
-		if (sDao.update(new Schedules(0, group_number, task, contents, register))) {		// 更新成功
+		if (sDao.update(new Groups(0,group_name, user_ID, editer, icon))) {		// 更新成功
 
 				request.setAttribute("result","内容を更新しました。");
 		}
@@ -79,7 +60,7 @@ public class ScheduleUpdateServlet extends HttpServlet {
 			}
 		}
 		else {
-			if (sDao.delete(id)) {	// 削除成功
+			if (sDao.delete(user_ID)) {	// 削除成功
 				request.setAttribute("result", "削除しました。");
 			}
 			else {			// 削除失敗
@@ -88,8 +69,21 @@ public class ScheduleUpdateServlet extends HttpServlet {
 		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// // もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/famiLink/LoginServlet");
+			return;
+		}
 
 	}
+
 }
