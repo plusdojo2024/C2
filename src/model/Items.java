@@ -12,6 +12,8 @@ public class Items implements Serializable {
 	private String contents; //内容
 	private String image; //画像
 	private java.sql.Date regist_day; //登録日
+	private String esc;
+	private String esc_g;
 
 	//引数なしのconstructor
 
@@ -21,7 +23,7 @@ public class Items implements Serializable {
 	}
 
 	//constructor
-	public Items(int id, int manual_id, String heading, String contents, String image, java.sql.Date regist_day) {
+	public Items(int id, int manual_id, String heading, String contents, String image, java.sql.Date regist_day, String manual, String group) {
 		super();
 		this.id = id;
 		this.manual_id = manual_id;
@@ -29,6 +31,8 @@ public class Items implements Serializable {
 		this.contents = contents;
 		this.image = image;
 		this.regist_day = regist_day;
+		this.esc = manual;
+		this.esc_g = group;
 	}
 
 	//method
@@ -79,7 +83,13 @@ public class Items implements Serializable {
 	public void setRegist_day(java.sql.Date regist_day) {
 		this.regist_day = regist_day;
 	}
+	public String getManual_Name() {
+		return this.esc;
+	}
 
+	public String getGroup_number() {
+		return this.esc_g;
+	}
 
 }
 
