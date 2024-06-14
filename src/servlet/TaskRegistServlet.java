@@ -53,7 +53,7 @@ public class TaskRegistServlet extends HttpServlet {
 
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_id") == null) {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
@@ -68,6 +68,7 @@ public class TaskRegistServlet extends HttpServlet {
 		String to = request.getParameter("zipcode");
 		String checkbox = request.getParameter("checkbox");
 		String manual_link = request.getParameter("manual_link");
+
 		java.sql.Date date = Date.valueOf(today);
 		boolean boo1 = Boolean.valueOf(checkbox);
 
