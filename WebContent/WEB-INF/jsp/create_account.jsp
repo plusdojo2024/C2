@@ -15,12 +15,12 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-			<form id="account_regist_form" method="post" action="/C2/AccountServlet">
+			<form id="account_regist_form" method="post" action="/C2/AccountRegistServlet">
 			  <table>
 			    <tr>
 			      <td>
 					<label>UserID<br>
-					<input type="text" name="id">
+					<input type="text" name="user_ID">
 					</label>
 			      </td>
 			    </tr>
@@ -41,7 +41,7 @@
 			    <tr>
 			      <td>
 					<label>Nicname<br>
-					<input type="text" name="nicname">
+					<input type="text" name="nickname">
 					</label>
 			      </td>
 			    <tr>

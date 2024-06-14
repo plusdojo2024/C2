@@ -10,7 +10,7 @@ import model.Items;
 public class ItemsDAO {
 
 
-	// マニュアルを登録し、成功したらtrueを返す
+	// マニュアルの項目を登録し、成功したらtrueを返す
 	public boolean insert(Items manualregist) {
 		Connection conn = null;
 		boolean result = false;
