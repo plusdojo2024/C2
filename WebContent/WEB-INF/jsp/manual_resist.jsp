@@ -11,29 +11,51 @@
 		<header>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
       <form method="post" action="/C2/ManualRegistServlet">
       	<table>
 	        <tr><td>new manual<br></td></tr>
-	        <tr><td><input type="text" name="item" placeholder="タイトル"><br></td></tr>
-	        <tr id = "target">
-	          <td><input type="text" name="header" placeholder="項目"></td>
-	          <td><input type="text" name="contents" placeholder="内容"></td>
+	        <tr><td>キッチン掃除<br></td></tr>
+
+          <tr id = "target">
+	          <td><input type="text" name="item" placeholder="項目"></td>
+	          <td><input type="text" name="content" placeholder="内容"></td>
 	          <td><input type="file" name="images"></td>
 	          <td><button>-</button><br></td>
 	        </tr>
-	        <tr><td><button id = "add">+</button><br></td>
-	        <td><input type="submit" id="" name="manual_regist" value="登録"></td></tr>
         </table>
+	      <input type="submit" id="regist" name="manual_regist" value="登録">
       </form>
+			<button id = "add">+</button>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
-		<script src="/C2/js/manual.js"></script>
+
+		<script>
+		/*登録ボタンをクリックしたらwindowconfirmが出る処理*/
+		var btn = document.getElementById('regist');
+
+		btn.addEventListener('click', function() {
+
+		    window.confirm('マニュアルを登録しますか？');
+
+		})
+
+		/*＋ボタンをクリックしたら列が増える処理*/
+		function addExample() {
+			let elements = document.getElementById("target");
+			let copied = elements.cloneNode(true);
+			elements.parentNode.appendChild(copied);
+		}
+		const btn2 = document.getElementById("add");
+		btn2.addEventListener("click", addExample, false);
+
+		</script>
+
 		<script src="/C2/js/result.js"></script>
 
 	</body>

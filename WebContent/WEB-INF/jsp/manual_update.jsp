@@ -21,31 +21,45 @@
 					<tr>
           	<td>キッチン掃除<br></td>
           </tr>
-          <tr>
+          <tr id = "target">
             <td><input type="text" name="item" placeholder="項目"></td>
             <td><input type="text" name="content" placeholder="内容"></td>
             <td><input type="file" name="images"></td>
             <td><button>-</button><br></td>
           </tr>
-          <tr>
-            <td><input type="text" name="item" placeholder="項目"></td>
-            <td><input type="text" name="content" placeholder="内容"></td>
-            <td><input type="file" name="images" placeholder="画像"></td>
-            <td><button>-</button><br></td>
-          </tr>
-          <tr>
-            <td><button>+</button><br></td>
-            <td>
-            <input type="submit" id="" name="manual_update" value="OK">
-            <input type="submit" id="delete" name="manual_delete" value="Delete">
-            </td>
-          </tr>
         </table>
+        <input type="submit" id="ok" name="manual_update" value="OK">
+        <input type="submit" id="delete" name="manual_delete" value="Delete">
       </form>
+          <button id = "add">+</button>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
+		<script>
+		/*okをクリックしたらwindowconfirmが出る処理*/
+		var btn = document.getElementById('ok');
+		btn.addEventListener('click', function() {
+			window.confirm('マニュアルを登録しますか？');
+		})
+
+
+		/*＋ボタンをクリックしたら列が増える処理*/
+		function addExample() {
+			let elements = document.getElementById("target");
+			let copied = elements.cloneNode(true);
+			elements.parentNode.appendChild(copied);
+		}
+		const btn2 = document.getElementById("add");
+		btn2.addEventListener("click", addExample, false);
+
+		/*deleteをクリックしたらwindowconfirmが出る処理 */
+		var btn3 = document.getElementById('delete');
+		btn3.addEventListener('click', function() {
+			window.confirm('マニュアルを削除しますか？');
+		})
+
+		</script>
 		<script src="/C2/js/common.js"></script>
 	</body>
 </html>
