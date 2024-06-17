@@ -10,6 +10,7 @@
 	</head>
 	<body>
 		<header>
+      <a href="/C2/AccountServlet">accountUpdatePage</a>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
 			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->

@@ -14,7 +14,7 @@
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
 			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
-			<h5 id = "today"></h5><!-- 今日の日付 -->
+			<h5 id = "today">17:59:00</h5><!-- 今日の日付 -->
 		</header>
 
 

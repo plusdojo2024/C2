@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ManualsDAO;
+import model.Accounts;
 import model.LoginUser;
 import model.Manuals;
 
@@ -65,18 +66,17 @@ public class ManualServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		LoginUser login = (LoginUser)session.getAttribute("group_id");
 		String manual_name = request.getParameter("manual_name");
 		//セッションスコープから取得
 		HttpSession session2 = request.getSession();
-		session2.getAttribute("pr_group");
-		int pr_group = (int) request.getAttribute("pr_group");
+		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
+		int group = pr_group.getPr_group();
 
 
 		// 検索処理を行う
 		ManualsDAO mDAO = new ManualsDAO();
 
-		List<Manuals> manualList = mDAO.select(new Manuals(manual_name, pr_group));
+		List<Manuals> manualList = mDAO.select(new Manuals(manual_name, group));
 
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("manualList", manualList);
