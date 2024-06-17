@@ -36,7 +36,7 @@ public class GroupCreateServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
@@ -44,7 +44,6 @@ public class GroupCreateServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/create_group.jsp");
 		dispatcher.forward(request, response);
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
