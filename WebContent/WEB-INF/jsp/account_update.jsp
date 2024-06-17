@@ -17,9 +17,10 @@
 			    </button>
 			<div class="dropdown__body">
     			<ul class="dropdown__list">
-      				<li class="dropdown__item"><a href="https://www.google.com/" class="dropdown__item-link">アカウント画面</a></li>
-      				<li class="dropdown__item"><a href="https://www.yahoo.co.jp/" class="dropdown__item-link">グループ一覧</a></li>
-      				<li class="dropdown__item"><a href="https://www.bing.com/" class="dropdown__item-link">グループ詳細</a></li>
+      				<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
+      				<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
+      				<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
+      				<li class="dropdown__item"><a href="/C2/LoginServlet" class="dropdown__item-link">ログアウト</a></li>
 			    </ul>
 			</div>
 			</div>
