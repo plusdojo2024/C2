@@ -17,17 +17,17 @@
             <form method="post" action="/C2/TaskServlet">
                 <p>日付<input type="date"><input type="text" placeholder="検索"><input type="submit" name="search" value="検索"></p>
             </form>
-                <ui>
+                <ul>
                     <li><input type="checkbox" name="detail">燃えるゴミ出し</li>
                     <li><input type="checkbox" name="detail">燃えないゴミ出し</li>
                     <li><a href="/C2/TaskRegistServlet"><button>+</button></a></li>
-                </ui>
-                <ui>
+                </ul>
+                <ul>
                     <li>schedule</li>
                     <li>09:00 授業参観</li>
                     <li>19:00 夜ごはん</li>
                     <li><a href="/C2/TaskRegistServlet"><button>+</button></a></li>
-                </ui>
+                </ul>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

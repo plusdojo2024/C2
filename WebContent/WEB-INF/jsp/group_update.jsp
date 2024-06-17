@@ -27,13 +27,11 @@
 			  <td><button>-</button></td>
 			  <td><input type="checkbox"></td>
 			</tr>
-			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
 			  <td><input type="text" value ="しんちゃん（閲覧モード）"></td>
 			  <td><button>-</button></td>
 			  <td><input type="checkbox"></td>
-			</tr>
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
