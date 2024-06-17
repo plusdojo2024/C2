@@ -1,17 +1,24 @@
 @charset "UTF-8";
 
+/* id="login_form"*/
+	#login_form {
+		padding:70px 220px 70px 220px;
+		background-position:center;
+	}
+
 /* form */
-form {
-  padding: 6px;
-  color: #007199;
-}
 
-.radius {
-	border-radius:5px;
-	border:2px solid #007199
-}
+	form {
+  		padding: 6px;
+  		color: #007199;
+	}
 
-.radius:focus {
-	outline: 0;
-	border-color:skyblue;
-}
+	.radius {
+		border-radius:5px;
+		border:2px solid #007199
+	}
+
+	.radius:focus {
+		outline: 0;
+		border-color:white;
+	}

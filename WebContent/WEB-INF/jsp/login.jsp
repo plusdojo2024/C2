@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/login.css">
 	</head>
 	<body>
 		<header>
@@ -50,7 +51,6 @@
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 		<script src="/C2/js/common.js"></script>
-		<script src ="/C2/js/login.js"></script>
 	</body>
 </html>
 
