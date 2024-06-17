@@ -31,6 +31,7 @@
             <input type="text" name="manual_name" value="${e.manual_name}" readonly="readonly">
           </td>
         </tr>
+       </table>
       </c:forEach>
 		</main>
 		<footer>
