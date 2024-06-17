@@ -16,7 +16,7 @@
 		</header>
 		<main>
 		<h2>NEW GROUP</h2>
-		<form id="" method="post" action="/C2/">
+		<form id="" method="post" action="/C2/GroupCreateServlet">
 			<table>
 			<tr>
 			  <td>

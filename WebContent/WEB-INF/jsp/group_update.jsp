@@ -15,7 +15,7 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-			<form id ="update"><!--  -->
+			<form id ="update" method="post" action="/C2/GroupUpdateServlet"><!--  -->
 			<table>
 			<tr>
 			  <td><input type="file" name="image"></td>
