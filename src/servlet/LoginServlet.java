@@ -45,7 +45,6 @@ public class LoginServlet extends HttpServlet {
 
 		// ログイン処理を行う
 		AccountsDAO aDao = new AccountsDAO();
-
 		if (  aDao.isLoginOK(  new Accounts( user_ID, pw )   )  ) {	// ログイン成功
 
 			// セッションスコープにIDを格納する

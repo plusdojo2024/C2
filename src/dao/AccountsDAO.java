@@ -29,12 +29,13 @@ public class AccountsDAO {
 
 				// SQL文を完成させる
 
-//				if (account.getUser_ID() != null) {
-//					pStmt.setString(1,account.getUser_ID());
-//				}
-//				else {
-//					pStmt.setString(1, "%");
-//				}
+				if (account.getUser_ID() != null) {
+					pStmt.setString(1,account.getUser_ID());
+					System.out.println(account.getUser_ID());
+				}
+				else {
+					pStmt.setString(1, "%");
+				}
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
@@ -43,7 +44,7 @@ public class AccountsDAO {
 				while (rs.next()) {
 					Accounts record = new Accounts(
 					rs.getString("user_ID"),
-					rs.getString("meil"),
+					rs.getString("mail"),
 					rs.getString("pw"),
 					rs.getString("nickname")
 					);

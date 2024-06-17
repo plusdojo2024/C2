@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,26 +19,31 @@
 
 
     	<main>
+    	<p>アカウント情報</p>
+    	  <c:if test="${empty accountList}">
+				<p>一致するデータはありません。</p>
+		  </c:if>
+    	<c:forEach var="e" items="${accountList}" >
       		<form id="account_form" method="post" action="AccountServlet"><!--アクションにサーブレットを入力する-->
         		<table class="table">
           			<tr>
             			<td>
               				<label>User ID<br>
-                				<input type="text" name="user_ID" value="${e.user_ID} }">
+                				<input type="text" name="user_ID" value="${e.user_ID}">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>Mail<br>
-                				<input type="text" name="mail" value="${e.mail} }">
+                				<input type="text" name="mail" value="${e.mail}">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>Password<br>
-                				<input type="text" name="password">
+                				<input type="text" name="password" value="${e.pw}">
               				</label>
             			</td>
           			</tr>
@@ -51,7 +57,7 @@
           			<tr>
             			<td>
               				<label>Nickname<br>
-                				<input type="text" name="nickname">
+                				<input type="text" name="nickname" value="${e.nickname}">
               				</label>
             			</td>
           			</tr>
@@ -62,6 +68,7 @@
           			</tr>
         		</table>
      		</form>
+     	  </c:forEach>
     	</main>
 
 
