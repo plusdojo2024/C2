@@ -11,7 +11,7 @@
 		<header>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
@@ -37,7 +37,7 @@
             <td><button>+</button><br></td>
             <td>
             <input type="submit" id="" name="manual_update" value="OK">
-            <input type="submit" id="" name="manual_delete" value="Delete">
+            <input type="submit" id="delete" name="manual_delete" value="Delete">
             </td>
           </tr>
         </table>
