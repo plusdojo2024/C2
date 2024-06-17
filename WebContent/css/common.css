@@ -1,0 +1,8 @@
+@charset "UTF-8";
+.dropdown__body {
+  display: none;
+}
+.dropdown__btn.is-open + .dropdown__body {
+  display: block;
+  z-index: 4;
+}

@@ -11,10 +11,21 @@
 
 	<body>
 		<header>
-			<img src=""><!-- アカウントのボタン -->
-			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
-			<h5 id = "today">17:59:00</h5><!-- 今日の日付 -->
+			<div class="dropdown">
+				<button class="dropdown__btn" id="dropdown__btn">
+					<img src="/C2/img/accountNull.png">
+			    </button>
+			<div class="dropdown__body">
+    			<ul class="dropdown__list">
+      				<li class="dropdown__item"><a href="https://www.google.com/" class="dropdown__item-link">アカウント画面</a></li>
+      				<li class="dropdown__item"><a href="https://www.yahoo.co.jp/" class="dropdown__item-link">グループ一覧</a></li>
+      				<li class="dropdown__item"><a href="https://www.bing.com/" class="dropdown__item-link">グループ詳細</a></li>
+			    </ul>
+			</div>
+			</div>
+			<a href="ManualServlet"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
+			<h5 id = "time"></h5><!-- 時間 -->
+			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 
 
@@ -77,6 +88,59 @@
 		</footer>
 
 		<script src="/C2/js/common.js"></script>
+<script>//日付表示
+function today(){
+	   let today = new Date();
+	   let year = today.getFullYear();
+	   let month = today.getMonth()+1;
+	   let date =  today.getDate();
+	   let youbi = today.getDay();
+	   let day;
+	   switch(youbi){
+	   case 0:
+		   day = "Sun";
+		   break;
+       case 1:
+	       day = "Mon";
+	       break;
+	   case 2:
+		   day = "Tue";
+		   break;
+	   case 3:
+		   day = "Wen";
+		   break;
+	   case 4:
+		   day = "Thu";
+		   break;
+	   case 5:
+		   day = "Fri";
+		   break;
+	   case 6:
+		   day = "Sat";
+		   break;
+	   }
+
+	    document.getElementById('today').textContent = year + "/" + month + "/" + date + "/" + "（" + day + "）";
+
+	    refresh();
+	}
+function refresh() {
+    setTimeout(recalc, 1000);
+}
+today();
+</script>
+<script>//左上のアカウントボタン
+(function () {
+	  document.addEventListener('DOMContentLoaded', function() { // HTML解析が終わったら
+	    const btn = document.getElementById('dropdown__btn'); // ボタンをidで取得
+	    if(btn) { // ボタンが存在しないときにエラーになるのを回避
+	      btn.addEventListener('click', function(){ //ボタンがクリックされたら
+	        this.classList.toggle('is-open'); // is-openを付加する
+	      });
+	    }
+	  });
+	}());
+</script>
 	</body>
 </html>
 
