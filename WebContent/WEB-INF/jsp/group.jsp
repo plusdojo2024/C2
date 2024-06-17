@@ -13,6 +13,7 @@
 			<img src=""><!-- マニュアルのみ タスクボタン -->
 			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
+
 		</header>
 		<main>
 			<form class="glist"method="post" action="/C2/GroupServlet"><!--グループ選択  -->
