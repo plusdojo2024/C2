@@ -25,22 +25,22 @@
 			  <td><h2>MEMBER</h2></td>
 			  <td><input type="text" value ="パパ"></td>
 			  <td><button>-</button></td>
-			  <td><input type="checkbox"></td>
+			  <td><input type="checkbox" class="agreement"></td>
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
 			  <td><input type="text" value ="しんちゃん（閲覧モード）"></td>
 			  <td><button>-</button></td>
-			  <td><input type="checkbox"></td>
+			  <td><input type="checkbox" class="agreement"></td>
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
 			  <td><input type="text" placeholder= "例：para_man"></td>
 			  <td><button>-</button></td>
-			  <td><input type="checkbox"></td>
+			  <td><input type="submit" value="招待" name="invite"><td>
 			</tr>
 			<tr>
-			  <td><input type="submit" value ="登録"></td>
+			  <td><input type="submit" value ="登録" name="regist"></td>
 			</tr>
 			</table>
 
