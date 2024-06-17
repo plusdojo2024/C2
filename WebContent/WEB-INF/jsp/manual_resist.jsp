@@ -40,5 +40,6 @@
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 		<script src="/C2/js/manual.js"></script>
+
 	</body>
 </html>
