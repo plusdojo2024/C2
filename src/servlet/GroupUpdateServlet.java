@@ -89,6 +89,7 @@ public class GroupUpdateServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
 		dispatcher.forward(request, response);
 	}
+
 }
 
 
