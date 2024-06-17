@@ -37,10 +37,10 @@
 			  <td><h2>MEMBER</h2></td>
 			  <td><input type="text" placeholder= "例：para_man"></td>
 			  <td><button>-</button></td>
-			  <td><input type="submit" value="招待" name="invite"><td>
+			  <td><input type="submit" value="招待"><td>
 			</tr>
 			<tr>
-			  <td><input type="submit" value ="登録" name="regist"></td>
+			  <td><input type="submit" value ="登録"></td>
 			</tr>
 			</table>
 
@@ -50,5 +50,6 @@
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 		<script src="/C2/js/common.js"></script>
+		<script src="/C2/js/group.js"></script>
 	</body>
 </html>
