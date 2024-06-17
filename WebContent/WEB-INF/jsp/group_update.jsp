@@ -15,7 +15,7 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-			<form><!--  -->
+			<form id ="update"><!--  -->
 			<table>
 			<tr>
 			  <td><input type="file" name="image"></td>
