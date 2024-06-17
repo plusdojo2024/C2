@@ -11,11 +11,11 @@
 		<header>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-			<form><!--グループ選択  -->
+			<form method="post" action="/C2/GroupServlet"><!--グループ選択  -->
 				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ１"></a>
 				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ２"></a>
 				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ３"></a><br>
