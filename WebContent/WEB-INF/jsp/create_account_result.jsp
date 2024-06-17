@@ -11,12 +11,12 @@
 		<header>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
 
-		  <img src="/C2/img/house.png"><!-- 家のロゴ -->
+		  <img src="/C2/img/registComplete2.png"><!-- 家のロゴ -->
 		  <h2>Welcome!!</h2>
 		  <h1>アカウントの登録が完了しました</h1>
 		  <p><a href="/C2/LoginServlet">ログイン画面へ</a></p>

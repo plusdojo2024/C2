@@ -10,7 +10,7 @@
 	<body>
 		<header>
 			<img src=""><!-- アカウントのボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today">今日の日付</h5><!-- 今日の日付 -->
 		</header>
 		<main>
