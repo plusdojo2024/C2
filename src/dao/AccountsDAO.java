@@ -45,7 +45,6 @@ public class AccountsDAO {
 					Accounts record = new Accounts(
 					rs.getString("user_ID"),
 					rs.getString("mail"),
-					rs.getString("pw"),
 					rs.getString("nickname")
 					);
 					accountsList.add(record);

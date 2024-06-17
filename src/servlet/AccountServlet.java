@@ -76,9 +76,20 @@ public class AccountServlet extends HttpServlet {
 //	Accounts pr_group = (Accounts)session.getAttribute("pr_group");
 //	int group = pr_group.getPr_group();
 //	System.out.println("pr_group:"+pr_group);
-//新しいパスワードが入力されているかの場合分け
-	if(newPassword != "") {
+
+//古いパスワードをセッションスコープから取得
+//新しいパスワード変更の場合分け
+	HttpSession session = request.getSession();
+	Accounts pass = (Accounts)session.getAttribute("pw");
+	String oldPass = pass.getPw();
+	if(newPassword != "" && password == oldPass) {
 		password = newPassword;
+	}
+	else {//失敗の時
+		request.setAttribute("result","");
+		//フォワード
+
+
 	}
 	//データの更新
 	AccountsDAO accountDao = new AccountsDAO();

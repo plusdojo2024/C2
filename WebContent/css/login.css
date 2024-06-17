@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* form */
+form {
+  padding: 6px;
+  color: #007199;
+}
+
+.radius {
+	border-radius:5px;
+	border:2px solid #007199
+}
+
+.radius:focus {
+	outline: 0;
+	border-color:skyblue;
+}

@@ -20,7 +20,7 @@
       				<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
       				<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
       				<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
-      				<li class="dropdown__item"><a href="/C2/LoginServlet" class="dropdown__item-link">ログアウト</a></li>
+      				<li class="dropdown__item"><a href="/C2/LogoutServlet" class="dropdown__item-link">ログアウト</a></li>
 			    </ul>
 			</div>
 			</div>
@@ -40,8 +40,8 @@
         		<table class="table">
           			<tr>
             			<td>
-              				<label>User ID<br>
-                				<input type="text" name="user_ID" value="${e.user_ID}">
+              				<label>User ID(変更不可)<br>
+                				<input type="text" name="user_ID" value="${e.user_ID}" readonly="readonly">
               				</label>
             			</td>
           			</tr>
@@ -55,14 +55,14 @@
           			<tr>
             			<td>
               				<label>Password<br>
-                				<input type="text" name="password" value="${e.pw}">
+                				<input type="text" name="password" placeholder="前のパスワードを入力">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>New Password<br>
-                				<input type="text" name="newPassword">
+                				<input type="text" name="newPassword" placeholder="新しいパスワードを入力">
               				</label>
             			</td>
           			</tr>
@@ -87,49 +87,7 @@
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
-
-		<script src="/C2/js/common.js"></script>
-<script>//日付表示
-function today(){
-	   let today = new Date();
-	   let year = today.getFullYear();
-	   let month = today.getMonth()+1;
-	   let date =  today.getDate();
-	   let youbi = today.getDay();
-	   let day;
-	   switch(youbi){
-	   case 0:
-		   day = "Sun";
-		   break;
-       case 1:
-	       day = "Mon";
-	       break;
-	   case 2:
-		   day = "Tue";
-		   break;
-	   case 3:
-		   day = "Wen";
-		   break;
-	   case 4:
-		   day = "Thu";
-		   break;
-	   case 5:
-		   day = "Fri";
-		   break;
-	   case 6:
-		   day = "Sat";
-		   break;
-	   }
-
-	    document.getElementById('today').textContent = year + "/" + month + "/" + date + "/" + "（" + day + "）";
-
-	    refresh();
-	}
-function refresh() {
-    setTimeout(recalc, 1000);
-}
-today();
-</script>
+<script src="/C2/js/common.js"></script>
 <script>//左上のアカウントボタン
 (function () {
 	  document.addEventListener('DOMContentLoaded', function() { // HTML解析が終わったら

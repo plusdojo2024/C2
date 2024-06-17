@@ -15,7 +15,7 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-			<form method="post" action="/C2/GroupServlet"><!--グループ選択  -->
+			<form class="glist"method="post" action="/C2/GroupServlet"><!--グループ選択  -->
 				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ１"></a>
 				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ２"></a>
 				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ３"></a><br>
