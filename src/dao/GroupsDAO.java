@@ -150,6 +150,8 @@ public class GroupsDAO {
 		return result;
 	}
 
+
+
 	// 引数user_IDで指定されたレコードを削除し、成功したらtrueを返す
 	public boolean delete(String user_ID) {
 		Connection conn = null;
@@ -196,6 +198,8 @@ public class GroupsDAO {
 		// 結果を返す
 		return result;
 	}
+
+
 
 	// 引数paramで検索項目を指定し、検索結果のリストを返す
 	public List<Groups> select(Groups card) {

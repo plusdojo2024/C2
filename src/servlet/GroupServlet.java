@@ -40,17 +40,17 @@ public class GroupServlet extends HttpServlet {
 		}
 
 		//ユーザーごとに所属しているグループのデータを取得
-		int login = (int)session.getAttribute("user_ID");
+		//String login = (String)session.getAttribute("user_ID");
 
 		//GroupsDAOに処理してもらう
 		GroupsDAO abc = new GroupsDAO();
 
-		request.setAttribute("user_ID", abc.select (login));
+		//リクエストスコープに格納する
+		request.setAttribute("user_ID", abc);
 
 		// グループ一覧ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
 		dispatcher.forward(request, response);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 
 	}
