@@ -14,7 +14,7 @@ public class TasksDAOTest {
 		String today = "2024-06-13";
 		java.sql.Date date = Date.valueOf(today);
 
-		int upDelNumber = 0;		// 後で更新および削除する番号
+		//int upDelNumber = 0;		// 後で更新および削除する番号
 		System.out.println("<< insertメソッドのテスト（1件のレコードを登録します）>>");
 		Tasks insRec = new Tasks(7, 0, "Task", "Contents", date, "From", "to", true, "");
 		if (dao.insert(insRec)) {
