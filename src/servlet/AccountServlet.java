@@ -86,8 +86,10 @@ public class AccountServlet extends HttpServlet {
 		password = newPassword;
 	}
 	else {//失敗の時
-		request.setAttribute("result","");
+		request.setAttribute("result","前のパスワードが正しくありません");
 		//フォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
+		dispatcher.forward(request, response);
 
 
 	}

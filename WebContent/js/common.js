@@ -44,3 +44,4 @@ function refresh() {
     setTimeout(recalc, 1000);
 }
 today();
+
