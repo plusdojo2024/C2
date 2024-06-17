@@ -23,7 +23,7 @@ public class ItemsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO Items VALUES (NULL,NULL, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Items VALUES (NULL,NULL, ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -45,7 +45,7 @@ public class ItemsDAO {
 			else {
 				pStmt.setString(3, "（未設定）");
 			}
-				pStmt.setDate(4, manualregist.getRegist_day());
+				//pStmt.setDate(4, manualregist.getRegist_day());
 
 
 			//Manualsに項目を一つ増やす

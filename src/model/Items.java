@@ -24,6 +24,15 @@ public class Items implements Serializable {
 	}
 
 	//constructor
+	//ManualRegistServletで使用
+	public Items(int id, int manual_id, String heading, String contents, String image) {
+		super();
+		this.id = id;
+		this.manual_id = manual_id;
+		this.heading = heading;
+		this.contents = contents;
+		this.image = image;
+	}
 	public Items(int id, int manual_id, String heading, String contents, String image, java.sql.Date regist_day) {
 		super();
 		this.id = id;

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,19 +57,19 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String task = request.getParameter("group_id");
-		int group_id = Integer.parseInt(task);
+		//String task = "1";//request.getParameter("group_id");
+		int group_id = 1;//Integer.parseInt(task);
 		String heading = request.getParameter("header");
 		String contents = request.getParameter("contents");
 		String images = request.getParameter("images");
-		String today = request.getParameter("today");
+		//String today = request.getParameter("today");
 
-		java.sql.Date date = Date.valueOf(today);
+		//java.sql.Date date = Date.valueOf(today);
 
 
 		// 登録処理を行う
 		ItemsDAO bItems = new ItemsDAO();
-		if (bItems.insert(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
+		if (bItems.insert(new Items(0, group_id, heading, contents, images))) {	// 登録成功
 			request.setAttribute("result", "レコードを登録しました。");
 		}
 		else {												// 登録失敗
