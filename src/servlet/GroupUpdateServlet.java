@@ -31,13 +31,13 @@ public class GroupUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
 		// 登録ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_update.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group_update.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -49,7 +49,7 @@ public class GroupUpdateServlet extends HttpServlet {
 		// // もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_ID") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
