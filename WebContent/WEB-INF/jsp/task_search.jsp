@@ -16,17 +16,17 @@
 		<main>
             <form method="post" action="/C2/TaskServlet">
                 <p>日付<input type="date"><input type="text" placeholder="検索"><input type="submit" name="search" value="検索"></p>
-                    <ui>
+                    <ul>
                         <li><input type="checkbox" name="detail">燃えるゴミ出し</li>
                         <li><input type="checkbox" name="detail">燃えないゴミ出し</li>
                         <li>＋ボタン</li>
-                    </ui>
-                    <ui>
+                    </ul>
+                    <ul>
                         <li>schedule</li>
                         <li>09:00 授業参観</li>
                         <li>19:00 夜ごはん</li>
                         <li><a href="">＋ボタン</a></li>
-                    </ui>
+                    </ul>
             </form>
                 </main>
 		<footer>

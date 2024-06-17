@@ -1,5 +1,5 @@
 package test;
-import java.util.List;
+//import java.util.List;
 
 import dao.SchedulesDAO;
 import model.Schedules;
@@ -7,10 +7,10 @@ import model.Schedules;
 public class SchedulesDAOTest {
 	public static void main(String[] args) {
 		SchedulesDAO dao = new SchedulesDAO();
-		List<Schedules> List;
+		//List<Schedules> List;
 
 		// insertメソッドのテスト
-		int upDelNumber = 0;		// 後で更新および削除する番号
+		//int upDelNumber = 0;		// 後で更新および削除する番号
 		System.out.println("<< insertメソッドのテスト（1件のレコードを登録します）>>");
 		Schedules insRec = new Schedules(0, 0, "挿入", "挿入", "挿入");
 		if (dao.insert(insRec)) {

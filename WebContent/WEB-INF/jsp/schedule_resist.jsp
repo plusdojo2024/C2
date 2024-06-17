@@ -5,7 +5,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>famiLink</title>
-		<link rel="stylesheet" href="/C2/css/common.css" "/C2/css/task.css">
+		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/task.css">
 	</head>
 
 
