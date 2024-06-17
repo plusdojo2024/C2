@@ -58,7 +58,7 @@ public class ManualServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_ID") == null) {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
