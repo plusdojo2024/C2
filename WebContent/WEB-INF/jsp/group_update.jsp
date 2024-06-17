@@ -11,11 +11,11 @@
 		<header>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-			<form id ="update"><!--  -->
+			<form id ="update" method="post" action="/C2/GroupUpdateServlet"><!--  -->
 			<table>
 			<tr>
 			  <td><input type="file" name="image"></td>

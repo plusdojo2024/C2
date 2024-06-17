@@ -34,7 +34,7 @@ public class GroupServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_ID") == null) {
 			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
