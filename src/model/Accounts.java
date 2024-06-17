@@ -33,6 +33,14 @@ public class Accounts implements Serializable {
 		this.pr_group = pr_group;
 		this.user_ID = user_ID;
 	}
+
+	public Accounts(String user_ID, String mail, String nickname) {
+		super();
+		this.user_ID = user_ID;
+		this.mail = mail;
+		this.nickname = nickname;
+	}
+
 	public Accounts(String user_ID, String mail, String pw, String nickname) {
 		super();
 		this.user_ID = user_ID;
@@ -63,6 +71,7 @@ public Accounts(String user_ID, String mail, String pw, String newPassword, Stri
 	public String getUser_ID() {
 		return user_ID;
 	}
+
 	public void setUser_ID(String user_ID) {
 		this.user_ID = user_ID;
 	}
