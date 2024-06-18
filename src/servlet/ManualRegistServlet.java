@@ -75,6 +75,7 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// 登録処理を行う
 		ItemsDAO bItems = new ItemsDAO();
+		bItems.manu(new Items(0, heading, contents, images, manual_name, group_id));
 		if (bItems.insert(new Items(0, heading, contents, images, manual_name, group_id))) {	// 登録成功
 			request.setAttribute("result",new Result("登録成功！", "レコードを登録しました。"));
 		}
