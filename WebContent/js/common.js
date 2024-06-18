@@ -45,3 +45,12 @@ function refresh() {
 }
 today();
 
+
+
+  function isOpen(){ //ボタンがクリックされたら
+	let body = document.getElementById('dropdown__btn');
+	body.classList.toggle('is-open'); // is-openを付加する
+
+
+	//this.classList.toggle('is-open'); // is-openを付加する
+  }

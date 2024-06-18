@@ -79,9 +79,16 @@ public class AccountServlet extends HttpServlet {
 
 //古いパスワードをセッションスコープから取得
 //新しいパスワード変更の場合分け
-	HttpSession session = request.getSession();
-	Accounts pass = (Accounts)session.getAttribute("pw");
-	String oldPass = pass.getPw();
+
+//	HttpSession session = request.getSession();
+//	LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
+//	String user = user_ID.getLoginUserId();
+//	System.out.println("user_ID:"+user);
+
+	HttpSession session2 = request.getSession();
+	Accounts pw = (Accounts)session2.getAttribute("pw");
+	String oldPass = pw.getPw();
+	System.out.println("oldpass"+oldPass);
 	if(newPassword != "" && password == oldPass) {
 		password = newPassword;
 	}
