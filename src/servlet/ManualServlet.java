@@ -40,7 +40,7 @@ public class ManualServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_ID") == null) {
-			response.sendRedirect("/C2/LoginServlet");
+			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
 
