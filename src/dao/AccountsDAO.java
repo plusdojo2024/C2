@@ -45,6 +45,7 @@ public class AccountsDAO {
 					Accounts record = new Accounts(
 					rs.getString("user_ID"),
 					rs.getString("mail"),
+					rs.getString("pw"),
 					rs.getString("nickname")
 					);
 					accountsList.add(record);
@@ -74,6 +75,7 @@ public class AccountsDAO {
 			// 結果を返す
 			return accountsList;
 		}
+
 	//ログインできるならtrueを返す
 	public boolean isLoginOK(Accounts account) {
 		Connection conn = null;
@@ -191,6 +193,7 @@ public class AccountsDAO {
 		// 結果を返す
 		return result;
 	}
+//passwordを含む更新
 	public boolean update(Accounts account) {
 		Connection conn = null;
 		boolean result = false;
@@ -265,6 +268,75 @@ public class AccountsDAO {
 		// 結果を返す
 		return result;
 	}
+	//passwordを含まない更新
+		public boolean updateWithoutPw(Accounts account) {
+			Connection conn = null;
+			boolean result = false;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+				// SQL文を準備する
+				String sql = "UPDATE Accounts SET user_ID=?, mail=?, nickname=?, pr_group=? WHERE user_ID=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				if (account.getUser_ID() != null && !account.getUser_ID().equals("")) {
+					pStmt.setString(1, account.getUser_ID());
+				}
+				else {
+					pStmt.setString(1, null);
+				}
+				if (account.getMail() != null && !account.getMail().equals("")) {
+					pStmt.setString(2, account.getMail());
+				}
+				else {
+					pStmt.setString(2, null);
+				}
+				if (account.getNickname() != null && !account.getNickname().equals("")) {
+					pStmt.setString(3, account.getNickname());
+				}
+				else {
+					pStmt.setString(3, null);
+				}
+				if (account.getPr_group() != 0) {
+					pStmt.setInt(4, account.getPr_group());
+				}
+				else {
+					pStmt.setInt(4, 0);
+				}
+				pStmt.setString(5, account.getUser_ID());
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			// 結果を返す
+			return result;
+		}
 //表示グループの切り替え
 
 	public boolean changeGroup(Accounts account) {

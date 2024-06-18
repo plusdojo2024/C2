@@ -62,56 +62,55 @@ public class AccountServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
 
-//リクエストスコープから取得
+//セッションスコープから取得(グループ参加機能ができてから実装)
+//	HttpSession session = request.getSession();
+//	Accounts pr_group = (Accounts)session.getAttribute("pr_group");
+//	int group = pr_group.getPr_group();
+//	System.out.println("pr_group:"+pr_group);
+
+	//古いパスワードを取得
+		//新しいパスワード変更の場合分け
+
+//リクエストスコープから取得(ユーザーが打ち込んだ情報)
 	request.setCharacterEncoding("UTF-8");
 	String user_ID = request.getParameter("user_ID");
 	String mail = request.getParameter("mail");
 	String password = request.getParameter("password");
 	String newPassword = request.getParameter("newPassword");
 	String nickname = request.getParameter("nickname");
+	String pw = request.getParameter("pw");//以前のパスワード（pr_pwで検索）
 
-//セッションスコープから取得
-//グループ参加機能ができてから実装
-//	HttpSession session = request.getSession();
-//	Accounts pr_group = (Accounts)session.getAttribute("pr_group");
-//	int group = pr_group.getPr_group();
-//	System.out.println("pr_group:"+pr_group);
-
-//古いパスワードをセッションスコープから取得
-//新しいパスワード変更の場合分け
-
-//	HttpSession session = request.getSession();
-//	LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
-//	String user = user_ID.getLoginUserId();
-//	System.out.println("user_ID:"+user);
-
-	HttpSession session2 = request.getSession();
-	Accounts pw = (Accounts)session2.getAttribute("pw");
-	String oldPass = pw.getPw();
-	System.out.println("oldpass"+oldPass);
-	if(newPassword != "" && password == oldPass) {
+	//password、newPasswordに入力があるとき、以前のパスワードと比較して新しいパスワードを登録
+	if(newPassword != null && password != null && password.equals(pw)) {
 		password = newPassword;
+		System.out.println("パスワード更新");
 	}
-	else {//失敗の時
-		request.setAttribute("result","前のパスワードが正しくありません");
+	else if(newPassword != null && password != null && !password.equals(pw)){//失敗の時
+		request.setAttribute("result","パスワードが正しくありません");
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
 		dispatcher.forward(request, response);
-
-
 	}
+
 	//データの更新
-	AccountsDAO accountDao = new AccountsDAO();
-    if (accountDao.update(new Accounts(user_ID,mail,password,nickname,1)))
-    {
-    	System.out.println("アカウント更新成功");
-    	System.out.println(mail);
-//		request.setAttribute("result",
-//		new Result("登録成功！", "レコードを登録しました。", "/simpleBC/MenuServlet"));
-//	}
-//	else {												// 登録失敗
-//		request.setAttribute("result",
-//		new Result("登録失敗！", "レコードを登録できませんでした。", "/simpleBC/MenuServlet"));
+	AccountsDAO accountsDao = new AccountsDAO();
+	//パスワードを含む更新
+	if(newPassword != null && password.equals(pw)) {
+		if (accountsDao.update(new Accounts(user_ID,mail,password,nickname,1))){
+			System.out.println("アカウント更新成功");
+//			request.setAttribute("result",
+//			new Result("登録成功！", "レコードを登録しました。", "/simpleBC/MenuServlet"));
+//		}
+//		else {												// 登録失敗
+//			request.setAttribute("result",
+//			new Result("登録失敗！", "レコードを登録できませんでした。", "/simpleBC/MenuServlet"));
+		}
+	}
+	//パスワードを含まない更新
+	else if(newPassword == null) {
+		if(accountsDao.updateWithoutPw(new Accounts(user_ID,mail,nickname,1))) {
+
+		}
 	}
 
 	// 結果ページにフォワードする

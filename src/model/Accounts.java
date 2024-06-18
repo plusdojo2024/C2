@@ -41,6 +41,14 @@ public class Accounts implements Serializable {
 		this.nickname = nickname;
 	}
 
+	public Accounts(String user_ID, String mail, String nickname, int pr_group) {
+		super();
+		this.user_ID = user_ID;
+		this.mail = mail;
+		this.nickname = nickname;
+		this.pr_group = pr_group;
+	}
+
 	public Accounts(String user_ID, String mail, String pw, String nickname) {
 		super();
 		this.user_ID = user_ID;

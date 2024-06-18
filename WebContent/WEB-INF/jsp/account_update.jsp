@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet"  href="/C2/css/common.css">
+		<link rel="stylesheet"  href="/C2/css/account.css">
 	</head>
 
 	<body>
@@ -78,6 +79,13 @@
               				<input type="submit" id="register" name="submit" value="登録">
             			</td>
           			</tr>
+          			<tr>
+            			<td>
+              				<label><br>
+                				<input type="text" id="pw" name="pw" value="${e.pw}">
+              				</label>
+            			</td>
+          			</tr>
         		</table>
      		</form>
      	  </c:forEach>
@@ -85,7 +93,7 @@
 
 
 		<footer>
-			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
+			<p class="copyright" id ="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 <script src="/C2/js/common.js"></script>
 <script>//左上のアカウントボタン
