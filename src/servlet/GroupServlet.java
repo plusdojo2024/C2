@@ -35,7 +35,7 @@ public class GroupServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_ID") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
