@@ -6,7 +6,7 @@
 
  /* [ログイン]ボタンをクリックしたときの処理 */
 	formObj.onsubmit = function() {
- 	 if (!formObj.id.value || !formObj.pw.value) {
+ 	 if (!formObj.user_ID.value || !formObj.pw.value) {
   	  errorMessageObj.textContent = 'UserIDとパスワードを入力してください';
    	 return false;
   	}
