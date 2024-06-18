@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,14 +17,12 @@
 
 		</header>
 		<main>
-			<form class="glist"method="post" action="/C2/GroupServlet"><!--グループ選択  -->
-				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ１"></a>
-				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ２"></a>
-				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ３"></a><br>
-				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ４"></a>
-				<a href="/C2/Servlet"> <img src="/C2/img/" alt="グループ５"></a>
-				<a href="/C2/GroupCreateServlet"> <img src="/C2/img/" alt="新規作成"></a>
+			<c:forEach var="e" items="${cardList}" >
+			<form class="glist"method="get" action="/C2/GroupServlet" ><!--グループ選択  -->
+				<a href="/C2/ManualServlet"><input type="text" value="${e.group_name}"></a>
 			</form>
+			</c:forEach>
+			<a href="/C2/GroupCreateServlet"> <img src="/C2/img/" alt="新規作成"></a>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
