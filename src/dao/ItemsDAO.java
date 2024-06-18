@@ -46,7 +46,10 @@ public class ItemsDAO {
 				pStmt.setString(3, "（未設定）");
 			}
 				//pStmt.setDate(4, manualregist.getRegist_day());
-
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+				}
 
 			//Manualsに項目を一つ増やす
 			String sql2 = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
@@ -54,14 +57,17 @@ public class ItemsDAO {
 
 			// SQL文を完成させる
 
-			pStmt2.setString(1, manualregist.getGroup_number());
+			pStmt2.setInt(1, manualregist.getGroup_number());
 
 			pStmt2.setString(2, manualregist.getManual_Name());
 
 			// SQL文を実行する
 			if (pStmt2.executeUpdate() == 1) {
 				result = true;
-				}
+			}
+			else {
+				result = false;
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

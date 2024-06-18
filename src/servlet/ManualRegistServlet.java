@@ -58,19 +58,23 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		//String task = "1";//request.getParameter("group_id");
+		//String task = "1";request.getParameter("group_id");
 		int group_id = 1;//Integer.parseInt(task);
-		String heading = request.getParameter("header");
-		String contents = request.getParameter("contents");
+		String heading = request.getParameter("item");
+		String contents = request.getParameter("content");
 		String images = request.getParameter("images");
+		String manual_name = request.getParameter("title");
 		//String today = request.getParameter("today");
 
 		//java.sql.Date date = Date.valueOf(today);
 
+		//System.out.println(heading);
+		//System.out.println(contents);
+		//System.out.println(images);
 
 		// 登録処理を行う
 		ItemsDAO bItems = new ItemsDAO();
-		if (bItems.insert(new Items(0, group_id, heading, contents, images))) {	// 登録成功
+		if (bItems.insert(new Items(0, group_id, heading, contents, images, manual_name, group_id))) {	// 登録成功
 			request.setAttribute("result",new Result("登録成功！", "レコードを登録しました。"));
 		}
 		else {												// 登録失敗
