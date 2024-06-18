@@ -25,38 +25,18 @@
 	          <td><input type="text" name="item" placeholder="項目"></td>
 	          <td><input type="text" name="content" placeholder="内容"></td>
 	          <td><input type="file" name="images"></td>
-	          <td><button>-</button><br></td>
+	          <td><button onclick="deleteExample();">-</button><br></td>
 	        </tr>
         </table>
-	      <input type="submit" id="regist" name="manual_regist" value="登録">
+	      <input type="submit" id="regist" name="manual_regist" value="登録" onclick="checkMessage();">
       </form>
-			<button id = "add">+</button>
+			<button id = "add" onclick="addExample();">+</button>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 
-		<script>
-		/*登録ボタンをクリックしたらwindowconfirmが出る処理*/
-		var btn = document.getElementById('regist');
-
-		btn.addEventListener('click', function() {
-
-		    window.confirm('マニュアルを登録しますか？');
-
-		})
-
-		/*＋ボタンをクリックしたら列が増える処理*/
-		function addExample() {
-			let elements = document.getElementById("target");
-			let copied = elements.cloneNode(true);
-			elements.parentNode.appendChild(copied);
-		}
-		const btn2 = document.getElementById("add");
-		btn2.addEventListener("click", addExample, false);
-
-		</script>
-
+		<script src="/C2/js/manual.js"></script>
 		<script src="/C2/js/result.js"></script>
 
 	</body>
