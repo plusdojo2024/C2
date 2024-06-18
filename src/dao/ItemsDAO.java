@@ -80,7 +80,7 @@ public class ItemsDAO {
 			PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
 			pStmt_manual_select.setString(1, manualregist.getManual_Name());
 			ResultSet rs = pStmt_manual_select.executeQuery();
-			manual_id = rs.getInt("ID");//エラー
+			manual_id = rs.getInt("ID");	//エラー
 			System.out.println(manual_id);
 
 
