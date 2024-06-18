@@ -59,7 +59,7 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		LoginUser group = (LoginUser)session.getAttribute("pr_group");
+		LoginUser group = (LoginUser)session.getAttribute("user_ID");
 		int group_id = group.getGroupId();
 		String heading = request.getParameter("item");
 		String contents = request.getParameter("content");
