@@ -12,17 +12,17 @@
 	<body>
 		<header>
 			<div class="dropdown">
-				<button class="dropdown__btn" id="dropdown__btn">
+				<button class="dropdown__btn" id="dropdown__btn" onClick="isOpen();">
 					<img src="/C2/img/accountNull.png">
 			    </button>
-			<div class="dropdown__body">
-    			<ul class="dropdown__list">
-      				<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
-      				<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
-      				<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
-      				<li class="dropdown__item"><a href="/C2/LogoutServlet" class="dropdown__item-link">ログアウト</a></li>
-			    </ul>
-			</div>
+				<div class="dropdown__body" id="dropdown__body">
+	    			<ul class="dropdown__list">
+	      				<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
+	      				<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
+	      				<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
+	      				<li class="dropdown__item"><a href="/C2/LogoutServlet" class="dropdown__item-link">ログアウト</a></li>
+				    </ul>
+				</div>
 			</div>
 			<a href="ManualServlet"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
 			<h5 id = "time"></h5><!-- 時間 -->
@@ -89,16 +89,7 @@
 		</footer>
 <script src="/C2/js/common.js"></script>
 <script>//左上のアカウントボタン
-(function () {
-	  document.addEventListener('DOMContentLoaded', function() { // HTML解析が終わったら
-	    const btn = document.getElementById('dropdown__btn'); // ボタンをidで取得
-	    if(btn) { // ボタンが存在しないときにエラーになるのを回避
-	      btn.addEventListener('click', function(){ //ボタンがクリックされたら
-	        this.classList.toggle('is-open'); // is-openを付加する
-	      });
-	    }
-	  });
-	}());
+
 </script>
 	</body>
 </html>
