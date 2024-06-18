@@ -33,9 +33,9 @@
 
     	<main>
     	<p>アカウント情報</p>
-    	  <c:if test="${empty accountList}">
+<!--      <c:if test="${empty accountList}">
 				<p>一致するデータはありません。</p>
-		  </c:if>
+		  </c:if>-->
     	<c:forEach var="e" items="${accountList}" >
       		<form id="account_form" method="post" action="AccountServlet"><!--アクションにサーブレットを入力する-->
         		<table class="table">
@@ -96,8 +96,12 @@
 			<p class="copyright" id ="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 <script src="/C2/js/common.js"></script>
-<script>//左上のアカウントボタン
-
+<script>
+if('${result.title}' === '') {
+}
+else {
+	window.alert('${result.message}');
+}
 </script>
 	</body>
 </html>

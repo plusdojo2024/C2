@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ItemsDAO;
 import model.Items;
+import model.Result;
 
 /**
  * Servlet implementation class ManualUpdateServlet
@@ -72,18 +73,18 @@ public class ManualUpdateServlet extends HttpServlet {
 		// 登録処理を行う
 		if (request.getParameter("submit").equals("更新")) {
 			if (bManuals.update(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
-				request.setAttribute("result", "レコードを登録しました。");
+				request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
 			}
 			else {												// 登録失敗
-				request.setAttribute("result", "レコードを登録できませんでした。");
+				request.setAttribute("result",  new Result("更新失敗！", "レコードを登録できませんでした。"));
 			}
 		}
 		else {
 			if (bManuals.delete(number)) {	// 削除成功
-				request.setAttribute("result", "レコードを削除しました。");
+				request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。") );
 			}
 			else {						// 削除失敗
-				request.setAttribute("result", "レコードを削除できませんでした。");
+				request.setAttribute("result",  new Result("削除失敗！", "レコードを削除できませんでした。"));
 			}
 		}
 

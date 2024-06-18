@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			session.setAttribute("user_ID", new LoginUser(user_ID));
+			session.setAttribute("user_ID", new LoginUser(user_ID, 1));
 			System.out.println("成功");
 			// マニュアルサーブレットにリダイレクトする
 			response.sendRedirect("/C2/ManualServlet");

@@ -43,9 +43,12 @@ public class ItemsDAO {
 				PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
 				pStmt_manual_select.setString(1, manualregist.getManual_Name());
 				ResultSet rs = pStmt_manual_select.executeQuery();
-				manual_number = rs.getInt("ID");
+				manual_number = rs.getInt("ID");//エラーの予感
+				System.out.println(manual_number);
 			}
+			else {
 
+			}
 
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）

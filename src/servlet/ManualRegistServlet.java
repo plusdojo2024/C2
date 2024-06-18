@@ -59,7 +59,7 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		LoginUser group = (LoginUser)session.getAttribute("pr_group");
+		LoginUser group = (LoginUser)session.getAttribute("user_ID");
 		int group_id = group.getGroupId();
 		String heading = request.getParameter("item");
 		String contents = request.getParameter("content");
@@ -79,7 +79,7 @@ public class ManualRegistServlet extends HttpServlet {
 			request.setAttribute("result",new Result("登録成功！", "レコードを登録しました。"));
 		}
 		else {												// 登録失敗
-			request.setAttribute("result", "レコードを登録できませんでした。");
+			request.setAttribute("result", new Result("登録失敗！", "レコードを登録できませんでした。"));
 		}
 
 		// 結果ページにフォワードする

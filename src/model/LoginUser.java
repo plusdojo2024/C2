@@ -21,6 +21,11 @@ public class LoginUser implements Serializable {
 		super();
 		this.group_id = group_id;
 	}
+	public LoginUser(String loginUserId, int group_id) {
+		super();
+		this.loginUserId = loginUserId;
+		this.group_id = group_id;
+	}
 
 	//method
 	public String getLoginUserId() {
