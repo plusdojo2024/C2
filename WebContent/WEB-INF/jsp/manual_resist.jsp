@@ -12,7 +12,7 @@
 		<header>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo.png"><!-- ロゴ -->
+			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
@@ -25,7 +25,7 @@
 	          <td><input type="text" name="item" placeholder="項目"></td>
 	          <td><input type="text" name="content" placeholder="内容"></td>
 	          <td><input type="file" name="images"></td>
-	          <td><button onclick="deleteExample();">-</button><br></td>
+	          <td><button onclick="deleteExample(this);">-</button><br></td>
 	        </tr>
         </table>
 	      <input type="submit" id="regist" name="manual_regist" value="登録" onclick="checkMessage();">

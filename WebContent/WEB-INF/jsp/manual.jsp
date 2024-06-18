@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/C2/css/common.css">
 	</head>
 	<body>
-		<header>
+		<header class="header">
       <a href="/C2/AccountServlet">accountUpdatePage</a>
 			<img src=""><!-- アカウントのボタン -->
 			<img src=""><!-- マニュアルのみ タスクボタン -->
@@ -35,7 +35,7 @@
        </table>
       </c:forEach>
 		</main>
-		<footer>
+		<footer class="footer">
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 		<script src="/C2/js/common.js"></script>

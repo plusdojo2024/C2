@@ -25,7 +25,7 @@
             <td><input type="text" name="item" placeholder="項目"></td>
             <td><input type="text" name="content" placeholder="内容"></td>
             <td><input type="file" name="images"></td>
-            <td><button>-</button><br></td>
+            <td><button onclick="deleteExample(this);">-</button><br></td>
           </tr>
         </table>
         <input type="submit" id="ok" name="manual_update" value="OK" onclick="checkMessage();">
