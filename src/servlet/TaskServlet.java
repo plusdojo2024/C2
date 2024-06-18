@@ -36,8 +36,8 @@ public class TaskServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
