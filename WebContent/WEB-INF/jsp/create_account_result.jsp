@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/login.css">
 	</head>
 	<body>
 		<header>
@@ -15,11 +16,12 @@
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
-
+		  <div id=house>
 		  <img src="/C2/img/registComplete2.png"><!-- 家のロゴ -->
-		  <h2>Welcome!!</h2>
-		  <h1>アカウントの登録が完了しました</h1>
+		  <h2 class=housetext>Welcome!!</h2>
+		  <h1 class=housetext>アカウントの登録が完了しました</h1>
 		  <p><a href="/C2/LoginServlet">ログイン画面へ</a></p>
+		  </div>
 
 		</main>
 		<footer>

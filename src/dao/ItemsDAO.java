@@ -10,9 +10,7 @@ import model.Items;
 
 public class ItemsDAO {
 
-
-	// マニュアルの項目を登録し、成功したらtrueを返す
-	public boolean insert(Items manualregist) {
+	public boolean manu(Items manualregist) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -34,21 +32,56 @@ public class ItemsDAO {
 
 			pStmt_manual.setString(2, manualregist.getManual_Name());
 
-			int  manual_number = 0;
 			// SQL文を実行する
 			if (pStmt_manual.executeUpdate() == 1) {
 				result = true;
-
-				String sql_manual_select = "SELECT * FROM MANUALS WHERE MANUAL_NAME = ?";
-				PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
-				pStmt_manual_select.setString(1, manualregist.getManual_Name());
-				ResultSet rs = pStmt_manual_select.executeQuery();
-				manual_number = rs.getInt("ID");//エラーの予感
-				System.out.println(manual_number);
 			}
-			else {
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
+		System.out.println("manualの登録結果" + result);
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+
+	// マニュアルの項目を登録し、成功したらtrueを返す
+	public boolean insert(Items manualregist) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			int manual_id;
+
+			String sql_manual_select = "SELECT * FROM MANUALS WHERE MANUAL_NAME = ?";
+			PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
+			pStmt_manual_select.setString(1, manualregist.getManual_Name());
+			ResultSet rs = pStmt_manual_select.executeQuery();
+			manual_id = rs.getInt("ID");	//エラー
+			System.out.println(manual_id);
 
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
@@ -56,7 +89,7 @@ public class ItemsDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, manual_number);
+			pStmt.setInt(1, manual_id);
 			if (manualregist.getHeading() != null && !manualregist.getHeading().equals("")) {
 				pStmt.setString(2, manualregist.getHeading());
 			}
@@ -104,6 +137,7 @@ public class ItemsDAO {
 					e.printStackTrace();
 				}
 			}
+			System.out.println("itemsの登録結果" + result);
 		}
 
 		// 結果を返す

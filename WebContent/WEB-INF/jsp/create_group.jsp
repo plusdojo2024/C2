@@ -20,10 +20,10 @@
 			<table>
 			<tr>
 			  <td>
-			<input type="file" name="images">
+			<input type="file" name="icon">
 			  </td>
 			  <td>
-			<input type="text" name="name" placeholder= "グループ名">
+			<input type="text" name="group_name" placeholder= "グループ名">
 			  </td>
 			</tr>
 			<tr>

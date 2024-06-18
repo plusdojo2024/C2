@@ -10,9 +10,20 @@
 	</head>
 	<body>
 		<header>
-      <a href="/C2/AccountServlet">accountUpdatePage</a>
-			<img src=""><!-- アカウントのボタン -->
-			<img src=""><!-- マニュアルのみ タスクボタン -->
+			<div class="dropdown">
+				<button class="dropdown__btn" id="dropdown__btn" onClick="isOpen();">
+					<img src="/C2/img/accountNull.png">
+			    </button>
+				<div class="dropdown__body" id="dropdown__body">
+	    			<ul class="dropdown__list">
+	      				<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
+	      				<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
+	      				<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
+	      				<li class="dropdown__item"><a href="/C2/LogoutServlet" class="dropdown__item-link">ログアウト</a></li>
+				    </ul>
+				</div>
+			</div>
+			<a href="/C2/TaskServlet"><img src="/C2/img/taskButton.png"></a><!-- マニュアルのみ タスクボタン -->
 			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>

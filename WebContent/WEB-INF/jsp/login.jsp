@@ -56,7 +56,15 @@
 		</footer>
 		<script src="/C2/js/common.js"></script>
 		<script src="/C2/js/login.js"></script>
-		<script src="/C2/js/result.js"></script>
+		<script>
+		'use strict';
+		//登録結果Windowアラート表示
+			if('${result}' === '') {
+			}
+			else {
+				window.alert('${result}');
+			}
+		</script>
 	</body>
 </html>
 
