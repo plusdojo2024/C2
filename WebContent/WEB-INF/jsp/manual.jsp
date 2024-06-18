@@ -18,11 +18,27 @@
 		</header>
 		<main>
       <p>Manual List</p>
+
+
+
+
       <form method="post" action="/C2/ManualServlet">
         <input type="search">
         <input type="submit" id="search" name="search" value="search">
-      </form>
-      <a href="/C2/ManualRegistServlet">+</a>
+        </form>
+
+
+
+        <form action="#" class="search-form-3">
+   			 <label>
+        	<input type="text" placeholder="キーワードを入力">
+    		</label>
+    		<button type="submit" aria-label="検索"></button>
+		</form>
+
+
+
+      <a href="/C2/ManualRegistServlet"><img src="/C2/img/plusButton2.png" alt="＋ボタン"></a>
 
 
       <c:forEach var="e" items="${cardList}" >
