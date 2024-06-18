@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.AccountsDAO;
 import model.Accounts;
 import model.LoginUser;
+import model.Result;
 
 /**
  * Servlet implementation class AccountServlet
@@ -78,43 +79,39 @@ public class AccountServlet extends HttpServlet {
 	String password = request.getParameter("password");
 	String newPassword = request.getParameter("newPassword");
 	String nickname = request.getParameter("nickname");
-	String pw = request.getParameter("pw");//以前のパスワード（pr_pwで検索）
-
+	String pw = request.getParameter("pw");
+	System.out.println("password:"+password);
 	//password、newPasswordに入力があるとき、以前のパスワードと比較して新しいパスワードを登録
-	if(newPassword != null && password != null && password.equals(pw)) {
+	if(password.equals(pw)) {
 		password = newPassword;
-		System.out.println("パスワード更新");
 	}
-	else if(newPassword != null && password != null && !password.equals(pw)){//失敗の時
-		request.setAttribute("result","パスワードが正しくありません");
-		//フォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
-		dispatcher.forward(request, response);
+	else if(!newPassword.equals("") && !password.equals("") && !password.equals(pw)){//失敗の時
+	request.setAttribute("result",new Result("登録失敗！", "パスワードが間違っています。"));
 	}
 
 	//データの更新
 	AccountsDAO accountsDao = new AccountsDAO();
 	//パスワードを含む更新
-	if(newPassword != null && password.equals(pw)) {
+	if(!newPassword.equals("")) {
 		if (accountsDao.update(new Accounts(user_ID,mail,password,nickname,1))){
-			System.out.println("アカウント更新成功");
-//			request.setAttribute("result",
-//			new Result("登録成功！", "レコードを登録しました。", "/simpleBC/MenuServlet"));
-//		}
-//		else {												// 登録失敗
-//			request.setAttribute("result",
-//			new Result("登録失敗！", "レコードを登録できませんでした。", "/simpleBC/MenuServlet"));
+			request.setAttribute("result",new Result("登録成功！", "アカウントを更新しました。"));
+		}
+		else {
+			request.setAttribute("result",new Result("登録失敗！", "アカウントをできませんでした。"));
 		}
 	}
 	//パスワードを含まない更新
-	else if(newPassword == null) {
+	if(newPassword.equals("")) {
 		if(accountsDao.updateWithoutPw(new Accounts(user_ID,mail,nickname,1))) {
-
+			request.setAttribute("result",new Result("登録成功！", "アカウントを更新しました。"));
+		}
+		else {
+			request.setAttribute("result",new Result("登録失敗！", "アカウントをできませんでした。"));
 		}
 	}
 
 	// 結果ページにフォワードする
-	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual.jsp");
+	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
 	dispatcher.forward(request, response);
 
 	}
