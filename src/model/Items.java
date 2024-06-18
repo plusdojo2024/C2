@@ -34,10 +34,9 @@ public class Items implements Serializable {
 		this.regist_day = regist_day;
 	}
 	//ManualRegistServletで使用
-	public Items(int id, int manual_id, String heading, String contents, String image, String manual, int group) {
+	public Items(int id, String heading, String contents, String image, String manual, int group) {
 		super();
 		this.id = id;
-		this.manual_id = manual_id;
 		this.heading = heading;
 		this.contents = contents;
 		this.image = image;

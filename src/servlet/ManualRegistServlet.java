@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ItemsDAO;
 import model.Items;
+import model.LoginUser;
 import model.Result;
 
 /**
@@ -58,8 +59,8 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		//String task = "1";request.getParameter("group_id");
-		int group_id = 1;//Integer.parseInt(task);
+		LoginUser group = (LoginUser)session.getAttribute("pr_group");
+		int group_id = group.getGroupId();
 		String heading = request.getParameter("item");
 		String contents = request.getParameter("content");
 		String images = request.getParameter("images");
@@ -74,7 +75,7 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// 登録処理を行う
 		ItemsDAO bItems = new ItemsDAO();
-		if (bItems.insert(new Items(0, group_id, heading, contents, images, manual_name, group_id))) {	// 登録成功
+		if (bItems.insert(new Items(0, heading, contents, images, manual_name, group_id))) {	// 登録成功
 			request.setAttribute("result",new Result("登録成功！", "レコードを登録しました。"));
 		}
 		else {												// 登録失敗

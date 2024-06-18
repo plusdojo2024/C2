@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Items;
@@ -22,52 +23,66 @@ public class ItemsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
+
+			//Manualsに項目を一つ増やす
+			String sql_manual = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
+			PreparedStatement pStmt_manual = conn.prepareStatement(sql_manual);
+
+			// SQL文を完成させる
+
+			pStmt_manual.setInt(1, manualregist.getGroup_number());
+
+			pStmt_manual.setString(2, manualregist.getManual_Name());
+
+			int  manual_number = 0;
+			// SQL文を実行する
+			if (pStmt_manual.executeUpdate() == 1) {
+				result = true;
+
+				String sql_manual_select = "SELECT * FROM MANUALS WHERE MANUAL_NAME = ?";
+				PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
+				pStmt_manual_select.setString(1, manualregist.getManual_Name());
+				ResultSet rs = pStmt_manual_select.executeQuery();
+				manual_number = rs.getInt("ID");
+			}
+
+
+
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO Items VALUES (NULL,NULL, ?, ?, ?, CURRENT_TIMESTAMP)";
+			String sql = "INSERT INTO Items VALUES (NULL,? , ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
+			pStmt.setInt(1, manual_number);
 			if (manualregist.getHeading() != null && !manualregist.getHeading().equals("")) {
-				pStmt.setString(1, manualregist.getHeading());
-			}
-			else {
-				pStmt.setString(1, "（未設定）");
-			}
-			if (manualregist.getContents() != null && !manualregist.getContents().equals("")) {
-				pStmt.setString(2, manualregist.getContents());
+				pStmt.setString(2, manualregist.getHeading());
 			}
 			else {
 				pStmt.setString(2, "（未設定）");
 			}
-			if (manualregist.getImage() != null && !manualregist.getImage().equals("")) {
-				pStmt.setString(3, manualregist.getImage());
+			if (manualregist.getContents() != null && !manualregist.getContents().equals("")) {
+				pStmt.setString(3, manualregist.getContents());
 			}
 			else {
 				pStmt.setString(3, "（未設定）");
 			}
-				//pStmt.setDate(4, manualregist.getRegist_day());
+			if (manualregist.getImage() != null && !manualregist.getImage().equals("")) {
+				pStmt.setString(4, manualregist.getImage());
+			}
+			else {
+				pStmt.setString(4, "（未設定）");
+			}
+				//pStmt.setDate(5, manualregist.getRegist_day());
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 				}
-
-			//Manualsに項目を一つ増やす
-			String sql2 = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-			// SQL文を完成させる
-
-			pStmt2.setInt(1, manualregist.getGroup_number());
-
-			pStmt2.setString(2, manualregist.getManual_Name());
-
-			// SQL文を実行する
-			if (pStmt2.executeUpdate() == 1) {
-				result = true;
-			}
 			else {
 				result = false;
 			}
+
+
+
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
