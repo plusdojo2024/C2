@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.GroupsDAO;
 import model.Groups;
+import model.LoginUser;
 
 /**
  * Servlet implementation class GroupCreateServlet
@@ -35,7 +36,7 @@ public class GroupCreateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_ID") == null) {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
@@ -53,23 +54,29 @@ public class GroupCreateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String group_name = request.getParameter("name");
-		String icon = request.getParameter("images");
+		String group_name = request.getParameter("group_name");
+		String icon = request.getParameter("icon");
+		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
+		String user = user_ID.getLoginUserId();
 
 		// 登録処理を行う
 		GroupsDAO abc = new GroupsDAO();
-		if (abc.insert(new Groups(group_name,icon))) {
+		if (abc.insert(new Groups(group_name,icon,user))) {
 			request.setAttribute("result", "レコードを登録しました。");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
+    		dispatcher.forward(request, response);
 		}
 		else {
 			request.setAttribute("result", "レコードの登録できません。");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/create_group.jsp");
+    		dispatcher.forward(request, response);
 		}
 
 		//登録後にグループ一覧画面にフォワードする。

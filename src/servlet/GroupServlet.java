@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.GroupsDAO;
-
+import model.Groups;
+import model.LoginUser;
 /**
  * Servlet implementation class GroupServlet
  */
@@ -40,13 +42,16 @@ public class GroupServlet extends HttpServlet {
 		}
 
 		//ユーザーごとに所属しているグループのデータを取得
-		//String login = (String)session.getAttribute("user_ID");
+		LoginUser login = (LoginUser)session.getAttribute("user_ID");
+		String user = login.getLoginUserId();
 
 		//GroupsDAOに処理してもらう
 		GroupsDAO abc = new GroupsDAO();
+        List<Groups> cardList = abc.select(user);
+
 
 		//リクエストスコープに格納する
-		request.setAttribute("user_ID", abc);
+		request.setAttribute("cardList", cardList);
 
 		// グループ一覧ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");

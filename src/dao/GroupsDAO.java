@@ -224,7 +224,8 @@ public class GroupsDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Groups record = new Groups(
-				rs.getString("user_ID")
+				rs.getString("user_ID"),
+				rs.getString("group_name")
 				);
 				cardList.add(record);
 			}
@@ -256,7 +257,7 @@ public class GroupsDAO {
 	}
 
 
-public List<Groups> select(int card) {
+public List<Groups> select(String card) {
 	Connection conn = null;
 	List<Groups> cardList = new ArrayList<Groups>();
 
@@ -270,7 +271,7 @@ public List<Groups> select(int card) {
 		String sql = "SELECT * FROM groups WHERE user_ID  =?";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 
-		pStmt.setInt(1, card);
+		pStmt.setString(1, card);
 
 		// SQL文を実行し、結果表を取得する
 		ResultSet rs = pStmt.executeQuery();
@@ -278,9 +279,11 @@ public List<Groups> select(int card) {
 		// 結果表をコレクションにコピーする
 		while (rs.next()) {
 			Groups record = new Groups(
-			rs.getString("user_ID")
+			rs.getString("user_ID"),
+			rs.getString("group_name")
 			);
 			cardList.add(record);
+
 		}
 	}
 

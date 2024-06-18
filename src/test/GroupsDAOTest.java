@@ -50,10 +50,10 @@ public class GroupsDAOTest {
 
 		// selectメソッドのテスト
 		System.out.println("<< selectメソッドのテスト（すべてのレコードを検索します）>>");
-		cardList = dao.select(new Groups());
+		cardList = dao.select("z");
 		for (Groups card : cardList) {
 			System.out.println("グループ：" + card.getUser_ID());
-
+			System.out.println("グループ：" + card.getGroup_name());
 		}
 	}
 }

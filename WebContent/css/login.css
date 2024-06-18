@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/*ログイン画面について*/
 
 /* id="login_form"*/
 	#login_form {
@@ -86,8 +87,22 @@
 		color:white;
 	}
 
-
 /* エラーメッセージ */
 	#error_message {
- 	color: #001746;
+ 		color: #001746;
 	}
+
+
+/*登録完了画面*/
+
+	#house {
+  	text-align: center;
+  	padding: 30px;
+	}
+
+	.housetext {
+	font: 20px UD デジタル 教科書体 NK-B;
+	color:#001746;
+	}
+
+

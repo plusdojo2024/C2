@@ -18,9 +18,10 @@ public class Groups implements Serializable {
 
 	}
 
-	public Groups(String user_ID) {
+	public Groups(String user_ID, String group_name) {
 		super();
 		this.user_ID = user_ID;
+		this.group_name = group_name;
 	}
 
 	//引数ありのコンストラクタ
@@ -34,11 +35,14 @@ public class Groups implements Serializable {
 	}
 
 	//引数三つのコンストラクタ
-	public Groups(String group_name, String icon) {
+	public Groups(String group_name, String icon, String user_ID) {
 		super();
 		this.group_name = group_name;
 		this.icon = icon;
+		this.user_ID = user_ID;
 	}
+
+
 
 	//ゲッターとセッターの登録
 	public int getId() {
