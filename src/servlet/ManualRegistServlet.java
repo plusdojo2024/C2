@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ItemsDAO;
 import model.Items;
+import model.Result;
 
 /**
  * Servlet implementation class ManualRegistServlet
@@ -70,7 +71,7 @@ public class ManualRegistServlet extends HttpServlet {
 		// 登録処理を行う
 		ItemsDAO bItems = new ItemsDAO();
 		if (bItems.insert(new Items(0, group_id, heading, contents, images))) {	// 登録成功
-			request.setAttribute("result", "レコードを登録しました。");
+			request.setAttribute("result",new Result("登録成功！", "レコードを登録しました。"));
 		}
 		else {												// 登録失敗
 			request.setAttribute("result", "レコードを登録できませんでした。");
