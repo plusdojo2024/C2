@@ -37,7 +37,14 @@
 		</footer>
 
 		<script src="/C2/js/manual.js"></script>
-		<script src="/C2/js/result.js"></script>
+		<!--  <script src="/C2/js/result.js"></script>-->
+		<script>
+        if('${result.title}' === '') {
+        }
+        else {
+        	window.alert('${result.message}');
+        }
+		</script>
 
 	</body>
 </html>
