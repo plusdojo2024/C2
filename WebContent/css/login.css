@@ -51,6 +51,7 @@
 		height: 50px;
 		font-size:20px;
 		margin-bottom:20px;
+		text-align: center;
 	}
 
 	input[name=pw] {
@@ -58,6 +59,7 @@
 		height: 50px;
 		font-size:20px;
 		margin-bottom:30px;
+		text-align: center;
 	}
 
 /*ログインボタン*/

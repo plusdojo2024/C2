@@ -55,6 +55,7 @@
 		height: 40px;
 		font-size:15px;
 		margin-bottom:10px;
+		text-align: center;
 	}
 
 	input[name=nickname] {
@@ -62,10 +63,12 @@
 		height: 40px;
 		font-size:15px;
 		margin-bottom:20px;
+		text-align: center;
 	}
 
 	input[name=pw] {
 		height: 20px;
+		text-align: center;
 	}
 
 /*okボタン*/

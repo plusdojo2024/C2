@@ -2,13 +2,30 @@
 
 /*マニュアル登録画面について*/
 
+/*タイトル部分*/
+	#newmanual {
+		font-size: 1.5rem;
+		background-color: #F3B4AB;
+		width: 250px;
+		height: 50px;
+		border-radius: 25px 25px 0 0;
+		color: white;
+		margin: auto;
+		padding: 6px;
+		text-align: center;
+	}
+
+	#newmanualtitle {
+		text-align: center;
+		padding-top: 30px;
+	}
 
 /*フォームのボックス*/
 	#form {
-		width: 1200px;
-  		margin: 15px auto 80px auto;
+		width: 1300px;
+  		margin: 0px auto 80px auto;
  		padding: 80px auto 30px auto;
-  		border: 1px solid #F3B4AB;
+  		border: 5px solid #F3B4AB;
   		background-color: white;
 	}
 
@@ -17,12 +34,16 @@
 		border:2px solid #F3B4AB;
 	}
 
+/*テキストボックス全体*/
+
+
 /*フォームのテキストボックスの大きさ*/
 	input[name=title] {
 		width: 20em;
 		height: 50px;
 		font-size:30px;
 		margin-bottom:20px;
+		text-align: center;
 	}
 
 	input[name=content] {
@@ -65,3 +86,7 @@
 		background-color:white;
 		color:#001746;
 	}
+
+
+/*プラスボタン*/
+

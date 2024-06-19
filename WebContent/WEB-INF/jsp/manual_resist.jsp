@@ -18,23 +18,36 @@
 		</header>
 
 		<main>
-		<div id="form" class=boxradius>
-      	<form method="post" action="/C2/ManualRegistServlet" id="all">
-      	<table>
-	        <tr><td>New Manual<br></td></tr>
-	        <tr><td><input type="text" name="title" placeholder="マニュアル名"><br></td></tr>
-
-          <tr id = "target">
-	          <td><input type="text" name="item" placeholder="項目"></td>
-	          <td><input type="text" name="content" placeholder="内容"></td>
-	          <td><input type="file" name="images"></td>
-	          <td><button onclick="deleteExample(this);">-</button><br></td>
-	        </tr>
-        </table>
-			<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
-			<input type="submit" id="regist" name="manual_regist" value="OK" onclick="checkMessage();" class=okbutton>
-     	 </form>
-     	 </div>
+			<div id="newmanualtitle">
+				<p id="newmanual">New Manual</p>
+			</div>
+			<div id="form" class=boxradius>
+      			<form method="post" action="/C2/ManualRegistServlet">
+      				<table>
+	        			<tr>
+	        			  <td>
+	        				<input type="text" name="title" placeholder="マニュアル名"><br>
+	        			  </td>
+	        			</tr>
+						<tr id = "target">
+	          			  <td>
+	          				<input type="text" name="item" placeholder="項目">
+	          			  </td>
+	          			  <td>
+	          			    <input type="text" name="content" placeholder="内容">
+	          			  </td>
+	          			  <td>
+	          			    <input type="file" name="images">
+	          			  </td>
+	          			  <td>
+	          			    <img src="/C2/img/minusButton3.png" onclick="deleteExample(this);"><br>
+	          			  </td>
+	       			    </tr>
+       				 </table>
+					<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
+					<input type="submit" id="regist" name="manual_regist" value="OK" onclick="checkMessage();" class=okbutton>
+     	 		</form>
+     	 	</div>
 		</main>
 
 		<footer>
@@ -43,6 +56,7 @@
 
 		<script src="/C2/js/manual.js"></script>
 		<!--  <script src="/C2/js/result.js"></script>-->
+
 		<script>
         if('${result.title}' === '') {
         }
@@ -51,5 +65,5 @@
         }
 		</script>
 
-	</body>
+		</body>
 </html>
