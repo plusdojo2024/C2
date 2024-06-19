@@ -79,7 +79,8 @@ public class GroupServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String group_name = request.getParameter("changeGroup");
 		System.out.println("グループ名：" + group_name);
-		String group_id = request.getParameter("chgGrpID");
+		String getGroupID = request.getParameter("chgGrpID");
+		int group_id = Integer.parseInt(getGroupID);
 		System.out.println("グループ番号：" + group_id);
 
 		//ユーザーごとに所属しているグループのデータを取得
@@ -91,6 +92,7 @@ public class GroupServlet extends HttpServlet {
 		boolean change = accountsdao.changeGroup(new Accounts(group_id, user));
 
 		//反映されているかの確認
+		System.out.println("ログインユーザー：" + user);
 		System.out.println("更新結果：" + change);
 
 		// ホームページ（マニュアルページ）にリダイレクトする
