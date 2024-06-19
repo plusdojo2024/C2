@@ -75,6 +75,7 @@ public class AccountsDAO {
 			// 結果を返す
 			return accountsList;
 		}
+//pr_groupを持ってくるメソッド
 
 	//ログインできるならtrueを返す
 	public boolean isLoginOK(Accounts account) {
