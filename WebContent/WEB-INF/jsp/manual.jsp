@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/manual_home.css">
 	</head>
 	<body>
 
@@ -37,7 +38,7 @@
 					</div>
 					<h5></h5><!-- 空の枠 -->
 					<h5></h5><!-- 空の枠 -->
-					<div calss="today-logo">
+					<div class="today-logo">
 						<h5 id = "today" class="header-content"></h5><!-- 今日の日付 -->
 					</div>
 				</div>

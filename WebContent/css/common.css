@@ -107,6 +107,11 @@ header {
     top: calc(50% - 5px);
 }
 
+/*メイン*/
+main {
+  flex: 1;
+}
+
 /*フッター*/
 footer {
   width: 100%;
