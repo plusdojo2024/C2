@@ -1,10 +1,14 @@
 @charset "UTF-8";
-/*ログイン画面について*/
 
-/* id="login_form"*/
-	#login_form {
+/*アカウントの更新について*/
 
-		padding:70px 100px 50px 95px;
+#pw{
+	display:none;
+}
+
+/* id="account_regist_form"*/
+	#account_form {
+		padding:30px 70px 30px 70px;
 		background-position:center;
 		text-align:center;
 	}
@@ -12,33 +16,33 @@
 /*フォームのボックス*/
 	#form {
 		width: 600px;
-  		margin: 50px auto;
- 		padding: 3px;
-  		border: 1px solid #EA7B6B;
-  		background-color: #EA7B6B;
+  		margin: 15px auto;
+ 		padding: 30px auto 30px auto;
+  		border: 1px solid #F9E799;
+  		background-color: #F9E799;
 	}
 
 	.boxradius {
 		border-radius:50px;
-		border:2px solid #EA7B6B;
+		border:2px solid #F9E799;
 	}
 
 /* フォーム全体 */
 
 	form {
   		padding: 6px;
-  		color: white;
+  		color: #001746;
   		font:20px Kristen ITC;
 	}
 
 	.radius {
 		border-radius:30px;
-		border:2px solid #EA7B6B;
+		border:2px solid #F9E799;
 	}
 
 	.radius:focus {
 		outline: 0;
-		border-color:#EA7B6B;
+		border-color:#F9E799;
 	}
 
 	.label {
@@ -46,27 +50,25 @@
 	}
 
 /*フォームのテキストボックスの大きさ*/
-	input[name=user_ID] {
-		width: 20em;
-		height: 50px;
-		font-size:20px;
-		margin-bottom:15px;
+	input[name=user_ID] ,input[name=mail],input[name=password],input[name=newPassword],input[name=nickname]{
+		width: 30em;
+		height: 40px;
+		font-size:15px;
+		margin-bottom:10px;
 	}
 
 	input[name=pw] {
-		width: 20em;
-		height: 50px;
-		font-size:20px;
-		margin-bottom:15px;
+		width: 30em;
+		height: 1px;
 	}
 
-/*ログインボタン*/
-	input[type=submit], input[type=reset] {
+/*okボタン*/
+	input[type=submit]{
   		width: 7em;
  		height: 50px
 	}
 
-	.loginbutton {
+	.okbutton {
 		border-radius:50px;
 		background-color: #001746;
     	border: 2px solid #001746;
@@ -82,27 +84,7 @@
     	transition: .3s;
 	}
 
-	.loginbutton:hover {
-		background-color:#F7D0C9;
+	.okbutton:hover {
+		background-color:#8AAEC9;
 		color:white;
 	}
-
-/* エラーメッセージ */
-	#error_message {
- 		color: #001746;
-	}
-
-
-/*登録完了画面*/
-
-	#house {
-  	text-align: center;
-  	padding: 30px;
-	}
-
-	.housetext {
-	font: 20px UD デジタル 教科書体 NK-B;
-	color:#001746;
-	}
-
-
