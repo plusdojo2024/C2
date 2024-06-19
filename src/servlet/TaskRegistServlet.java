@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.TasksDAO;
-import model.LoginUser;
+import model.Accounts;
 import model.Tasks;
 
 /**
@@ -35,11 +35,11 @@ public class TaskRegistServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("user_ID") == null) {
-//			response.sendRedirect("/simpleBC/LoginServlet");
-//			return;
-//		}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}
 
 		// taskページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_regist.jsp");
@@ -52,7 +52,9 @@ public class TaskRegistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//セッションスコープから取得する
 		HttpSession session = request.getSession();
-		LoginUser login = (LoginUser)session.getAttribute("group_id");
+		Accounts group = (Accounts)session.getAttribute("pr_group");
+		int group_number = group.getPr_group();
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String task = request.getParameter("task");
@@ -64,12 +66,13 @@ public class TaskRegistServlet extends HttpServlet {
 		String checkbox = request.getParameter("checkbox");
 		String manual_link = request.getParameter("manual_link");
 
-
 		boolean boo1 = Boolean.valueOf(checkbox);
+
+		System.out.println("グループID："+ group_number);
 
 		// 登録処理を行う
 		TasksDAO bTask = new TasksDAO();
-		if (bTask.insert(new Tasks(0, login.getGroupId(), task, content, date, register, to,
+		if (bTask.insert(new Tasks(0, group_number, task, content, date, register, to,
 				boo1, manual_link))) {	// 登録成功
 			request.setAttribute("result", "レコードを登録しました。");
 		}
