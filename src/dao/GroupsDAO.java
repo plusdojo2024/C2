@@ -279,9 +279,9 @@ public List<Groups> select(String card) {
 		// 結果表をコレクションにコピーする
 		while (rs.next()) {
 			Groups record = new Groups(
-			rs.getString("user_ID"),
-			rs.getString("group_name")
-			);
+			rs.getString("group_name"),
+			rs.getInt("id"),
+			rs.getString("user_ID"));
 			cardList.add(record);
 
 		}

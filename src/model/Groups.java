@@ -42,6 +42,14 @@ public class Groups implements Serializable {
 		this.user_ID = user_ID;
 	}
 
+	//引数三つのコンストラクタ(グループ切り替えの際に使用＝groupsDao=SLECT)
+	public Groups(String group_name, int id, String user_ID) {
+		super();
+		this.group_name = group_name;
+		this.id = id;
+		this.user_ID = user_ID;
+	}
+
 
 
 	//ゲッターとセッターの登録

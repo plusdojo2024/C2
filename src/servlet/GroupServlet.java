@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AccountsDAO;
 import dao.GroupsDAO;
+import model.Accounts;
 import model.Groups;
 import model.LoginUser;
 /**
@@ -67,15 +69,35 @@ public class GroupServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
+		if (session.getAttribute("user_ID") == null) {
+			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
 
 
+		//反映されているかの確認
+		request.setCharacterEncoding("UTF-8");
+		String group_name = request.getParameter("changeGroup");
+		System.out.println("グループ名：" + group_name);
+		String group_id = request.getParameter("chgGrpID");
+		System.out.println("グループ番号：" + group_id);
+
+		//ユーザーごとに所属しているグループのデータを取得
+		LoginUser login = (LoginUser)session.getAttribute("user_ID");
+		String user = login.getLoginUserId();
+
+		//グループの切り替え処理
+		AccountsDAO accountsdao = new AccountsDAO();
+		boolean change = accountsdao.changeGroup(new Accounts(group_id, user));
+
+		//反映されているかの確認
+		System.out.println("更新結果：" + change);
+
+		// ホームページ（マニュアルページ）にリダイレクトする
+		response.sendRedirect("/C2/ManualServlet");
 
 
-		doGet(request, response);
+
 	}
 
 }
