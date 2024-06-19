@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet"  href="/C2/css/common.css">
-		<link rel="stylesheet"  href="/C2/css/account.css">
+		<link rel="stylesheet"  href="/C2/css/account_update.css">
 	</head>
 
 	<body>
@@ -32,51 +32,51 @@
 
 
     	<main>
-    	<p>アカウント情報</p>
 <!--      <c:if test="${empty accountList}">
 				<p>一致するデータはありません。</p>
 		  </c:if>-->
     	<c:forEach var="e" items="${accountList}" >
+    	<div id="form" class=boxradius>
       		<form id="account_form" method="post" action="AccountServlet"><!--アクションにサーブレットを入力する-->
         		<table class="table">
           			<tr>
             			<td>
-              				<label>User ID(変更不可)<br>
-                				<input type="text" name="user_ID" value="${e.user_ID}" readonly="readonly">
+              				<label>User ID ※変更不可<br>
+                				<input type="text" name="user_ID" value="${e.user_ID}" class=radius readonly="readonly">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>Mail<br>
-                				<input type="text" name="mail" value="${e.mail}">
+                				<input type="text" name="mail" value="${e.mail}" class=radius>
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>Password<br>
-                				<input type="text" name="password" placeholder="前のパスワードを入力">
+                				<input type="text" name="password" class=radius placeholder="前のパスワードを入力">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>New Password<br>
-                				<input type="text" name="newPassword" placeholder="新しいパスワードを入力">
+                				<input type="text" name="newPassword" class=radius placeholder="新しいパスワードを入力">
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
               				<label>Nickname<br>
-                				<input type="text" name="nickname" value="${e.nickname}">
+                				<input type="text" name="nickname" value="${e.nickname}" class=radius>
               				</label>
             			</td>
           			</tr>
           			<tr>
             			<td>
-              				<input type="submit" id="register" name="submit" value="登録">
+              				<input type="submit" id="register" name="submit" value="OK" class=okbutton>
             			</td>
           			</tr>
           			<tr>
@@ -88,6 +88,7 @@
           			</tr>
         		</table>
      		</form>
+     		</div>
      	  </c:forEach>
     	</main>
 
