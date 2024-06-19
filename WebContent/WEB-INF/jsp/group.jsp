@@ -18,8 +18,9 @@
 		</header>
 		<main>
 			<c:forEach var="e" items="${cardList}" >
-			<form class="glist"method="get" action="/C2/GroupServlet" ><!--グループ選択  -->
-				<a href="/C2/ManualServlet"><input type="text" value="${e.group_name}"></a>
+			<form class="glist"method="post" action="/C2/GroupServlet" ><!--グループ選択  -->
+			<input type="hidden" name="chgGrpID" value="${e.id}">
+			<input type="submit" name="changeGroup" value="${e.group_name}">
 			</form>
 			</c:forEach>
 			<a href="/C2/GroupCreateServlet"> <img src="/C2/img/" alt="新規作成"></a>

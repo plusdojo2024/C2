@@ -1,5 +1,84 @@
 @charset "UTF-8";
 
-#pw{
-	display:none;
-}
+
+/*アカウントの登録について*/
+
+/* id="account_regist_form"*/
+	#account_regist_form {
+
+		padding:40px 70px 40px 70px;
+		background-position:center;
+		text-align:center;
+	}
+
+/*フォームのボックス*/
+	#form {
+		width: 600px;
+  		margin: 15px auto;
+ 		padding: 30px auto 30px auto;
+  		border: 1px solid #EA7B6B;
+  		background-color: #EA7B6B;
+	}
+
+	.boxradius {
+		border-radius:50px;
+		border:2px solid #EA7B6B;
+	}
+
+/* フォーム全体 */
+
+	form {
+  		padding: 6px;
+  		color: white;
+  		font:20px Kristen ITC;
+	}
+
+	.radius {
+		border-radius:30px;
+		border:2px solid #EA7B6B;
+	}
+
+	.radius:focus {
+		outline: 0;
+		border-color:#EA7B6B;
+	}
+
+	.label {
+		text-align:center
+	}
+
+/*フォームのテキストボックスの大きさ*/
+	input[name=user_ID] ,input[name=mail],input[name=pw],input[name=nickname]{
+		width: 30em;
+		height: 40px;
+		font-size:15px;
+		margin-bottom:15px;
+	}
+
+/*okボタン*/
+	input[type=submit]{
+  		width: 7em;
+ 		height: 50px
+	}
+
+	.okbutton {
+		border-radius:50px;
+		background-color: #001746;
+    	border: 2px solid #001746;
+    	font: 20px UD デジタル 教科書体 NK-B;
+    	box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+		color: white;
+    	display: inline-block;
+    	font-weight: 700;
+    	padding: auto;
+		position: relative;
+    	text-align: center;
+    	text-decoration: none;
+    	transition: .3s;
+	}
+
+	.okbutton:hover {
+		background-color:#F7D0C9;
+		color:white;
+	}
+

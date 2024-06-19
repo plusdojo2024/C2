@@ -10,22 +10,25 @@
 	</head>
 	<body>
 		<header>
-			<div class="dropdown">
-				<button class="dropdown__btn" id="dropdown__btn" onClick="isOpen();">
-					<img src="/C2/img/accountNull.png">
-			    </button>
-				<div class="dropdown__body" id="dropdown__body">
-	    			<ul class="dropdown__list">
-	      				<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
-	      				<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
-	      				<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
-	      				<li class="dropdown__item"><a href="/C2/LogoutServlet" class="dropdown__item-link">ログアウト</a></li>
-				    </ul>
+			<div class="header-contents">
+				<div class="dropdown header-content">
+					<button class="dropdown__btn" id="dropdown__btn" onClick="isOpen();">
+						<div class ="account-logo"><img src="/C2/img/accountNull.png"></div><!-- アカウントロゴ -->
+			    	</button>
+					<div class="dropdown__body" id="dropdown__body">
+	    				<ul class="dropdown__list">
+	      					<li class="dropdown__item"><a href="/C2/AccountServlet" class="dropdown__item-link">アカウント画面</a></li>
+	      					<li class="dropdown__item"><a href="/C2/GroupServlet" class="dropdown__item-link">グループ一覧</a></li>
+	      					<li class="dropdown__item"><a href="/C2/GroupUpdateServlet" class="dropdown__item-link">グループ詳細</a></li>
+	      					<li class="dropdown__item"><a href="/C2/LogoutServlet" class="dropdown__item-link">ログアウト</a></li>
+				    	</ul>
+					</div>
 				</div>
+				<a href="/C2/TaskServlet" class="header-content"><img src="/C2/img/taskButton.png"></a><!-- マニュアルのみ タスクボタン -->
+				<a href="/C2/TaskServlet" class="header-content"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
+				<h5></h5><!-- 空の枠 -->
+				<h5 id = "today" class="header-content"></h5><!-- 今日の日付 -->
 			</div>
-			<a href="/C2/TaskServlet"><img src="/C2/img/taskButton.png"></a><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
-			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
 		<main>
       <p>Manual List</p>
@@ -33,18 +36,15 @@
 
 
 
-      <form method="post" action="/C2/ManualServlet">
-        <input type="search">
-        <input type="submit" id="search" name="search" value="search">
-        </form>
 
 
 
-        <form action="#" class="search-form-3">
+
+        <form action="#" class="search-form">
    			 <label>
-        	<input type="text" placeholder="キーワードを入力">
+        	<input type="text" placeholder="検索">
     		</label>
-    		<button type="submit" aria-label="検索"></button>
+    		<button type="submit"aria-label="検索"></button>
 		</form>
 
 
