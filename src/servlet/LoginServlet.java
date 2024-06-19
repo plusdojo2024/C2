@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,23 +47,23 @@ public class LoginServlet extends HttpServlet {
 		AccountsDAO aDao = new AccountsDAO();
 		if (  aDao.isLoginOK(  new Accounts( user_ID, pw )   )  ) {	// ログイン成功
 
-		//DAOのpr_account
-//		 ユーザーの検索処理を行う
-		AccountsDAO accountDao = new AccountsDAO();
-       List<Accounts> accountList = accountDao.pr_account(new Accounts(user_ID));
+//		//DAOのpr_account
+////		 ユーザーの検索処理を行う
+//		AccountsDAO accountDao = new AccountsDAO();
+//       List<Accounts> accountList = accountDao.pr_account(new Accounts(user_ID));
 
-//		 検索結果をリクエストスコープに格納する
-		request.setCharacterEncoding("UTF-8");
-		request.setAttribute("accountList", accountList);
-		String GI= request.getParameter("accountList.group_ID");
-		System.out.println("GI:"+GI);
-		int pr_group = Integer.parseInt(GI);
-
+////		 検索結果をリクエストスコープに格納する
+//		request.setCharacterEncoding("UTF-8");
+//		request.setAttribute("accountList", accountList);
+////		String GI= request.getParameter("group_ID");
+////		System.out.println("GI:"+GI);
+////		int pr_group = Integer.parseInt(GI);
+//
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("user_ID", new LoginUser(user_ID, 1));
-			session.setAttribute("group_ID", new LoginUser(pr_group));
-			System.out.println("user_ID:"+user_ID+".pr_group:"+pr_group+".ログイン成功");
+//			session.setAttribute("group_ID", new Accounts(pr_group));
+//			System.out.println("user_ID:"+user_ID+".pr_group:"+pr_group+".ログイン成功");
 			// マニュアルサーブレットにリダイレクトする
 			response.sendRedirect("/C2/ManualServlet");
 		}
