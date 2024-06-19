@@ -8,7 +8,7 @@
 
 /* id="account_regist_form"*/
 	#account_form {
-		padding:30px 70px 30px 70px;
+		padding:40px 70px 5px 70px;
 		background-position:center;
 		text-align:center;
 	}
@@ -16,7 +16,7 @@
 /*フォームのボックス*/
 	#form {
 		width: 600px;
-  		margin: 15px auto;
+  		margin: 15px auto 80px auto;
  		padding: 30px auto 30px auto;
   		border: 1px solid #F9E799;
   		background-color: #F9E799;
@@ -50,16 +50,22 @@
 	}
 
 /*フォームのテキストボックスの大きさ*/
-	input[name=user_ID] ,input[name=mail],input[name=password],input[name=newPassword],input[name=nickname]{
+	input[name=user_ID] ,input[name=mail],input[name=password],input[name=newPassword]{
 		width: 30em;
 		height: 40px;
 		font-size:15px;
 		margin-bottom:10px;
 	}
 
-	input[name=pw] {
+	input[name=nickname] {
 		width: 30em;
-		height: 1px;
+		height: 40px;
+		font-size:15px;
+		margin-bottom:20px;
+	}
+
+	input[name=pw] {
+		height: 20px;
 	}
 
 /*okボタン*/

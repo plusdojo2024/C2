@@ -25,22 +25,15 @@
 					</div>
 				</div>
 				<a href="/C2/TaskServlet" class="header-content"><img src="/C2/img/taskButton.png"></a><!-- マニュアルのみ タスクボタン -->
-				<a href="/C2/TaskServlet" class="header-content"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
+				<a href="/C2/ManualServlet" class="header-content"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
 				<h5></h5><!-- 空の枠 -->
 				<h5 id = "today" class="header-content"></h5><!-- 今日の日付 -->
 			</div>
 		</header>
 		<main>
-      <p>Manual List</p>
+      <p class ="document">Manual List</p>
 
-
-
-
-
-
-
-
-        <form action="#" class="search-form">
+		<form action="#" class="search-form">
    			 <label>
         	<input type="text" placeholder="検索">
     		</label>
@@ -49,7 +42,7 @@
 
 
 
-      <a href="/C2/ManualRegistServlet"><img src="/C2/img/plusButton2.png" alt="＋ボタン"></a>
+      <a href="/C2/ManualRegistServlet" class="plus-button"><img src="/C2/img/plusButton2.png" alt="＋ボタン"></a>
 
 
       <c:forEach var="e" items="${cardList}" >
@@ -63,7 +56,7 @@
       </c:forEach>
 		</main>
 		<footer>
-			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
+			<p class="document">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 		<script src="/C2/js/common.js"></script>
 	</body>
