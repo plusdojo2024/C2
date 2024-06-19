@@ -18,9 +18,10 @@
 		</header>
 
 		<main>
-      	<form method="post" action="/C2/ManualRegistServlet" id=all>
+		<div id="form" class=boxradius>
+      	<form method="post" action="/C2/ManualRegistServlet" id="all">
       	<table>
-	        <tr><td>new manual<br></td></tr>
+	        <tr><td>New Manual<br></td></tr>
 	        <tr><td><input type="text" name="title" placeholder="マニュアル名"><br></td></tr>
 
           <tr id = "target">
@@ -30,10 +31,10 @@
 	          <td><button onclick="deleteExample(this);">-</button><br></td>
 	        </tr>
         </table>
-	      <input type="submit" id="regist" name="manual_regist" value="登録" onclick="checkMessage();">
-     	 </form>
 			<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
-
+			<input type="submit" id="regist" name="manual_regist" value="OK" onclick="checkMessage();" class=okbutton>
+     	 </form>
+     	 </div>
 		</main>
 
 		<footer>

@@ -2,9 +2,66 @@
 
 /*マニュアル登録画面について*/
 
-/*全体*/
-	#all {
-		text-align:right;
-		padding:60px 250px 60px 250px;
-		background-position:center;
+
+/*フォームのボックス*/
+	#form {
+		width: 1200px;
+  		margin: 15px auto 80px auto;
+ 		padding: 80px auto 30px auto;
+  		border: 1px solid #F3B4AB;
+  		background-color: white;
+	}
+
+	.boxradius {
+		border-radius:50px;
+		border:2px solid #F3B4AB;
+	}
+
+/*フォームのテキストボックスの大きさ*/
+	input[name=title] {
+		width: 20em;
+		height: 50px;
+		font-size:30px;
+		margin-bottom:20px;
+	}
+
+	input[name=content] {
+		width: 20em;
+		height: 40px;
+		font-size:20px;
+		margin-bottom:20px;
+	}
+
+	input[name=item][name=images]{
+		width: 10em;
+		height: 40px;
+		font-size:20px;
+		margin-bottom:20px;
+	}
+
+/*okボタン*/
+	input[type=submit]{
+  		width: 7em;
+ 		height: 50px
+	}
+
+	.okbutton {
+		border-radius:10px;
+		background-color: #001746;
+    	border: 2px solid #001746;
+    	font: 20px UD デジタル 教科書体 NK-B;
+    	box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+		color: white;
+    	display: inline-block;
+    	font-weight: 700;
+    	padding: auto;
+		position: relative;
+    	text-align: center;
+    	text-decoration: none;
+    	transition: .3s;
+	}
+
+	.okbutton:hover {
+		background-color:white;
+		color:#001746;
 	}
