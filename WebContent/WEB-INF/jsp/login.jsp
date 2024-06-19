@@ -10,10 +10,19 @@
 	</head>
 	<body>
 		<header>
-			<img src=""><!-- アカウントのボタン -->
-			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
-			<h5 id = "today"></h5><!-- 今日の日付 -->
+			<div class="header-contents">
+				<h5></h5><!-- 空の枠 -->
+				<h5></h5><!-- 空の枠 -->
+				<h5></h5><!-- 空の枠 -->
+				<div class="logo">
+					<a href="/C2/LoginServlet" class="header-content"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
+				</div>
+				<h5></h5><!-- 空の枠 -->
+				<h5></h5><!-- 空の枠 -->
+				<div class="today-logo">
+					<h5 id = "today" class="header-content"></h5><!-- 今日の日付 -->
+				</div>
+			</div>
 		</header>
 
 		<main>
