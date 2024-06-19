@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/manual.css">
 	</head>
 	<body>
 		<header>
@@ -15,8 +16,9 @@
 			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
 			<h5 id = "today"></h5><!-- 今日の日付 -->
 		</header>
+
 		<main>
-      <form method="post" action="/C2/ManualRegistServlet">
+      	<form method="post" action="/C2/ManualRegistServlet" id=all>
       	<table>
 	        <tr><td>new manual<br></td></tr>
 	        <tr><td><input type="text" name="title" placeholder="マニュアル名"><br></td></tr>
@@ -29,9 +31,11 @@
 	        </tr>
         </table>
 	      <input type="submit" id="regist" name="manual_regist" value="登録" onclick="checkMessage();">
-      </form>
-			<button id = "add" onclick="addExample();">+</button>
+     	 </form>
+			<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
+
 		</main>
+
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>

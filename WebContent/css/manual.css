@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+/*マニュアル登録画面について*/
+
+/*全体*/
+	#all {
+		text-align:right;
+		padding:60px 250px 60px 250px;
+		background-position:center;
+	}
