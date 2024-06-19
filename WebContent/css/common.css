@@ -1,14 +1,12 @@
 @charset "UTF-8";
-.dropdown__body {
-  display: none;
-}
-.dropdown__btn.is-open + .dropdown__body {
-  display: block;
-  z-index: 4;
+html{
+  font-size: 20px;
+  font-family: Kristen ITC;
 }
 
-/*分かりやすいように赤ラインをひく*/
-
+*{
+  box-sizing: border-box;
+}
 
 
 /*ボディ*/
@@ -16,86 +14,102 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  display: flex;
+  flex-flow: column;
+  min-height: 200vh;
 }
 
 /*ヘッダー*/
 header {
   width: 100%;
+  height: 130px;
   background: #f5f5f5;
   /*position: fixed;*/
 }
 
 .header-contents{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 
-.header-content{
-	text-align: center;
-}
+
 #today{
-	align-items: flex-end;
+	margin-top: 100px;
 }
-/*メイン*/
 
-.ducument{
-	text-align: center;
+.logo{
+	padding-top: 25px;
 }
-.search-form {
+
+.task-logo{
+	padding-top: 10px;
+}
+
+.today-logo{
+	margin-top: 200px;
+}
+
+.dropdown__lists {
+    display: none;/*デフォルトでは非表示の状態にしておく*/
+    width: 25%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    list-style: none;
+}
+
+.gnavi__lists{
+	list-style: none;
+	padding-left: 30px;
+	margin-top: 15px;
+}
+
+.gnavi__list:hover .dropdown__lists {
+    display: block;/*Gナビメニューにホバーしたら表示*/
+}
+.dropdown__list {
+    background-color: rgba(0,17,46,0.7);
+    height: 60px;
+    transition: all .3s;
+    position: relative;
+}
+.dropdown__list:not(:first-child)::before{
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #3492d1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.dropdown__list:hover {
+    background-color: #7de3a1;
+}
+.dropdown__list a {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    border: 2px solid #F7CDC6;
-    border-radius: 7px;
-    width:500px;
-    margin-left:auto;
-    margin-right:auto;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
 }
-
-.search-form input {
-    width: 250px;
-    height: 30px;
-    padding: 5px 15px;
-    border: none;
-    box-sizing: border-box;
-    font-size: 1em;
-    outline: none;
-    text-align: center;
-}
-
-.search-form input::placeholder{
-    color: #F7CDC6;
-}
-
-.search-form button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 45px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.search-form button::after {
-    width: 24px;
-    height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z' fill='%23777777'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
+.dropdown__list a::before {
     content: '';
-}
-
-.plus-button{
-	text-align: right;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    transform: rotate(135deg);
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 5px);
 }
 
 /*フッター*/
 footer {
-  left: 0;
-  bottom: 0;
   width: 100%;
   background: #f5f5f5;
+  font-family: Calibri;
 }
