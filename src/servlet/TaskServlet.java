@@ -54,13 +54,6 @@ public class TaskServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user_Id") == null) {
-			response.sendRedirect("/C2/LoginServlet");
-			return;
-		}
-
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String to = request.getParameter("to");

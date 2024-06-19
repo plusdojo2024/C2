@@ -27,12 +27,12 @@
         		<table class="table">
           			<tr>
             			<td>
-                			<input type="text" name="heading" placeholder="zoom会議">
+                			<input type="text" name="task" placeholder="zoom会議">
             			</td>
           			</tr>
           			<tr>
             			<td>
-                			<textarea name="detail" id="詳細" placeholder="14:00～"></textarea>
+                			<textarea name="contents" id="詳細" placeholder="14:00～"></textarea>
             			</td>
           			</tr>
           			<tr>

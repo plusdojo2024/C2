@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AccountsDAO;
 import dao.ManualsDAO;
 import model.Accounts;
 import model.LoginUser;
@@ -43,7 +44,18 @@ public class ManualServlet extends HttpServlet {
 			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
+		//ユーザー情報の現在の情報を持ってくるselect
+		HttpSession session2 = request.getSession();
+		LoginUser user_ID = (LoginUser)session2.getAttribute("user_ID");
+		String user = user_ID.getLoginUserId();
+		System.out.println("user_ID:"+user);
 
+//		 ユーザーの検索処理を行う
+		AccountsDAO accountDao = new AccountsDAO();
+        List<Accounts> accountList = accountDao.pr_account(new Accounts(user));
+
+//		 検索結果をリクエストスコープに格納する
+		request.setAttribute("accountList", accountList);
 		LoginUser login = (LoginUser)session.getAttribute("id_group");
 		request.setAttribute("id_group",login);
 
@@ -67,16 +79,18 @@ public class ManualServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String manual_name = request.getParameter("manual_name");
+		String group=request.getParameter("pr_group");
+		int pr_group=Integer.parseInt(group);
+		System.out.println("pr_group");
 		//セッションスコープから取得
-		HttpSession session2 = request.getSession();
-		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
-		int group = pr_group.getPr_group();
+
+
 
 
 		// 検索処理を行う
 		ManualsDAO mDAO = new ManualsDAO();
 
-		List<Manuals> manualList = mDAO.select(new Manuals(manual_name, group));
+		List<Manuals> manualList = mDAO.select(new Manuals(manual_name, pr_group));
 
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("manualList", manualList);

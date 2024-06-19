@@ -52,8 +52,9 @@ public class TaskRegistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//セッションスコープから取得する
 		HttpSession session = request.getSession();
-		Accounts group = (Accounts)session.getAttribute("pr_group");
+		Accounts group = (Accounts)session.getAttribute("group_ID");
 		int group_number = group.getPr_group();
+		System.out.println("pr_group:"+ group_number);
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -68,7 +69,6 @@ public class TaskRegistServlet extends HttpServlet {
 
 		boolean boo1 = Boolean.valueOf(checkbox);
 
-		System.out.println("グループID："+ group_number);
 
 		// 登録処理を行う
 		TasksDAO bTask = new TasksDAO();
@@ -81,7 +81,7 @@ public class TaskRegistServlet extends HttpServlet {
 		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
 		dispatcher.forward(request, response);
 	}
 

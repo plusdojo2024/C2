@@ -14,7 +14,7 @@ public class AccountsDAO {
 	//アカウント設定の際の現在のアカウント情報を持ってくるselect
 		public List<Accounts> pr_account (Accounts account) {
 			Connection conn = null;
-			List<Accounts> accountsList = new ArrayList<Accounts>();
+			List<Accounts> accountList = new ArrayList<Accounts>();
 
 			try {
 				// JDBCドライバを読み込む
@@ -46,18 +46,19 @@ public class AccountsDAO {
 					rs.getString("user_ID"),
 					rs.getString("mail"),
 					rs.getString("pw"),
-					rs.getString("nickname")
+					rs.getString("nickname"),
+					rs.getInt("pr_group")
 					);
-					accountsList.add(record);
+					accountList.add(record);
 				}
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
-				accountsList = null;
+				accountList = null;
 			}
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				accountsList = null;
+				accountList = null;
 			}
 			finally {
 				// データベースを切断
@@ -67,13 +68,13 @@ public class AccountsDAO {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						accountsList = null;
+						accountList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return accountsList;
+			return accountList;
 		}
 //pr_groupを持ってくるメソッド
 
