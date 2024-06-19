@@ -18,7 +18,7 @@
 		</header>
 
 		<main>
-      	<form method="post" action="/C2/ManualRegistServlet" id=all>
+      	<form method="post" action="/C2/ManualRegistServlet" id="all">
       	<table>
 	        <tr><td>new manual<br></td></tr>
 	        <tr><td><input type="text" name="title" placeholder="マニュアル名"><br></td></tr>

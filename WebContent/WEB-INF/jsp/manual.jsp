@@ -44,19 +44,16 @@
 				</div>
 			</header>
 			<main>
-	      <p class="manual">Manual</p>
-
-			<form action="#" class="search-form">
+				<p class="plus-button"><a href="/C2/ManualRegistServlet"><img src="/C2/img/plusButton2.png" alt="＋ボタン"></a></p>
+	      		<div class="manual-header">
+	      			<p class="manual">Manual</p>
+				</div>
+				<form action="#" class="search-form">
 	   			 <label>
 	        	<input type="text" placeholder="検索">
 	    		</label>
 	    		<button type="submit"aria-label="検索"></button>
 			</form>
-
-
-
-	      <a href="/C2/ManualRegistServlet" class="plus-button"><img src="/C2/img/plusButton2.png" alt="＋ボタン"></a>
-
 
 	      <c:forEach var="e" items="${cardList}" >
 	      <table class="table">
