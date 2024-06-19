@@ -111,14 +111,14 @@ public class TasksDAO {
 				pStmt.setString(2, "（未設定）");
 			}
 			//Contents文
-			if (list.getContents() != null && !list.getContents().equals("")) {
-				pStmt.setString(3, list.getContents());
+			if (list.getContent() != null && !list.getContent().equals("")) {
+				pStmt.setString(3, list.getContent());
 			}
 			else {
 				pStmt.setString(3, "（未設定）");
 			}
 			//today文
-				pStmt.setDate(4, list.getToday());
+				pStmt.setDate(4, list.getDay());
 			//from文
 				pStmt.setString(5, list.getRegister());
 			//to文
@@ -198,14 +198,14 @@ public class TasksDAO {
 				pStmt.setString(1, null);
 			}
 			//Contents文
-			if (up.getContents() != null && !up.getContents().equals("")) {
-				pStmt.setString(2, up.getContents());
+			if (up.getContent() != null && !up.getContent().equals("")) {
+				pStmt.setString(2, up.getContent());
 			}
 			else {
 				pStmt.setString(2, null);
 			}
-			//today文
-				pStmt.setDate(3, up.getToday());
+			//day文
+				pStmt.setDate(3, up.getDay());
 			//from文
 				pStmt.setString(4, up.getRegister());
 			//to文

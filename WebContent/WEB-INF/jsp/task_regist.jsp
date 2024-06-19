@@ -15,24 +15,25 @@
 		</header>
 		<main>
             <h1>new task</h1>
-            <form method="post" action="/C2/RegistServlet">
+            <form method="post" action="/C2/TaskServletRegist">
                 <table>
                     <tr>
-                        <td>日付<input type="date"></td>
-                        <td><input type="text" placeholder="見出し"></td>
+                        <td><input type="date" name="day"></td><!-- 期限 -->
+                        <td><input type="text" name="task"placeholder="見出し"></td>
+                        <td><input type="checkbox" name="checkbox"></td>
                     </tr>
                     <tr>
-                        <td><textarea>タスク内容</textarea></td>
+                        <td><textarea name="content">タスク内容</textarea></td>
                         <td><a href="">マニュアルボタン</a></td>
-                        <td><select name="manual">
+                        <td><select name="manual_link">
                             <option>manual1</option>
                             <option>manual2</option>
                             <option>manual3</option>
                         </select></td>
                     </tr>
                     <tr>
-                        <td><input type="text" placeholder="to"></td>
-                        <td>from ママ</td>
+                        <td><input type="text" name="to"placeholder="to"></td>
+                        <td><input type="text" name="register"></td>
                         <td><input type="submit" value="登録"></td>
                     </tr>
                 </table>

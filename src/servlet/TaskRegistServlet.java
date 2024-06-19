@@ -35,11 +35,11 @@ public class TaskRegistServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
-			return;
-		}
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("user_ID") == null) {
+//			response.sendRedirect("/simpleBC/LoginServlet");
+//			return;
+//		}
 
 		// taskページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_regist.jsp");
@@ -50,31 +50,26 @@ public class TaskRegistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		//セッションスコープから取得する
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
-			return;
-		}
-
+		LoginUser login = (LoginUser)session.getAttribute("group_id");
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		LoginUser login = (LoginUser)session.getAttribute("group_id");
 		String task = request.getParameter("task");
-		String contents = request.getParameter("contents");
-		String today = request.getParameter("today");
+		String content = request.getParameter("content");
+		String day = request.getParameter("day");
+		java.sql.Date date = Date.valueOf(day);
 		String register = request.getParameter("register");
-		String to = request.getParameter("zipcode");
+		String to = request.getParameter("to");
 		String checkbox = request.getParameter("checkbox");
 		String manual_link = request.getParameter("manual_link");
 
-		java.sql.Date date = Date.valueOf(today);
+
 		boolean boo1 = Boolean.valueOf(checkbox);
 
 		// 登録処理を行う
 		TasksDAO bTask = new TasksDAO();
-		if (bTask.insert(new Tasks(0, login.getGroupId(), task, contents, date, register, to,
+		if (bTask.insert(new Tasks(0, login.getGroupId(), task, content, date, register, to,
 				boo1, manual_link))) {	// 登録成功
 			request.setAttribute("result", "レコードを登録しました。");
 		}
@@ -83,7 +78,7 @@ public class TaskRegistServlet extends HttpServlet {
 		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_regist.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
 		dispatcher.forward(request, response);
 	}
 

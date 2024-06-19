@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,13 +21,13 @@
                 <ul>
                     <li><input type="checkbox" name="detail">燃えるゴミ出し</li>
                     <li><input type="checkbox" name="detail">燃えないゴミ出し</li>
-                    <li><a href="/C2/TaskRegistServlet"><button>+</button></a></li>
+                    <li><a href="/C2/TaskServletRegist"><button>+</button></a></li>
                 </ul>
                 <ul>
                     <li>schedule</li>
                     <li>09:00 授業参観</li>
                     <li>19:00 夜ごはん</li>
-                    <li><a href="/C2/TaskRegistServlet"><button>+</button></a></li>
+                    <li><a href="/C2/ScheduleRegistServlet"><button>+</button></a></li>
                 </ul>
 		</main>
 		<footer>

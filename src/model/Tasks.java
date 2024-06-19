@@ -9,8 +9,8 @@ public class Tasks implements Serializable {
 	private int id; //管理番号
 	private int group_number;	//グループDB_管理番号
 	private String task; 	//タスク名
-	private	String contents;	//内容
-	private java.sql.Date today;	//期限
+	private	String content;	//内容
+	private java.sql.Date day;	//期限
 	private String register;	//from
 	private String to;	//to
 	private boolean checkbox;	//チェックボックス
@@ -24,14 +24,14 @@ public class Tasks implements Serializable {
 	public Tasks(String to) {
 		this.to = to;
 	}
-	public Tasks(int id, int group_number, String task, String contens, Date today, String register, String to,
+	public Tasks(int id, int group_number, String task, String content, Date day, String register, String to,
 			boolean checkbox, String manual_link) {
 		super();
 		this.id = id;
 		this.group_number = group_number;
 		this.task = task;
-		this.contents = contens;
-		this.today = today;
+		this.content = content;
+		this.day = day;
 		this.register = register;
 		this.to = to;
 		this.checkbox = checkbox;
@@ -57,17 +57,17 @@ public class Tasks implements Serializable {
 	public void setTask(String task) {
 		this.task = task;
 	}
-	public String getContents() {
-		return contents;
+	public String getContent() {
+		return content;
 	}
-	public void setContents(String contens) {
-		this.contents = contens;
+	public void setContent(String contens) {
+		this.content = contens;
 	}
-	public java.sql.Date getToday() {
-		return today;
+	public java.sql.Date getDay() {
+		return day;
 	}
-	public void setToday(java.sql.Date today) {
-		this.today = today;
+	public void setToday(java.sql.Date day) {
+		this.day = day;
 	}
 	public String getRegister() {
 		return register;
