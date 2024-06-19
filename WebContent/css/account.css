@@ -6,7 +6,7 @@
 /* id="account_regist_form"*/
 	#account_regist_form {
 
-		padding:40px 70px 40px 70px;
+		padding:40px 70px 35px 70px;
 		background-position:center;
 		text-align:center;
 	}
@@ -48,11 +48,18 @@
 	}
 
 /*フォームのテキストボックスの大きさ*/
-	input[name=user_ID] ,input[name=mail],input[name=pw],input[name=nickname]{
+	input[name=user_ID] ,input[name=mail],input[name=pw]{
 		width: 30em;
 		height: 40px;
 		font-size:15px;
 		margin-bottom:15px;
+	}
+
+	input[name=nickname] {
+		width: 30em;
+		height: 40px;
+		font-size:15px;
+		margin-bottom:20px;
 	}
 
 /*okボタン*/

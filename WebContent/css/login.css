@@ -4,7 +4,7 @@
 /* id="login_form"*/
 	#login_form {
 
-		padding:70px 100px 50px 95px;
+		padding:60px 100px 55px 95px;
 		background-position:center;
 		text-align:center;
 	}
@@ -28,7 +28,7 @@
 	form {
   		padding: 6px;
   		color: white;
-  		font:20px Kristen ITC;
+  		font:25px Kristen ITC;
 	}
 
 	.radius {
@@ -50,14 +50,14 @@
 		width: 20em;
 		height: 50px;
 		font-size:20px;
-		margin-bottom:15px;
+		margin-bottom:20px;
 	}
 
 	input[name=pw] {
 		width: 20em;
 		height: 50px;
 		font-size:20px;
-		margin-bottom:15px;
+		margin-bottom:30px;
 	}
 
 /*ログインボタン*/
