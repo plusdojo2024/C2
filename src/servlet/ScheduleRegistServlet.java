@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.SchedulesDAO;
+import model.Accounts;
+import model.LoginUser;
 import model.Schedules;
 
 
@@ -55,19 +57,23 @@ public class ScheduleRegistServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String task = request.getParameter("task");
 		String contents = request.getParameter("contents");
-		String register = request.getParameter("register");
 
-		// セッションパラメーター
-		int group_number =(int)session.getAttribute("group_number");
-
+		// セッションスコープ
+		HttpSession session2 = request.getSession();
+		Accounts group = (Accounts)session2.getAttribute("group_ID");
+		int group_number = group.getPr_group();
+		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
+		String register = user_ID.getLoginUserId();
 
 		// 登録処理を行う
 		SchedulesDAO sDao = new SchedulesDAO();
-		if (sDao.insert(new Schedules(0, group_number, task, contents, register))) {	// 登録成功
+		if (sDao.insert(new Schedules(0 ,group_number, task, contents, register))) {	// 登録成功
 			request.setAttribute("result", "登録しました。");
+			System.out.println("スケジュール登録成功");
 		}
 		else {												// 登録失敗
 			request.setAttribute("result", "登録できませんでした。");
+			System.out.println("スケジュール登録失敗");
 		}
 
 		// 結果ページにフォワードする

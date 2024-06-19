@@ -30,22 +30,19 @@ public class SchedulesDAO {
 			// SQL文を完成させる
 
 			pStmt.setInt(1, s_detail.getGroup_number());
-
 			if (s_detail.getTask() != null && !s_detail.getTask().equals("")) {
 				pStmt.setString(2, s_detail.getTask());
 			}
 			else {
 				pStmt.setString(2, "（未設定）");
 			}
-
 			if (s_detail.getContents() != null && !s_detail.getContents().equals("")) {
 				pStmt.setString(3, s_detail.getContents());
 			}
 			else {
 				pStmt.setString(3, "（未設定）");
 			}
-
-			pStmt.setString(5, s_detail.getRegister());	//まだここは未定
+			pStmt.setString(4, s_detail.getRegister());
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {

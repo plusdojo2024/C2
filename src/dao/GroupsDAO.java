@@ -201,8 +201,8 @@ public class GroupsDAO {
 
 
 
-	// 引数paramで検索項目を指定し、検索結果のリストを返す
-	public List<Groups> select(Groups card) {
+	// グループの詳細表示
+	public List<Groups> select(int group) {
 		Connection conn = null;
 		List<Groups> cardList = new ArrayList<Groups>();
 
@@ -213,10 +213,10 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT * FROM groups WHERE user_ID  =?";
+			String sql = "SELECT * FROM groups WHERE id  =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, "%" + card.getUser_ID() + "%");
+			pStmt.setInt(1,group);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -257,6 +257,7 @@ public class GroupsDAO {
 	}
 
 
+	//groupの一覧表示
 public List<Groups> select(String card) {
 	Connection conn = null;
 	List<Groups> cardList = new ArrayList<Groups>();

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,25 +64,37 @@ public class GroupCreateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String group_name = request.getParameter("group_name");
 		String icon = request.getParameter("icon");
+
+		//ユーザーごとに所属しているグループのデータを取得
 		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
 		String user = user_ID.getLoginUserId();
 
-		// 登録処理を行う
+
+		//GroupsDAOに処理してもらう
 		GroupsDAO abc = new GroupsDAO();
 		if (abc.insert(new Groups(group_name,icon,user))) {
 			request.setAttribute("result", "レコードを登録しました。");
+
+			//登録後のリストを取得
+			List<Groups> cardList = abc.select(user);
+			request.setAttribute("cardList", cardList);
+
+			//登録したリストをフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
     		dispatcher.forward(request, response);
 		}
 		else {
 			request.setAttribute("result", "レコードの登録できません。");
+
+			//登録できなかった際はcreate_groupにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/create_group.jsp");
     		dispatcher.forward(request, response);
 		}
 
-		//登録後にグループ一覧画面にフォワードする。
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
-				dispatcher.forward(request, response);
+
+
+
+
 			}
 
 
