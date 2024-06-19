@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.ItemsDAO;
 import dao.ManualsDAO;
 import model.Items;
+import model.LoginUser;
 import model.Result;
 
 /**
@@ -59,8 +60,8 @@ public class ManualRegistServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		int group_id = (int)session.getAttribute("group_ID");
-		//int group_id = group.getGroupId();
+		LoginUser group = (LoginUser)session.getAttribute("user_ID");
+		int group_id = group.getGroupId();
 		String heading = request.getParameter("item");
 		String contents = request.getParameter("content");
 		String images = request.getParameter("images");

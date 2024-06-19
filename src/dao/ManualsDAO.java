@@ -163,7 +163,7 @@ public class ManualsDAO {
 			while (rs.next()) {
 				Manuals record = new Manuals(
 					rs.getString("manual_name"),
-					rs.getInt("pr_group")
+					rs.getInt("ID")
 				);
 				manualList.add(record);
 			}
