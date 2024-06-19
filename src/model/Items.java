@@ -33,10 +33,21 @@ public class Items implements Serializable {
 		this.image = image;
 		this.regist_day = regist_day;
 	}
-	//ManualRegistServletで使用
+	//ManualRegistServletで使用(manu)
 	public Items(int id, String heading, String contents, String image, String manual, int group) {
 		super();
 		this.id = id;
+		this.heading = heading;
+		this.contents = contents;
+		this.image = image;
+		this.esc = manual;
+		this.esc_g = group;
+	}
+	//ManualRegistServletで使用(count)
+	public Items(int id, int manual_id,String heading, String contents, String image, String manual, int group) {
+		super();
+		this.id = id;
+		this.manual_id = manual_id;
 		this.heading = heading;
 		this.contents = contents;
 		this.image = image;

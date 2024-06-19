@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Items;
 import model.Manuals;
 
 public class ManualsDAO {
@@ -81,8 +82,119 @@ public class ManualsDAO {
 		return manualitemsList;
 	}
 
+	public boolean manu(Items manualregist) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+
+			//Manualsに項目を一つ増やす
+			String sql_manual = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
+			PreparedStatement pStmt_manual = conn.prepareStatement(sql_manual);
+
+			// SQL文を完成させる
+
+			pStmt_manual.setInt(1, manualregist.getGroup_number());
+
+			pStmt_manual.setString(2, manualregist.getManual_Name());
+
+			// SQL文を実行する
+			if (pStmt_manual.executeUpdate() == 1) {
+				result = true;
+			}
+		}//try終了タグ
+		//エラー処理
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		//finaly処理
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			//結果をコンソールに表示（確認用）
+			System.out.println("manualの登録結果" + result);
+		}
+		// 結果を返す
+		return result;
+	}//manu_Method終了タグ
 
 
 
+	public int count(int groupNum) {
 
-}
+		//変数設定
+		Connection conn = null;
+		int countNumber = 0;	// 後で更新および削除する番号
+		List<Manuals> manualList = select(new Manuals());
+
+		try {
+
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+
+			//SQL文の準備
+			String sql = "SELECT * FROM MANUALS WHERE GROUP_NUMBER = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//SQL文の完成
+			pStmt.setInt(1, groupNum);
+			//SQL文の実行および結果の取得
+			ResultSet rs = pStmt.executeQuery();
+			//結果表のコピー
+			while (rs.next()) {
+				Manuals record = new Manuals(
+					rs.getString("manual_name"),
+					rs.getInt("pr_group")
+				);
+				manualList.add(record);
+			}
+			//count処理
+			for (Manuals list : manualList) {
+				countNumber = list.getId();	// 最後のレコードを後で更新および削除する
+			}
+		}	//try終了タグ
+		//エラー処理
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		//finaly処理
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			//結果をコンソールに表示（確認用）
+			System.out.println("countNumber" + countNumber);
+		}
+		//戻り値
+		return countNumber;
+	}	//count_Method終了タグ
+
+}//manualDAO終了タグ
