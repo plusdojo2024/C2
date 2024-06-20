@@ -48,14 +48,14 @@
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
-			  <td><input type="text" value ="${e.user_ID}"></td>
+			  <td><input type="text" value ="${e.use_ID}"></td>
 			  <td><button onclick="deleteExample(this);">-</button></td>
 			  <td><input type="checkbox" class="agreement"></td>
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
 			  <td><input type="text" placeholder= "例：para_man"></td>
-			  <td><input type="submit" value="招待"><td>
+			  <td><input type="submit" value="招待"></td>
 			</tr>
 			<tr>
 			  <td><input type="submit" value ="登録"></td>
