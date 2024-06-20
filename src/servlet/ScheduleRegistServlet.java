@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -70,7 +71,8 @@ public class ScheduleRegistServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String task = request.getParameter("task");
 		String contents = request.getParameter("contents");
-
+		String d = request.getParameter("deadline");
+		java.sql.Date deadline= Date.valueOf(d);
 		// セッションスコープ
 		HttpSession session2 = request.getSession();
 		Accounts group = (Accounts)session2.getAttribute("pr_group");
@@ -80,7 +82,7 @@ public class ScheduleRegistServlet extends HttpServlet {
 
 		// 登録処理を行う
 		SchedulesDAO sDao = new SchedulesDAO();
-		if (sDao.insert(new Schedules(0 ,group_number, task, contents, register))) {	// 登録成功
+		if (sDao.insert(new Schedules(0 ,group_number, task, contents, register,deadline))) {	// 登録成功
 			request.setAttribute("result", "登録しました。");
 			System.out.println("スケジュール登録成功");
 		}

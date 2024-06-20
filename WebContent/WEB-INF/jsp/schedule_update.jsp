@@ -14,41 +14,50 @@
 
 	<body>
 		<header>
-			<img src=""><!-- アカウントのボタン -->
-			<img src=""><!-- マニュアルのみ タスクボタン -->
-			<img src="/C2/img/headerLogo2.png"><!-- ロゴ -->
-			<h5 id = "today"></h5><!-- 今日の日付 -->
+			<div class="header-contents">
+				<div class="header-content">
+					<div class="gnavi__wrap">
+						 <ul class="gnavi__lists">
+							 <li class="gnavi__list">
+						     	<a href="#"><img src="/C2/img/accountNull.png"></a>
+						        <ul class="dropdown__lists">
+						       		<li class="dropdown__list"><a href="/C2/AccountServlet">アカウント画面</a></li>
+							       	<li class="dropdown__list"><a href="/C2/GroupServlet">グループ一覧</a></li>
+							       	<li class="dropdown__list"><a href="/C2/GroupUpdateServlet">グループ詳細</a></li>
+							       	<li class="dropdown__list"><a href="/C2/LogoutServlet">ログアウト</a></li>
+						        </ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<h5></h5><!-- 空の枠 -->
+				<h5></h5><!-- 空の枠 -->
+				<div class="logo">
+					<a href="/C2/ManualServlet" class="header-content"><img src="/C2/img/headerLogo2.png"></a><!-- ロゴ -->
+				</div>
+				<h5></h5><!-- 空の枠 -->
+				<h5></h5><!-- 空の枠 -->
+				<div class="today-logo">
+					<h5 id = "today" class="header-content"></h5><!-- 今日の日付 -->
+				</div>
+			</div>
 		</header>
 
 
 		<main>
 			<h2>Schedule Detail</h2>
-			<form id="schedule_form" method="post" action="/C2/ScheduleUpdateServlet"><!--アクションにサーブレットを入力する-->
-        		<table class="table">
-          			<tr>
-            			<td>
-              				<input type="text" name="heading"  placeholder="授業参観">
-            			</td>
-          			</tr>
-          			<tr>
-            			<td>
-              				<textarea name="detail" id="詳細" placeholder="スリッパ持っていく"></textarea>
-            			</td>
-          			</tr>
-          			<tr>
-            			<td>
-              				<label>ママ<br>
-              				</label>
-            			</td>
-            			<td>
-              				<input type="submit" id="update" name="submit" value="更新">
-            			</td>
-            			<td>
-              				<input type="submit" id="delete" name="submit" value="削除">
-            			</td>
-          			</tr>
-        		</table>
+			<c:forEach var="e" items="${scheduleList}">
+			<form id="schedule_form" method="get" action="/C2/ScheduleUpdateServlet"><!--アクションにサーブレットを入力する-->
+                <input type="date" id="day" name="deadline" value="${deadline}">
+				<input type="text"  name="task" value="${e.task}">
+				<br>
+				<textarea name="contents">${e.contents}</textarea>
+				<br>
+				<input type="text" name="register" value="${e.register}">
+              	<input type="submit" id="update" name="submit" value="更新">
+              	<input type="submit" id="delete" name="submit" value="削除">
       		</form>
+      		</c:forEach>
     	</main>
 
 		<footer>

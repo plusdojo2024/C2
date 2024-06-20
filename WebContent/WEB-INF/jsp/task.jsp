@@ -40,25 +40,28 @@
 		</header>
 		<main>
 
-           	タスクの期限：${deadline}
+            <!-- タスクの期限の表示 -->
+           	日付：${deadline}
             <form method="post" action="/C2/TaskServlet">
             	<br>
                 <input type="date" name="deadline">
-                <input type="submit" name="dateChange" value="DLchange">
+                <input type="submit" name="dateChange" value="日付切替">
             </form>
+            <!-- タスクの一覧表示 -->
 			<c:forEach var="e" items="${taskList}" >
-				<form method="post" action="/C2/TaskServlet" >
+				<form method="get" action="/C2/TaskUpdateServlet" >
 					<input type="hidden" name="id" value="${e.id}">
 					<input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if> disabled>
-					<input type="text" name="task" value="${e.task}">
+					<input type="submit" name="task" value="${e.task}">
 					<input type="text" name="to" value="${e.to}">
 				</form>
 			</c:forEach>
                    <a href="/C2/TaskServletRegist"><button>+</button></a>
             <br>
+            <!-- 予定の一覧表示 -->
             <p>Schedule</p>
            	<c:forEach var="e" items="${schedulesList}" >
-            	<form method="post" action="/C2/TaskServlet">
+            	<form method="get" action="/C2/ScheduleUpdateServlet">
 					<input type="hidden" name="id" value="${e.id}">
             		<input type="submit" name="scheduleDetail" value="${e.task}">
 				</form>

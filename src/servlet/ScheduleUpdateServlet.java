@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,6 +35,13 @@ public class ScheduleUpdateServlet extends HttpServlet {
 			return;
 		}
 
+		request.setCharacterEncoding("UTF-8");
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		SchedulesDAO schedulesDao = new SchedulesDAO();
+        List<Schedules> scheduleList = schedulesDao.selectDetail(id);
+
+		request.setAttribute("scheduleList", scheduleList);
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_update.jsp");
 		dispatcher.forward(request, response);

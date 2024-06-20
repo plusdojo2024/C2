@@ -15,7 +15,7 @@ import model.Tasks;
 public class TasksDAO {
 
 	//日付で検索するselect
-	public List<Tasks> select(Date deadline) {
+	public List<Tasks> select(int group_number,Date deadline) {
 		Connection conn = null;
 		List<Tasks> taskList = new ArrayList<Tasks>();
 
@@ -27,10 +27,11 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql ="SELECT * FROM TASKS WHERE deadline LIKE ?";
+			String sql ="SELECT * FROM TASKS WHERE group_number = ? AND deadline LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
-			pStmt.setDate(1,deadline);
+			pStmt.setInt(1,group_number);
+			pStmt.setDate(2,deadline);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -131,6 +132,66 @@ public class TasksDAO {
 		// 結果を返す
 		return taskList;
 	}
+	//doGetでのタスク詳細表示
+	public List<Tasks> selectDetail(int id) {
+		Connection conn = null;
+		List<Tasks> taskList = new ArrayList<Tasks>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql ="SELECT * FROM TASKS WHERE id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる}
+			pStmt.setInt(1,id);
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Tasks record = new Tasks(
+				rs.getInt("id"),
+				rs.getString("task"),
+				rs.getString("contents"),
+				rs.getDate("deadline"),
+				rs.getString("to"),
+				rs.getString("register"),
+				rs.getBoolean("checkbox")
+				);
+				taskList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			taskList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			taskList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					taskList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return taskList;
+	}
+
 	//doGetでのスケジュール一覧表示
 	public List<Tasks> selectScheduleList(int group_number) {
 		Connection conn = null;
@@ -218,8 +279,8 @@ public class TasksDAO {
 				pStmt.setString(2, "（未設定）");
 			}
 			//Contents文
-			if (list.getContent() != null && !list.getContent().equals("")) {
-				pStmt.setString(3, list.getContent());
+			if (list.getContents() != null && !list.getContents().equals("")) {
+				pStmt.setString(3, list.getContents());
 			}
 			else {
 				pStmt.setString(3, "（未設定）");
@@ -305,8 +366,8 @@ public class TasksDAO {
 				pStmt.setString(1, null);
 			}
 			//Contents文
-			if (up.getContent() != null && !up.getContent().equals("")) {
-				pStmt.setString(2, up.getContent());
+			if (up.getContents() != null && !up.getContents().equals("")) {
+				pStmt.setString(2, up.getContents());
 			}
 			else {
 				pStmt.setString(2, null);

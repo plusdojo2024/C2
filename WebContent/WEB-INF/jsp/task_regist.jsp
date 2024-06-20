@@ -50,7 +50,7 @@
                         <td><input type="checkbox" name="checkbox" value="yes" ></td>
                     </tr>
                     <tr>
-                        <td><textarea name="content">タスク内容</textarea></td>
+                        <td><textarea name="contents"></textarea></td>
                         <td><select name="manual_link">
                             <option><a href="ManualServlet">manual1</a></option>
                         </select></td>

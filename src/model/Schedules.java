@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Schedules implements Serializable {
 
@@ -10,6 +11,7 @@ public class Schedules implements Serializable {
 	private String task;			//予定名
 	private String contents;		//内容
 	private String register;		//from
+	private java.sql.Date deadline;
 
 
 	//constructor
@@ -26,6 +28,13 @@ public class Schedules implements Serializable {
 		super();
 		this.id = id;
 		this.task = task;
+	}
+
+	public Schedules(String task, String contents, String register) {
+		super();
+		this.task = task;
+		this.contents = contents;
+		this.register = register;
 	}
 
 	public Schedules(int group_number, String task, String contents, String register) {
@@ -45,6 +54,25 @@ public class Schedules implements Serializable {
 		this.register = register;
 	}
 
+
+	public Schedules(int group_number, String task, String contents, String register, Date deadline) {
+		super();
+		this.group_number = group_number;
+		this.task = task;
+		this.contents = contents;
+		this.register = register;
+		this.deadline = deadline;
+	}
+
+	public Schedules(int id, int group_number, String task, String contents, String register, Date deadline) {
+		super();
+		this.id = id;
+		this.group_number = group_number;
+		this.task = task;
+		this.contents = contents;
+		this.register = register;
+		this.deadline = deadline;
+	}
 
 	//method
 	public int getId() {
@@ -85,6 +113,14 @@ public class Schedules implements Serializable {
 
 	public void setRegister(String register) {
 		this.register = register;
+	}
+
+	public java.sql.Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(java.sql.Date deadline) {
+		this.deadline = deadline;
 	}
 
 

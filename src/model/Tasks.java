@@ -9,7 +9,7 @@ public class Tasks implements Serializable {
 	private int id; //管理番号
 	private int group_number;	//グループDB_管理番号
 	private String task; 	//タスク名
-	private	String content;	//内容
+	private	String contents;	//内容
 	private java.sql.Date deadline;	//期限
 	private String register;	//from
 	private String to;	//to
@@ -60,13 +60,23 @@ public class Tasks implements Serializable {
 		this.to = to;
 		this.checkbox = checkbox;
 	}
-	public Tasks(int id, int group_number, String task, String content, Date deadline, String register, String to,
+	public Tasks(int id, String task, String contents, Date deadline, String register, String to, boolean checkbox) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.contents = contents;
+		this.deadline = deadline;
+		this.register = register;
+		this.to = to;
+		this.checkbox = checkbox;
+	}
+	public Tasks(int id, int group_number, String task, String contents, Date deadline, String register, String to,
 			boolean checkbox, String manual_link) {
 		super();
 		this.id = id;
 		this.group_number = group_number;
 		this.task = task;
-		this.content = content;
+		this.contents = contents;
 		this.deadline = deadline;
 		this.register = register;
 		this.to = to;
@@ -93,11 +103,11 @@ public class Tasks implements Serializable {
 	public void setTask(String task) {
 		this.task = task;
 	}
-	public String getContent() {
-		return content;
+	public String getContents() {
+		return contents;
 	}
-	public void setContent(String contens) {
-		this.content = contens;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 	public java.sql.Date getDeadline() {
 		return deadline;

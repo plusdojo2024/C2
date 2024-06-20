@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -39,29 +40,28 @@
 		</header>
 		<main>
             <h1>task detail</h1>
+            <c:forEach var="e" items="${taskList}">
             <form method="post" action="/C2/TaskUpdateServlet">
                 <table>
                     <tr>
-                        <td>日付<input type="date"></td>
-                        <td><input type="text" placeholder="見出し"></td>
+                        <td><input type="date" id="day" name="deadline" value="${e.deadline}"></td><!-- 期限 -->
+                        <td><input type="text" name="task" value="${e.task}"></td>
+                        <td><input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if>></td>
                     </tr>
                     <tr>
-                        <td><textarea>タスク内容</textarea></td>
-                        <td><a href="">マニュアルボタン</a></td>
-                        <td><select name="manual">
-                            <option>manual1</option>
-                            <option>manual2</option>
-                            <option>manual3</option>
+                        <td><textarea name="content">${e.contents}</textarea></td>
+                        <td><select name="manual_link">
+                            <option><a href="ManualServlet">manual1</a></option>
                         </select></td>
                     </tr>
                     <tr>
-                        <td><input type="text" placeholder="to"></td>
-                        <td>from ママ</td>
-                        <td><input type="submit" value="更新"></td>
+                        <td><input type="text" name="to" value="${e.to}"></td>
+                        <td><input type="text" name="register" value="${e.register}"></td>
                         <td><input type="submit" value="登録"></td>
                     </tr>
                 </table>
             </form>
+            </c:forEach>
     		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

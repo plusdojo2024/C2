@@ -51,17 +51,17 @@ public class TaskServlet extends HttpServlet {
 		System.out.println("group:"+group_number);
 
 		//検索処理をおこなう
-		Date today= Date.valueOf(LocalDate.now());
+		Date deadline= Date.valueOf(LocalDate.now());
 		TasksDAO taskDao = new TasksDAO();
-        List<Tasks> taskList = taskDao.selectTaskList(group_number,today);
+        List<Tasks> taskList = taskDao.selectTaskList(group_number,deadline);
 
 		//リクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
-		request.setAttribute("deadline", today);
+		request.setAttribute("deadline", deadline);
 
 		//検索処理をおこなう
 		SchedulesDAO schedulesDao = new SchedulesDAO();
-        List<Schedules> schedulesList = schedulesDao.selectList(group_number);
+        List<Schedules> schedulesList = schedulesDao.selectList(group_number,deadline);
 
 		//リクエストスコープに格納する
 		request.setAttribute("schedulesList", schedulesList);
@@ -77,6 +77,11 @@ public class TaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	//タスクリストを取得
+		//pr_groupをセッションから取得
+
+		HttpSession session2 = request.getSession();
+		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
+		int group_number = pr_group.getPr_group();
 		// リクエストパラメータを取得する.HTML内の入力内容
 		request.setCharacterEncoding("UTF-8");
 		String hiduke = request.getParameter("deadline");
@@ -86,21 +91,16 @@ public class TaskServlet extends HttpServlet {
 		// 検索処理を行う
 
 		TasksDAO taskDao = new TasksDAO();
-		List<Tasks> taskList = taskDao.select(deadline);
+		List<Tasks> taskList = taskDao.select(group_number,deadline);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
 		request.setAttribute("deadline", deadline);
 //スケジュールリストを取得
-		//pr_groupをセッションから取得
-		HttpSession session2 = request.getSession();
-		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
-		int group_number = pr_group.getPr_group();
-		System.out.println("group:"+group_number);
 
 		//検索処理をおこなう
 		SchedulesDAO schedulesDao = new SchedulesDAO();
-        List<Schedules> schedulesList = schedulesDao.selectList(group_number);
+        List<Schedules> schedulesList = schedulesDao.selectList(group_number,deadline);
 
 		//リクエストスコープに格納する
 		request.setAttribute("schedulesList", schedulesList);
