@@ -85,6 +85,7 @@ public class ManualsDAO {
 	public boolean manu(Items manualregist) {
 		Connection conn = null;
 		boolean result = false;
+		int autoIncrementKey = 0;
 
 		try {
 			// JDBCドライバを読み込む
@@ -96,7 +97,7 @@ public class ManualsDAO {
 
 			//Manualsに項目を一つ増やす
 			String sql_manual = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
-			PreparedStatement pStmt_manual = conn.prepareStatement(sql_manual);
+			PreparedStatement pStmt_manual = conn.prepareStatement(sql_manual, java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			// SQL文を完成させる
 
@@ -108,6 +109,15 @@ public class ManualsDAO {
 			if (pStmt_manual.executeUpdate() == 1) {
 				result = true;
 			}
+
+			//試験
+			ResultSet r = pStmt_manual.getGeneratedKeys();
+			if(r.next()){
+	             autoIncrementKey = r.getInt(1);
+	         }
+			System.out.println(autoIncrementKey);
+
+
 		}//try終了タグ
 		//エラー処理
 		catch (SQLException e) {

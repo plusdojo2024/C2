@@ -36,34 +36,62 @@
 
 /*テキストボックス全体*/
 
+	#tablebox {
+		text-align:center;
+		width:100%;
+	}
 
 /*フォームのテキストボックスの大きさ*/
 	input[name=title] {
 		width: 20em;
-		height: 50px;
+		height: 60px;
 		font-size:30px;
-		margin-bottom:20px;
+		color:#001746;
+		margin:20px 0px 20px 0px;
 		text-align: center;
+		border: none;
+		border-bottom: 4px solid #F3B4AB;
 	}
 
 	input[name=content] {
-		width: 20em;
-		height: 40px;
+		width: 30em;
+		height: 50px;
 		font-size:20px;
+		color:white;
 		margin-bottom:20px;
+		border: none;
+		border-radius:10px;
+		background-color:#F3B4AB;
 	}
 
-	input[name=item][name=images]{
-		width: 10em;
-		height: 40px;
+	input[name=item]{
+		width: 12em;
+		height: 50px;
+		font-size:20px;
+		color:white;
+		margin-bottom:20px;
+		border: none;
+		border-radius:10px;
+		background-color:#F3B4AB;
+	}
+
+	input[name=image]{
+		width: 5em;
+		height: 50px;
 		font-size:20px;
 		margin-bottom:20px;
 	}
 
 /*okボタン*/
+	#okbutton {
+		text-align: center;
+		padding-bottom:20px;
+	}
+
+
 	input[type=submit]{
   		width: 7em;
- 		height: 50px
+ 		height: 50px;
 	}
 
 	.okbutton {
@@ -87,5 +115,11 @@
 		color:#001746;
 	}
 
+/*プラスボタン*/
 
-
+input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: #F3B4AB;
+    color: fieldtext !important;
+}

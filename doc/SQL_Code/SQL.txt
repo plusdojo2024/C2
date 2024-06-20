@@ -17,11 +17,19 @@ CREATE TABLE accounts (
 
 /* グループDB */
 CREATE TABLE groups ( 
+    ID INTEGER AUTO_INCREMENT(1), /* 管理番号 #自動採番*/ 
+    group_name VARCHAR(20) NOT NULL,  /* グループネーム #自動採番*/ 
+    icon VARCHAR(100),　/* アイコン #自動採番*/ 
+    PRIMARY KEY  (ID) 
+); 
+
+/* グループメンバーDB */
+CREATE TABLE groups_menbr ( 
     ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
-    group_name VARCHAR(20) NOT NULL,
+    group_ID　INTEGER,
+    group_name VARCHAR(20),
     user_id VARCHAR(20),
     editer BOOLEAN,
-    icon VARCHAR(100),
     PRIMARY KEY  (ID) 
 ); 
 
