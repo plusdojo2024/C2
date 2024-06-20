@@ -57,6 +57,7 @@ public class TaskServlet extends HttpServlet {
 
 		//リクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
+		request.setAttribute("deadline", today);
 
 		//検索処理をおこなう
 		SchedulesDAO schedulesDao = new SchedulesDAO();
@@ -83,13 +84,13 @@ public class TaskServlet extends HttpServlet {
 		Date deadline = Date.valueOf(hiduke);
 
 		// 検索処理を行う
-		if (request.getParameter("submit").equals("DLchange")) {
+
 		TasksDAO taskDao = new TasksDAO();
 		List<Tasks> taskList = taskDao.select(deadline);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
-
+		request.setAttribute("deadline", deadline);
 //スケジュールリストを取得
 		//pr_groupをセッションから取得
 		HttpSession session2 = request.getSession();
@@ -103,10 +104,6 @@ public class TaskServlet extends HttpServlet {
 
 		//リクエストスコープに格納する
 		request.setAttribute("schedulesList", schedulesList);
-		}
-		else if(request.getParameter("submit").equals("SD")) {
-
-		}
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
