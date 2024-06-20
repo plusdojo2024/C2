@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AccountsDAO;
 import dao.SchedulesDAO;
 import model.Accounts;
 import model.LoginUser;
@@ -36,6 +38,17 @@ public class ScheduleRegistServlet extends HttpServlet {
 			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
+		//ユーザー情報の現在の情報を持ってくるselect
+		HttpSession session2 = request.getSession();
+		LoginUser user_ID = (LoginUser)session2.getAttribute("user_ID");
+		String user = user_ID.getLoginUserId();
+
+//		 ユーザーの検索処理を行う
+		AccountsDAO accountDao = new AccountsDAO();
+        List<Accounts> accountList = accountDao.pr_account(new Accounts(user));
+
+//		 検索結果をリクエストスコープに格納する
+		request.setAttribute("accountList", accountList);
 
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_resist.jsp");
@@ -60,7 +73,7 @@ public class ScheduleRegistServlet extends HttpServlet {
 
 		// セッションスコープ
 		HttpSession session2 = request.getSession();
-		Accounts group = (Accounts)session2.getAttribute("group_ID");
+		Accounts group = (Accounts)session2.getAttribute("pr_group");
 		int group_number = group.getPr_group();
 		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
 		String register = user_ID.getLoginUserId();

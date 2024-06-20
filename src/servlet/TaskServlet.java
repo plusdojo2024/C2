@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.SchedulesDAO;
 import dao.TasksDAO;
-import model.LoginUser;
+import model.Accounts;
+import model.Schedules;
 import model.Tasks;
 
 /**
@@ -40,9 +42,25 @@ public class TaskServlet extends HttpServlet {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
+		//pr_groupをセッションから取得
+		HttpSession session2 = request.getSession();
+		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
+		int group_number = pr_group.getPr_group();
+		System.out.println("group:"+group_number);
 
-		LoginUser login = (LoginUser)session.getAttribute("id_group");
-		request.setAttribute("id_group",login);
+		//検索処理をおこなう
+		TasksDAO taskDao = new TasksDAO();
+        List<Tasks> taskList = taskDao.selectList(group_number);
+
+		//リクエストスコープに格納する
+		request.setAttribute("taskList", taskList);
+
+		//検索処理をおこなう
+		SchedulesDAO schedulesDao = new SchedulesDAO();
+        List<Schedules> schedulesList = schedulesDao.selectList(group_number);
+
+		//リクエストスコープに格納する
+		request.setAttribute("schedulesList", schedulesList);
 
 		// taskページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
@@ -55,19 +73,19 @@ public class TaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String to = request.getParameter("to");
-
-		// 登録処理を行う
-		TasksDAO bTask = new TasksDAO();
-		List<Tasks> cardList = bTask.select(to);
-
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("cardList", cardList);
-
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
-		dispatcher.forward(request, response);
+//		request.setCharacterEncoding("UTF-8");
+//		String to = request.getParameter("to");
+//
+//		// 登録処理を行う
+//		TasksDAO bTask = new TasksDAO();
+//		List<Tasks> cardList = bTask.select(to);
+//
+//		// 検索結果をリクエストスコープに格納する
+//		request.setAttribute("cardList", cardList);
+//
+//		// 結果ページにフォワードする
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
+//		dispatcher.forward(request, response);
 
 	}
 

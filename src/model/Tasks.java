@@ -17,12 +17,29 @@ public class Tasks implements Serializable {
 	private String manual_link;	//マニュアルリンク
 
 
+	public Tasks(int id, int group_number, String task, boolean checkbox) {
+		super();
+		this.id = id;
+		this.group_number = group_number;
+		this.task = task;
+		this.checkbox = checkbox;
+	}
 	//constructor
 	public Tasks() {
 		//処理なし
 	}
 	public Tasks(String to) {
 		this.to = to;
+	}
+	public Tasks(int id) {
+		super();
+		this.id = id;
+	}
+	public Tasks(int id , boolean checkbox , String task) {
+		super();
+		this.id = id;
+		this.checkbox = checkbox;
+		this.task = task;
 	}
 	public Tasks(int id, int group_number, String task, String content, Date day, String register, String to,
 			boolean checkbox, String manual_link) {

@@ -52,9 +52,8 @@ public class TaskRegistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//セッションスコープから取得する
 		HttpSession session = request.getSession();
-		Accounts group = (Accounts)session.getAttribute("group_ID");
+		Accounts group = (Accounts)session.getAttribute("pr_group");
 		int group_number = group.getPr_group();
-		System.out.println("pr_group:"+ group_number);
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -67,13 +66,17 @@ public class TaskRegistServlet extends HttpServlet {
 		String checkbox = request.getParameter("checkbox");
 		String manual_link = request.getParameter("manual_link");
 
-		boolean boo1 = Boolean.valueOf(checkbox);
-
-
+//		boolean boo1 = Boolean.valueOf(checkbox);
+		//favoritesの値が"yes"かそれ以外の判定を行う。
+		boolean check = false;
+        String yes = "yes";
+		if (yes.equals(checkbox)) {
+			check = true;
+		}
 		// 登録処理を行う
 		TasksDAO bTask = new TasksDAO();
 		if (bTask.insert(new Tasks(0, group_number, task, content, date, register, to,
-				boo1, manual_link))) {	// 登録成功
+				check, manual_link))) {	// 登録成功
 			request.setAttribute("result", "レコードを登録しました。");
 		}
 		else {												// 登録失敗
