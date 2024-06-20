@@ -56,7 +56,7 @@
 			</c:forEach>
                    <a href="/C2/TaskServletRegist"><button>+</button></a>
             <br>
-            schedule
+            <p>Schedule</p>
            	<c:forEach var="e" items="${schedulesList}" >
             	<form method="post" action="/C2/TaskServlet">
 					<input type="hidden" name="id" value="${e.id}">
