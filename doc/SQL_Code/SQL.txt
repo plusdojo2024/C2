@@ -34,18 +34,18 @@ CREATE TABLE groups_memebr (
 ); 
 
 /* タスクDB */
-CREATE TABLE tasks ( 
-    ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
-    group_number INTEGER, 
-    task VARCHAR(30),
-    contents VARCHAR(200),
-    today TIMESTAMP,
-    register VARCHAR(20),
-    to VARCHAR(20),
-    checkbox BOOLEAN,
-    manual_link VARCHAR(30),
-    PRIMARY KEY  (ID) 
-); 
+ 
+create table tasks (
+id int not null auto_increment,
+group_number int ,
+task varchar (30),
+contents varchar (200),
+deadline date ,
+register varchar (20),
+to varchar(20),
+checkbox boolean ,
+manual_link varchar (30)
+);
 
 /* 予定DB */
 CREATE TABLE schedules ( 
@@ -57,6 +57,8 @@ CREATE TABLE schedules (
     register VARCHAR(20),
     PRIMARY KEY  (ID) 
 ); 
+
+ALTER TABLE SCHEDULES DROP COLUMN TODAY;
 
 /* マニュアルDB */
 CREATE TABLE manuals ( 
