@@ -13,11 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ItemsDAO;
-import dao.ManualsDAO;
-import model.Groups;
 import model.Items;
-import model.LoginUser;
-import model.Manuals;
 import model.Result;
 
 /**
@@ -62,8 +58,10 @@ public class ManualUpdateServlet extends HttpServlet {
 			return;
 		}
 
+		else {
 			//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
-			if(request.getParameter("submit").equals("getDetail") {
+			request.setCharacterEncoding("UTF-8");
+			if(request.getParameter("manualID").equals("マニュアル詳細へ遷移")) {
 
 				//マニュアルのidを取り出す
 				HttpSession session2 = request.getSession();
@@ -83,43 +81,45 @@ public class ManualUpdateServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 
-			else if(request.getParameter("submit").equals("getDetail") {}
+			//doPostの分岐2：更新を押した場合の処理
+			if(request.getParameter("submit").equals("ok")){
 
+				// リクエストパラメータを取得する
+				request.setCharacterEncoding("UTF-8");
+				int number = Integer.parseInt(request.getParameter("id"));
+				String task = request.getParameter("group_id");
+				int group_id = Integer.parseInt(task);
+				String heading = request.getParameter("header");
+				String contents = request.getParameter("contents");
+				String images = request.getParameter("images");
+				String today = request.getParameter("today");
 
-		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		int number = Integer.parseInt(request.getParameter("id"));
-		String task = request.getParameter("group_id");
-		int group_id = Integer.parseInt(task);
-		String heading = request.getParameter("header");
-		String contents = request.getParameter("contents");
-		String images = request.getParameter("images");
-		String today = request.getParameter("today");
+				java.sql.Date date = Date.valueOf(today);
 
-		java.sql.Date date = Date.valueOf(today);
+				ItemsDAO bManuals = new ItemsDAO();
+				// 登録処理を行う
+				if (request.getParameter("submit").equals("更新")) {
+					if (bManuals.update(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
+						request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
+					}
+					else {												// 登録失敗
+						request.setAttribute("result",  new Result("更新失敗！", "レコードを登録できませんでした。"));
+					}
+				}
+				else {
+					if (bManuals.delete(number)) {	// 削除成功
+						request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。") );
+					}
+					else {						// 削除失敗
+						request.setAttribute("result",  new Result("削除失敗！", "レコードを削除できませんでした。"));
+					}
+				}
 
-		ItemsDAO bManuals = new ItemsDAO();
-		// 登録処理を行う
-		if (request.getParameter("submit").equals("更新")) {
-			if (bManuals.update(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
-				request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
-			}
-			else {												// 登録失敗
-				request.setAttribute("result",  new Result("更新失敗！", "レコードを登録できませんでした。"));
+				// 結果ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
+				dispatcher.forward(request, response);
 			}
 		}
-		else {
-			if (bManuals.delete(number)) {	// 削除成功
-				request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。") );
-			}
-			else {						// 削除失敗
-				request.setAttribute("result",  new Result("削除失敗！", "レコードを削除できませんでした。"));
-			}
-		}
-
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
-		dispatcher.forward(request, response);
 	}
 
 }
