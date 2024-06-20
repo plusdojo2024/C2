@@ -10,7 +10,7 @@ public class Tasks implements Serializable {
 	private int group_number;	//グループDB_管理番号
 	private String task; 	//タスク名
 	private	String content;	//内容
-	private java.sql.Date day;	//期限
+	private java.sql.Date deadline;	//期限
 	private String register;	//from
 	private String to;	//to
 	private boolean checkbox;	//チェックボックス
@@ -35,9 +35,9 @@ public class Tasks implements Serializable {
 		super();
 		this.id = id;
 	}
-	public Tasks(Date day) {
+	public Tasks(Date deadline) {
 		super();
-		this.day = day;
+		this.deadline = deadline;
 	}
 	public Tasks(int id , boolean checkbox , String task) {
 		super();
@@ -52,14 +52,22 @@ public class Tasks implements Serializable {
 		this.checkbox = checkbox;
 		this.to = to;
 	}
-	public Tasks(int id, int group_number, String task, String content, Date day, String register, String to,
+	public Tasks(int id , boolean checkbox, String task, String to, Date deadline) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.deadline = deadline;
+		this.to = to;
+		this.checkbox = checkbox;
+	}
+	public Tasks(int id, int group_number, String task, String content, Date deadline, String register, String to,
 			boolean checkbox, String manual_link) {
 		super();
 		this.id = id;
 		this.group_number = group_number;
 		this.task = task;
 		this.content = content;
-		this.day = day;
+		this.deadline = deadline;
 		this.register = register;
 		this.to = to;
 		this.checkbox = checkbox;
@@ -91,11 +99,11 @@ public class Tasks implements Serializable {
 	public void setContent(String contens) {
 		this.content = contens;
 	}
-	public java.sql.Date getDay() {
-		return day;
+	public java.sql.Date getDeadline() {
+		return deadline;
 	}
-	public void setToday(java.sql.Date day) {
-		this.day = day;
+	public void setToday(java.sql.Date deadline) {
+		this.deadline = deadline;
 	}
 	public String getRegister() {
 		return register;

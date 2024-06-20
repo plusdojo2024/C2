@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -50,8 +51,9 @@ public class TaskServlet extends HttpServlet {
 		System.out.println("group:"+group_number);
 
 		//検索処理をおこなう
+		Date today= Date.valueOf(LocalDate.now());
 		TasksDAO taskDao = new TasksDAO();
-        List<Tasks> taskList = taskDao.selectTaskList(group_number);
+        List<Tasks> taskList = taskDao.selectTaskList(group_number,today);
 
 		//リクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
@@ -73,18 +75,18 @@ public class TaskServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	//タスクリストを取得
 		// リクエストパラメータを取得する.HTML内の入力内容
 		request.setCharacterEncoding("UTF-8");
-		String hiduke = request.getParameter("day");
+		String hiduke = request.getParameter("deadline");
 		System.out.println("hiduke;"+hiduke);
-		Date day = Date.valueOf(hiduke);
-		System.out.println("d;"+day);
+		Date deadline = Date.valueOf(hiduke);
 
 		// 検索処理を行う
 
 		TasksDAO taskDao = new TasksDAO();
-		List<Tasks> taskList = taskDao.select(new Tasks(day));
-		
+		List<Tasks> taskList = taskDao.select(deadline);
+
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
 

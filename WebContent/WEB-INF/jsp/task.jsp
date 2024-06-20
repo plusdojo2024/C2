@@ -39,10 +39,14 @@
 			</div>
 		</header>
 		<main>
+			<c:forEach var="e" items="${taskList}" >
             <form method="post" action="/C2/TaskServlet">
-                <input type="date" name="day">
+            	タスクの期限：${e.deadline}
+            	<br>
+                <input type="date" name="deadline">
                 <input type="submit" name="dateChange" value="日付切替">
             </form>
+            </c:forEach>
 			<c:forEach var="e" items="${taskList}" >
 				<form method="post" action="/C2/TaskServlet" >
 					<input type="hidden" name="id" value="${e.id}">
@@ -52,6 +56,8 @@
 				</form>
 			</c:forEach>
                    <a href="/C2/TaskServletRegist"><button>+</button></a>
+            <br>
+            schedule
            	<c:forEach var="e" items="${schedulesList}" >
             	<form method="post" action="/C2/TaskServlet">
             		<input type="text" name="schedule" value="${e.task}">
