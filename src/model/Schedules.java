@@ -22,6 +22,12 @@ public class Schedules implements Serializable {
 		this.task = task;
 	}
 
+	public Schedules(int id, String task) {
+		super();
+		this.id = id;
+		this.task = task;
+	}
+
 	public Schedules(int group_number, String task, String contents, String register) {
 		super();
 		this.group_number = group_number;

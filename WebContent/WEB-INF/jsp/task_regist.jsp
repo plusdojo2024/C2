@@ -39,6 +39,7 @@
 			</div>
 		</header>
 		<main>
+		<a href="/C2/ScheduleUpdateServlet">a</a>
             <h1>new task</h1>
 			<c:forEach var="e" items="${accountList}" >
             <form method="post" action="/C2/TaskServletRegist">
@@ -50,11 +51,8 @@
                     </tr>
                     <tr>
                         <td><textarea name="content">タスク内容</textarea></td>
-                        <td><a href="">マニュアルボタン</a></td>
                         <td><select name="manual_link">
-                            <option>manual1</option>
-                            <option>manual2</option>
-                            <option>manual3</option>
+                            <option><a href="ManualServlet">manual1</a></option>
                         </select></td>
                     </tr>
                     <tr>

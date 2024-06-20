@@ -44,7 +44,7 @@
             	タスクの期限：${e.deadline}
             	<br>
                 <input type="date" name="deadline">
-                <input type="submit" name="dateChange" value="日付切替">
+                <input type="submit" name="dateChange" value="DLchange">
             </form>
             </c:forEach>
 			<c:forEach var="e" items="${taskList}" >
@@ -60,7 +60,8 @@
             schedule
            	<c:forEach var="e" items="${schedulesList}" >
             	<form method="post" action="/C2/TaskServlet">
-            		<input type="text" name="schedule" value="${e.task}">
+					<input type="hidden" name="id" value="${e.id}">
+            		<input type="submit" name="scheduleDetail" value="SD"${e.task}>
 				</form>
             </c:forEach>
                    <a href="/C2/ScheduleRegistServlet"><button>+</button></a>

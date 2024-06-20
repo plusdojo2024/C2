@@ -39,6 +39,7 @@ public class SchedulesDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Schedules record = new Schedules(
+				rs.getInt("id"),
 				rs.getString("task")
 				);
 				scheduleList.add(record);
