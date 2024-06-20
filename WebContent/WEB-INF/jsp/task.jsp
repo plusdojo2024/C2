@@ -50,7 +50,7 @@
 				</form>
 			</c:forEach>
                    <a href="/C2/TaskServletRegist"><button>+</button></a>
-           	<c:forEach var="c" items="${scheduleList}" >
+           	<c:forEach var="e" items="${schedulesList}" >
             	<form method="post" action="/C2/TaskServlet">
             		<input type="text" name="schedule" value="${e.task}">
 				</form>
