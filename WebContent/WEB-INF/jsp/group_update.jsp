@@ -39,7 +39,7 @@
 			</div>
 		</header>
 		<main>
-		<c:forEach var="e" items="${cardList}" >
+		<c:forEach var="e" items="${GroupsList}" >
 			<form id ="update" method="post" action="/C2/GroupUpdateServlet"><!--  -->
 			<table>
 			<tr>
@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
-			  <td><input type="text" value ="${e.nickname}"></td>
+			  <td><input type="text" value ="${e.user_ID}"></td>
 			  <td><button onclick="deleteExample(this);">-</button></td>
 			  <td><input type="checkbox" class="agreement"></td>
 			</tr>

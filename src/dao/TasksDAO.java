@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ import model.Tasks;
 public class TasksDAO {
 
 	//日付で検索するselect
-	public List<Tasks> select(Tasks task) {
+	public List<Tasks> select(Date deadline) {
 		Connection conn = null;
 		List<Tasks> taskList = new ArrayList<Tasks>();
 
@@ -28,12 +27,10 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql ="SELECT * FROM TASKS WHERE register LIKE ?";
+			String sql ="SELECT * FROM TASKS WHERE deadline LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			Date today= Date.valueOf(LocalDate.now());
-	        java.sql.Date d = java.sql.Date.valueOf("2024-06-20");
 			// SQL文を完成させる
-			pStmt.setString(1,task.getRegister());
+			pStmt.setDate(1,deadline);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -44,7 +41,8 @@ public class TasksDAO {
 				rs.getInt("id"),
 				rs.getBoolean("checkbox"),
 				rs.getString("task"),
-				rs.getString("to")
+				rs.getString("to"),
+				rs.getDate("deadline")
 				);
 				taskList.add(record);
 			}
@@ -75,7 +73,7 @@ public class TasksDAO {
 	}
 
 	//doGetでのタスク一覧表示:select
-	public List<Tasks> selectTaskList(int group_number) {
+	public List<Tasks> selectTaskList(int group_number ,Date deadline) {
 		Connection conn = null;
 		List<Tasks> taskList = new ArrayList<Tasks>();
 
@@ -87,14 +85,12 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql ="SELECT * FROM TASKS WHERE group_number = ? AND today = ?";
+			String sql ="SELECT * FROM TASKS WHERE group_number = ? AND deadline LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
-			Date today= Date.valueOf(LocalDate.now());
+			// SQL文を完成させる}
 			pStmt.setInt(1,group_number);
-			pStmt.setDate(2,today);
-			System.out.println("今日の日付："+Date.valueOf(LocalDate.now()));
+			pStmt.setDate(2,deadline);
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
@@ -104,7 +100,9 @@ public class TasksDAO {
 				rs.getInt("id"),
 				rs.getBoolean("checkbox"),
 				rs.getString("task"),
-				rs.getString("to")
+				rs.getString("to"),
+				rs.getDate("deadline")
+
 				);
 				taskList.add(record);
 			}
@@ -227,7 +225,7 @@ public class TasksDAO {
 				pStmt.setString(3, "（未設定）");
 			}
 			//today文
-				pStmt.setDate(4, list.getDay());
+				pStmt.setDate(4, list.getDeadline());
 			//from文
 				pStmt.setString(5, list.getRegister());
 			//to文
@@ -314,7 +312,7 @@ public class TasksDAO {
 				pStmt.setString(2, null);
 			}
 			//day文
-				pStmt.setDate(3, up.getDay());
+				pStmt.setDate(3, up.getDeadline());
 			//from文
 				pStmt.setString(4, up.getRegister());
 			//to文
