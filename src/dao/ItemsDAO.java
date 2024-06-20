@@ -14,7 +14,7 @@ public class ItemsDAO {
 
 
 	// マニュアルの項目を登録し、成功したらtrueを返す
-	public boolean insert(Items manualregist) {
+	public int insert(Items manualregist) {
 		Connection conn = null;
 		boolean result = false;
 		int autoIncrementKey = 0;
@@ -106,7 +106,7 @@ public class ItemsDAO {
 		}
 
 		// 結果を返す
-		return result;
+		return autoIncrementKey;
 	}
 	/*
 	//SQL文の準備
@@ -122,7 +122,7 @@ public class ItemsDAO {
 
 
 	// マニュアルを更新し、成功したらtrueを返す
-		public boolean update(Items manualupdate) {
+		public boolean update(int manual_id, String[] items, String[] contents, String[] images) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -139,7 +139,7 @@ public class ItemsDAO {
 
 
 				// SQL文を完成させる
-				pStmt.setInt(1, manualupdate.getManual_id());
+				pStmt.setInt(1, manual_id);
 
 				// SQL文を実行する　一件登録できたら成功
 				if (pStmt.executeUpdate() == 1) {
@@ -147,30 +147,42 @@ public class ItemsDAO {
 				}
 
 				//insertのバージョンを作る
-				String sql2 = "INSERT INTO Items VALUES (NULL,NULL, ?, ?, ?, ?)";
+				String sql2 = "INSERT INTO Items VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 				PreparedStatement pStmt3 = conn.prepareStatement(sql2);
 
 				// SQL文を完成させる
-				if (manualupdate.getHeading() != null && !manualupdate.getHeading().equals("")) {
-					pStmt3.setString(1, manualupdate.getHeading());
-				}
-				else {
-					pStmt3.setString(1, "（未設定）");
-				}
-				if (manualupdate.getContents() != null && !manualupdate.getContents().equals("")) {
-					pStmt3.setString(2, manualupdate.getContents());
-				}
-				else {
-					pStmt3.setString(2, "（未設定）");
-				}
-				if (manualupdate.getImage() != null && !manualupdate.getImage().equals("")) {
-					pStmt3.setString(3, manualupdate.getImage());
-				}
-				else {
-					pStmt3.setString(3, "（未設定）");
-				}
-					pStmt3.setDate(4, manualupdate.getRegist_day());
+				int i = 0;
 
+				pStmt3.setInt(1, manual_id);
+				while(i < items.length) {
+					if (items[i] != null && !items[i].equals("")) {
+						pStmt3.setString(2, items[i]);
+					}
+					else {
+						pStmt3.setString(2, "（未設定）");
+					}
+					if (contents[i] != null && !contents[i].equals("")) {
+						pStmt3.setString(3, contents[i]);
+					}
+					else {
+						pStmt3.setString(3, "（未設定）");
+					}
+					if (images[i] != null && !images[i] .equals("")) {
+						pStmt3.setString(4, images[i] );
+					}
+					else {
+						pStmt3.setString(4, "（未設定）");
+					}
+					if (pStmt3.executeUpdate() != 1) {
+						result = false;
+						break;
+					}
+					System.out.println(i + "件目のデータを登録");
+					i ++;
+				}//while end
+				if(i == items.length) {
+					result = true;
+				}
 
 			}
 			catch (SQLException e) {

@@ -62,23 +62,20 @@ public class ManualRegistServlet extends HttpServlet {
 		LoginUser group = (LoginUser)session.getAttribute("user_ID");
 		int group_id = group.getGroupId();
 		String heading = request.getParameter("item");
-		String contents = request.getParameter("content");
-		String images = request.getParameter("images");
+		String content = request.getParameter("content");
+		String image = request.getParameter("images");
 		String manual_name = request.getParameter("title");
 		//String today = request.getParameter("today");
 
-		//java.sql.Date date = Date.valueOf(today);
+		String[] items = request.getParameterValues("item");
+		String[] contents = request.getParameterValues("content");
+		String[] images = request.getParameterValues("images");
 
-		//System.out.println(heading);
-		//System.out.println(contents);
-		//System.out.println(images);
 
 		// 登録処理を行う
 		ItemsDAO bItems = new ItemsDAO();
-		//ManualsDAO bManuals = new ManualsDAO();
-		//bManuals.manu(new Items(0, heading, contents, images, manual_name, group_id));
-		//int manualId = bManuals.count(group_id);
-		if (bItems.insert(new Items(0, heading, contents, images, manual_name, group_id))) {	// 登録成功
+		int manual_id = bItems.insert(new Items(0, heading, content, image, manual_name, group_id));
+		if (bItems.update(manual_id, items, contents, images)) {	// 登録成功
 			request.setAttribute("result",new Result("登録成功！", "レコードを登録しました。"));
 		}
 		else {												// 登録失敗
