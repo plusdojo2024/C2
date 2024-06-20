@@ -197,4 +197,68 @@ public class ManualsDAO {
 		return countNumber;
 	}	//count_Method終了タグ
 
+
+
+	//大戸作成
+	//グループ番号からマニュアルを選択して画面に表示する
+	public List<Manuals> selectManuals(Manuals manuals) {
+
+		//変数設定
+		Connection conn = null;
+		int countNumber = 0;	// 後で更新および削除する番号
+		List<Manuals> manualNameList = select(new Manuals()); //これなんだ？？？
+
+		try {
+
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+
+			//SQL文の準備
+			String sql = "SELECT manual_name FROM MANUALS WHERE GROUP_NUMBER = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			//SQL文の完成
+			pStmt.setInt(1, manuals.getGroup_number());
+
+			//SQL文の実行および結果の取得
+			ResultSet rs = pStmt.executeQuery();
+			//結果表のコピー
+			while (rs.next()) {
+				Manuals record = new Manuals(
+					rs.getString("manual_name")
+				);
+				manualNameList.add(record);
+			}
+		}	//try終了タグ
+		//エラー処理
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		//finaly処理
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			//結果をコンソールに表示（確認用）
+			System.out.println("countNumber" + countNumber);
+		}
+		//戻り値
+		return manualNameList;
+	}	//selectManuals終了タグ
+
+
+
 }//manualDAO終了タグ
