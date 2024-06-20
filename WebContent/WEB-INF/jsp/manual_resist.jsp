@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>famiLink</title>
+
+		<link rel="stylesheet" href="/C2/css/normalize.css">
 		<link rel="stylesheet" href="/C2/css/common.css">
 		<link rel="stylesheet" href="/C2/css/manual.css">
 	</head>
@@ -48,15 +50,17 @@
 			</div>
 			<div id="form" class=boxradius>
       			<form method="post" action="/C2/ManualRegistServlet">
-      				<table>
+      				<table  id="tablebox">
 	        			<tr>
-	        			  <td>
+	        			  <td colspan="4">
+	        			  <div id="tablebox">
 	        				<input type="text" name="title" placeholder="マニュアル名"><br>
+	        			  </div>
 	        			  </td>
 	        			</tr>
 						<tr id = "target">
 	          			  <td>
-	          				<input type="text" name="item" placeholder="項目">
+	          				&emsp;<input type="text" name="item" placeholder="項目">
 	          			  </td>
 	          			  <td>
 	          			    <input type="text" name="content" placeholder="内容">
@@ -65,12 +69,15 @@
 	          			    <input type="file" name="images">
 	          			  </td>
 	          			  <td>
-	          			    <img src="/C2/img/minusButton3.png" onclick="deleteExample(this);"><br>
+	          			    <img src="/C2/img/minusButton3.png"  id = "minus" onclick="deleteExample(this);">&emsp;<br>
 	          			  </td>
 	       			    </tr>
        				 </table>
-					<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
-					<input type="submit" id="regist" name="manual_regist" value="OK" onclick="checkMessage();" class=okbutton>
+					&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
+					<div id="okbutton">
+					&emsp;&emsp;&emsp;&emsp;<input type="submit" id="regist" name="manual_regist" value="OK"
+						   onclick="checkMessage();" class=okbutton>&emsp;&emsp;&emsp;&emsp;
+					</div>
      	 		</form>
      	 	</div>
 		</main>
