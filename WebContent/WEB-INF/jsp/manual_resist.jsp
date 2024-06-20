@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="/C2/css/manual.css">
 	</head>
 	<body>
+	
 		<header>
 			<div class="header-contents">
 				<div class="header-content">
