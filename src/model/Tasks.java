@@ -35,11 +35,22 @@ public class Tasks implements Serializable {
 		super();
 		this.id = id;
 	}
+	public Tasks(Date day) {
+		super();
+		this.day = day;
+	}
 	public Tasks(int id , boolean checkbox , String task) {
 		super();
 		this.id = id;
 		this.checkbox = checkbox;
 		this.task = task;
+	}
+	public Tasks(int id,boolean checkbox , String task, String to) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.checkbox = checkbox;
+		this.to = to;
 	}
 	public Tasks(int id, int group_number, String task, String content, Date day, String register, String to,
 			boolean checkbox, String manual_link) {

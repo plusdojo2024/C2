@@ -40,13 +40,15 @@
 		</header>
 		<main>
             <form method="post" action="/C2/TaskServlet">
-                <p>日付<input type="date"><input type="text" placeholder="検索"><input type="submit" name="search" value="検索"></p>
+                <input type="date" name="day">
+                <input type="submit" name="dateChange" value="日付切替">
             </form>
 			<c:forEach var="e" items="${taskList}" >
 				<form method="post" action="/C2/TaskServlet" >
 					<input type="hidden" name="id" value="${e.id}">
 					<input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if> disabled>
 					<input type="text" name="task" value="${e.task}">
+					<input type="text" name="to" value="${e.to}">
 				</form>
 			</c:forEach>
                    <a href="/C2/TaskServletRegist"><button>+</button></a>

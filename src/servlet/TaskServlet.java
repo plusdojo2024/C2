@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -50,7 +51,7 @@ public class TaskServlet extends HttpServlet {
 
 		//検索処理をおこなう
 		TasksDAO taskDao = new TasksDAO();
-        List<Tasks> taskList = taskDao.selectList(group_number);
+        List<Tasks> taskList = taskDao.selectTaskList(group_number);
 
 		//リクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
@@ -72,20 +73,38 @@ public class TaskServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// リクエストパラメータを取得する
-//		request.setCharacterEncoding("UTF-8");
-//		String to = request.getParameter("to");
-//
-//		// 登録処理を行う
-//		TasksDAO bTask = new TasksDAO();
-//		List<Tasks> cardList = bTask.select(to);
-//
-//		// 検索結果をリクエストスコープに格納する
-//		request.setAttribute("cardList", cardList);
-//
-//		// 結果ページにフォワードする
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_search.jsp");
-//		dispatcher.forward(request, response);
+		// リクエストパラメータを取得する.HTML内の入力内容
+		request.setCharacterEncoding("UTF-8");
+		String hiduke = request.getParameter("day");
+		System.out.println("hiduke;"+hiduke);
+		Date day = Date.valueOf(hiduke);
+		System.out.println("d;"+day);
+
+		// 検索処理を行う
+
+		TasksDAO taskDao = new TasksDAO();
+		List<Tasks> taskList = taskDao.select(new Tasks(day));
+		
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("taskList", taskList);
+
+//スケジュールリストを取得
+		//pr_groupをセッションから取得
+		HttpSession session2 = request.getSession();
+		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
+		int group_number = pr_group.getPr_group();
+		System.out.println("group:"+group_number);
+
+		//検索処理をおこなう
+		SchedulesDAO schedulesDao = new SchedulesDAO();
+        List<Schedules> schedulesList = schedulesDao.selectList(group_number);
+
+		//リクエストスコープに格納する
+		request.setAttribute("schedulesList", schedulesList);
+
+		// 結果ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
+		dispatcher.forward(request, response);
 
 	}
 
