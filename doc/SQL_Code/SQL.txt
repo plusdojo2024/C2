@@ -24,7 +24,7 @@ CREATE TABLE groups (
 ); 
 
 /* グループメンバーDB */
-CREATE TABLE groups_menbr ( 
+CREATE TABLE groups_memebr ( 
     ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
     group_ID　INTEGER,
     group_name VARCHAR(20),
