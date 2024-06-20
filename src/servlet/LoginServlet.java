@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("user_ID", new LoginUser(user_ID, pr_group));
-			session.setAttribute("group_ID", new Accounts(pr_group));
+			session.setAttribute("pr_group", new Accounts(pr_group));
 			System.out.println("user_ID:"+user_ID+".pr_group:"+pr_group+".ログイン成功");
 			// マニュアルサーブレットにリダイレクトする
 			response.sendRedirect("/C2/ManualServlet");

@@ -31,7 +31,6 @@ public class AccountsDAO {
 
 				if (account.getUser_ID() != null) {
 					pStmt.setString(1,account.getUser_ID());
-					System.out.println(account.getUser_ID());
 				}
 				else {
 					pStmt.setString(1, "%");

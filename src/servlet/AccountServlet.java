@@ -42,7 +42,6 @@ public class AccountServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
 		String user = user_ID.getLoginUserId();
-		System.out.println("user_ID:"+user);
 
 //		 ユーザーの検索処理を行う
 		AccountsDAO accountDao = new AccountsDAO();

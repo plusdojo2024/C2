@@ -23,29 +23,16 @@
 
 		<main>
 			<h2>New Schedule</h2>
+			<c:forEach var="e" items="${accountList}" >
       		<form id="schedule_form" method="post" action="/C2/ScheduleRegistServlet"><!--アクションにサーブレットを入力する-->
-        		<table class="table">
-          			<tr>
-            			<td>
                 			<input type="text" name="task" placeholder="zoom会議">
-            			</td>
-          			</tr>
-          			<tr>
-            			<td>
+                			<br>
                 			<textarea name="contents" id="詳細" placeholder="14:00～"></textarea>
-            			</td>
-          			</tr>
-          			<tr>
-            			<td>
-              				<label>パパ<br>
-              				</label>
-            			</td>
-            			<td>
-                			<input type="submit" id="regist" name="submit" value="登録">
-            			</td>
-          			</tr>
-        		</table>
+              				<br>
+              				<input type="text" name="register" value="${e.nickname}" readonly="readonly">
+              				<input type="submit" id="regist" name="submit" value="登録">
       		</form>
+      		</c:forEach>
     	</main>
 
 

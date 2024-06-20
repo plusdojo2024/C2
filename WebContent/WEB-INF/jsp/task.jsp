@@ -42,18 +42,21 @@
             <form method="post" action="/C2/TaskServlet">
                 <p>日付<input type="date"><input type="text" placeholder="検索"><input type="submit" name="search" value="検索"></p>
             </form>
-                <ul>
-                    <li><input type="checkbox" name="detail">燃えるゴミ出し</li>
-                    <li><input type="checkbox" name="detail">燃えないゴミ出し</li>
-                    <li><a href="/C2/TaskServletRegist"><button>+</button></a></li>
-                </ul>
-                <ul>
-                    <li>schedule</li>
-                    <li>09:00 授業参観</li>
-                    <li>19:00 夜ごはん</li>
-                    <li><a href="/C2/ScheduleRegistServlet"><button>+</button></a></li>
-                </ul>
-		</main>
+			<c:forEach var="e" items="${taskList}" >
+				<form method="post" action="/C2/TaskServlet" >
+					<input type="hidden" name="id" value="${e.id}">
+					<input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if> disabled>
+					<input type="text" name="task" value="${e.task}">
+				</form>
+			</c:forEach>
+                   <a href="/C2/TaskServletRegist"><button>+</button></a>
+           	<c:forEach var="e" items="${schedulesList}" >
+            	<form method="post" action="/C2/TaskServlet">
+            		<input type="text" name="schedule" value="${e.task}">
+				</form>
+            </c:forEach>
+                   <a href="/C2/ScheduleRegistServlet"><button>+</button></a>
+        </main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
