@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -23,13 +22,13 @@ import model.Result;
 public class ManualUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ManualUpdateServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ManualUpdateServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,19 +58,21 @@ public class ManualUpdateServlet extends HttpServlet {
 		}
 
 		else {
+			/*
 			//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
 			request.setCharacterEncoding("UTF-8");
 			if(request.getParameter("manualID").equals("マニュアル詳細へ遷移")) {
 
 				//マニュアルのidを取り出す
 				HttpSession session2 = request.getSession();
-				int manual_ID = (int)session2.getAttribute("manual_id");
+				String manual_ID = (String)session2.getAttribute("manual_id");
 				System.out.println("manual_ID:"+manual_ID);
+				int intManual_ID = Integer.parseInt(manual_ID);
 
 
 				//manual_idでマニュアルを検索する処理を行う
 				ItemsDAO itemsDao = new ItemsDAO();
-		        List<Items> itemList = itemsDao.selectItems(new Items(manual_ID));
+		        List<Items> itemList = itemsDao.selectItems(new Items(intManual_ID));
 
 		        //検索結果をリクエストスコープに格納する
 				request.setAttribute("itemList", itemList);
@@ -79,7 +80,12 @@ public class ManualUpdateServlet extends HttpServlet {
 				// 詳細ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
 				dispatcher.forward(request, response);
-			}
+			}*/
+			//マニュアルのidを取り出す
+			HttpSession session2 = request.getSession();
+			String manual_ID = (String)session2.getAttribute("manual_id");
+			System.out.println("manual_ID:"+manual_ID);
+			//int intManual_ID = Integer.parseInt(manual_ID);
 
 			//doPostの分岐2：更新を押した場合の処理
 			if(request.getParameter("submit").equals("ok")){
@@ -87,19 +93,19 @@ public class ManualUpdateServlet extends HttpServlet {
 				// リクエストパラメータを取得する
 				request.setCharacterEncoding("UTF-8");
 				int number = Integer.parseInt(request.getParameter("id"));
-				String task = request.getParameter("group_id");
-				int group_id = Integer.parseInt(task);
-				String heading = request.getParameter("header");
-				String contents = request.getParameter("contents");
-				String images = request.getParameter("images");
-				String today = request.getParameter("today");
+				//String task = request.getParameter("group_id");
+				//int group_id = Integer.parseInt(task);
+				String[] items = request.getParameterValues("header");
+				String[] contents = request.getParameterValues("contents");
+				String[] images = request.getParameterValues("images");
+				//String today = request.getParameter("today");
 
-				java.sql.Date date = Date.valueOf(today);
+				//java.sql.Date date = Date.valueOf(today);
 
 				ItemsDAO bManuals = new ItemsDAO();
 				// 登録処理を行う
 				if (request.getParameter("submit").equals("更新")) {
-					if (bManuals.update(new Items(0, group_id, heading, contents, images, date))) {	// 登録成功
+					if (bManuals.update(intManual_ID, items, contents, images)) {	// 登録成功
 						request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
 					}
 					else {												// 登録失敗
@@ -119,7 +125,20 @@ public class ManualUpdateServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
 				dispatcher.forward(request, response);
 			}
-		}
-	}
+			else {
+				//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
+				//manual_idでマニュアルを検索する処理を行う
+				ItemsDAO itemsDao = new ItemsDAO();
+				List<Items> itemList = itemsDao.selectItems(new Items(intManual_ID));
 
-}
+				//検索結果をリクエストスコープに格納する
+				request.setAttribute("itemList", itemList);
+
+				// 詳細ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
+				dispatcher.forward(request, response);
+				}
+			}
+		}
+
+	}
