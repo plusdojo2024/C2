@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Items;
 
@@ -238,5 +240,71 @@ public class ItemsDAO {
 			// 結果を返す
 			return result;
 		}
+
+
+
+
+		//大戸作成
+		//マニュアルIDでマニュアルの詳細を表示する
+		public List<Items> selectItems(Items items) {
+			Connection conn = null;
+			List<Items> itemList = new ArrayList<Items>();
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+				// SQL文を準備する
+				String sql ="SELECT * FROM Items WHERE manual_id = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				pStmt.setInt(1, items.getManual_id());
+
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					Items record = new Items(
+					rs.getInt("id"),
+					rs.getInt("manual_id"),
+					rs.getString("heading"),
+					rs.getString("contents"),
+					rs.getString("image"),
+					rs.getDate("regist_day")
+					);
+					itemList.add(record);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				itemList = null;
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				itemList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						itemList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return itemList;
+		}
+
 
 }

@@ -53,7 +53,7 @@
 	    		<button type="submit"aria-label="検索"></button>
 			</form>
 
-		<form method = "post" action = "/C2/ManualUpdateServlet">
+		<form method = "post" action = "/C2/ManualUpdateServlet" id ="getDetail">
 	      <c:forEach var="e" items="${manualNameList}" >
 	      <table class="table">
 	        <tr>

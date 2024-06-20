@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ItemsDAO;
+import dao.ManualsDAO;
+import model.Groups;
 import model.Items;
+import model.LoginUser;
+import model.Manuals;
 import model.Result;
 
 /**
@@ -56,6 +61,30 @@ public class ManualUpdateServlet extends HttpServlet {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
+
+			//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
+			if(request.getParameter("submit").equals("getDetail") {
+
+				//マニュアルのidを取り出す
+				HttpSession session2 = request.getSession();
+				int manual_ID = (int)session2.getAttribute("manual_id");
+				System.out.println("manual_ID:"+manual_ID);
+
+
+				//manual_idでマニュアルを検索する処理を行う
+				ItemsDAO itemsDao = new ItemsDAO();
+		        List<Items> itemList = itemsDao.selectItems(new Items(manual_ID));
+
+		        //検索結果をリクエストスコープに格納する
+				request.setAttribute("itemList", itemList);
+
+				// 詳細ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
+				dispatcher.forward(request, response);
+			}
+
+			else if(request.getParameter("submit").equals("getDetail") {}
+
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");

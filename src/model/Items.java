@@ -55,6 +55,12 @@ public class Items implements Serializable {
 		this.esc_g = group;
 	}
 
+	//大戸作成
+	public Items(int manual_ID) {
+		this.manual_id = manual_ID;
+	}
+
+
 	//method
 	public int getId() {
 		return id;
