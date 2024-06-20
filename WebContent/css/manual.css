@@ -50,6 +50,7 @@
 		margin:20px 0px 20px 0px;
 		text-align: center;
 		border: none;
+		outline: none;
 		border-bottom: 4px solid #F3B4AB;
 	}
 
@@ -60,8 +61,13 @@
 		color:white;
 		margin-bottom:20px;
 		border: none;
+		outline: none;
 		border-radius:10px;
 		background-color:#F3B4AB;
+	}
+
+	input[name=content]:hover{
+		background-color: #F9E799;
 	}
 
 	input[name=item]{
@@ -71,14 +77,19 @@
 		color:white;
 		margin-bottom:20px;
 		border: none;
+		outline: none;
 		border-radius:10px;
 		background-color:#F3B4AB;
+	}
+
+	input[name=item]:hover{
+		background-color: #F9E799;
 	}
 
 	input[name=image]{
 		width: 5em;
 		height: 50px;
-		font-size:20px;
+		font-size:10px;
 		margin-bottom:20px;
 	}
 
@@ -117,9 +128,12 @@
 
 /*プラスボタン*/
 
-input:-internal-autofill-selected {
+
+
+/*リセットCSS*/
+/*input:-internal-autofill-selected {
     appearance: menulist-button;
     background-image: none !important;
     background-color: #F3B4AB;
     color: fieldtext !important;
-}
+}*/
