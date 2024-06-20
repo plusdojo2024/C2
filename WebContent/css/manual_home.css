@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+
+*{
+ outline: 1px solid #000000;
+}
+
+
 .manual{
 	font-size: 1.5rem;
 	background-color: #F3B4AB;
@@ -66,5 +72,5 @@
 }
 
 .table{
-
+	background-color: #F7CDC6;
 }
