@@ -37,23 +37,28 @@
 				</div>
 			</div>
 		</header>
-		<main>
-      <p>Details/Update/Delete</p>
+	<main>
+      <p>ManualDetails</p>
+      <c:forEach var="e" items="${List}">
       <form>
         <table>
-					<tr>
-          	<td>キッチン掃除<br></td>
-          </tr>
-          <tr id = "target">
-            <td><input type="text" name="item" placeholder="項目"></td>
-            <td><input type="text" name="content" placeholder="内容"></td>
-            <td><input type="file" name="images"></td>
-            <td><button onclick="deleteExample(this);">-</button><br></td>
-          </tr>
+			<tr>
+          		<td>
+					<input type="text" name="heading" value="${e.}" class="heading">
+              	</td>
+        	</tr>
+          	<tr id = "target">
+            	<td><input type="text" name="item" value="${e.}" class="items"></td>
+            	<td><input type="text" name="content" value="${e.}" class="contents"></td>
+            	<td><input type="file" name="images" value="${e.}" class="images"></td>
+            	<td><button onclick="deleteExample(this);">-</button><br></td>
+          	</tr>
         </table>
         <input type="submit" id="ok" name="manual_update" value="OK" onclick="checkMessage();">
         <input type="submit" id="delete" name="manual_delete" value="Delete" onclick="manualDelete();">
       </form>
+      </c:forEach>
+
           <button id = "add" onclick="addExample();" >+</button>
 		</main>
 		<footer>
