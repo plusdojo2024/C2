@@ -53,7 +53,7 @@
 	    		<button type="submit"aria-label="検索"></button>
 			</form>
 
-	      <c:forEach var="e" items="${cardList}" >
+	      <c:forEach var="e" items="${manualNameList}" >
 	      <table class="table">
 	        <tr>
 	          <td>
@@ -63,6 +63,8 @@
 	       </table>
 	      </c:forEach>
 			</main>
+
+
 			<footer>
 				<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 			</footer>

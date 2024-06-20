@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AccountsDAO;
 import dao.ManualsDAO;
-import model.Accounts;
 import model.LoginUser;
 import model.Manuals;
 
@@ -44,12 +42,27 @@ public class ManualServlet extends HttpServlet {
 			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
+
+
 		//ユーザー情報の現在の情報を持ってくるselect
 		HttpSession session2 = request.getSession();
 		LoginUser user_ID = (LoginUser)session2.getAttribute("user_ID");
 		String user = user_ID.getLoginUserId();
 		System.out.println("user_ID:"+user);
+		int groupID = user_ID.getGroupId();
+		System.out.println("group_ID:"+ groupID);
 
+		//group_idでマニュアルを検索する処理を行う
+		ManualsDAO manualsDao = new ManualsDAO();
+        List<Manuals> manualNameList = manualsDao.selectManuals(new Manuals(groupID));
+
+        //検索結果をリクエストスコープに格納する
+		request.setAttribute("manualNameList", manualNameList);
+
+		// 登録ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual.jsp");
+		dispatcher.forward(request, response);
+/*
 //		 ユーザーの検索処理を行う
 		AccountsDAO accountDao = new AccountsDAO();
         List<Accounts> accountList = accountDao.pr_account(new Accounts(user));
@@ -62,6 +75,31 @@ public class ManualServlet extends HttpServlet {
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual.jsp");
 		dispatcher.forward(request, response);
+
+
+
+	//大戸バージョン
+
+		//group_idをセッションから取りだす大戸
+		HttpSession session3 = request.getSession();
+		LoginUser user_group = (LoginUser)session3.getAttribute("group_id");
+
+
+		int group_number = user_group.getGroupId();
+		System.out.println("group_id"+group_number);
+
+		//group_idでマニュアルを検索する処理を行う
+		ManualsDAO manualsDao = new ManualsDAO();
+        List<Manuals> manualNameList = manualsDao.selectManuals(new Manuals(group_number));
+
+        //検索結果をリクエストスコープに格納する
+		request.setAttribute("manualNameList", manualNameList);
+
+		// 登録ページにフォワードする
+		RequestDispatcher dispatcher2 = request.getRequestDispatcher("/WEB-INF/jsp/manual.jsp");
+		dispatcher2.forward(request, response);
+*/
+
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

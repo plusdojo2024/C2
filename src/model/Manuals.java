@@ -8,6 +8,8 @@ public class Manuals implements Serializable {
 	private int id;
 	private int group_number;
 	private String manual_name;
+
+
 //コンストラクタ
 	public Manuals() {
 		//処理なし
@@ -24,6 +26,13 @@ public class Manuals implements Serializable {
 		super();
 		this.manual_name = manual_name;
 		this.group_number = pr_group;
+	}
+
+	public Manuals(int group_number) {
+		//group_numberだけ
+		super();
+		this.group_number = group_number;
+
 	}
 //メソッド
 	public int getId() {
