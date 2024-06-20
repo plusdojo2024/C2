@@ -57,6 +57,7 @@ public class TaskServlet extends HttpServlet {
 
 		//リクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
+		request.setAttribute("deadline", today);
 
 		//検索処理をおこなう
 		SchedulesDAO schedulesDao = new SchedulesDAO();
@@ -89,7 +90,7 @@ public class TaskServlet extends HttpServlet {
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("taskList", taskList);
-
+		request.setAttribute("deadline", deadline);
 //スケジュールリストを取得
 		//pr_groupをセッションから取得
 		HttpSession session2 = request.getSession();
