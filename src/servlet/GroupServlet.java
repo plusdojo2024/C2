@@ -48,8 +48,8 @@ public class GroupServlet extends HttpServlet {
 		String user = login.getLoginUserId();
 
 		//GroupsDAOに処理してもらう
-		GroupsDAO abc = new GroupsDAO();
-        List<Groups> cardList = abc.select(user);
+		GroupsDAO groupsDao = new GroupsDAO();
+        List<Groups> cardList = groupsDao.select(user);
 
 
 		//リクエストスコープに格納する
