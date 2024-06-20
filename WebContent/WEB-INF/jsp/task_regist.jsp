@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -39,12 +40,13 @@
 		</header>
 		<main>
             <h1>new task</h1>
+			<c:forEach var="e" items="${accountList}" >
             <form method="post" action="/C2/TaskServletRegist">
                 <table>
                     <tr>
                         <td><input type="date" id="day" name="day"></td><!-- 期限 -->
                         <td><input type="text" name="task"placeholder="見出し"></td>
-                        <td><input type="checkbox" name="checkbox"></td>
+                        <td><input type="checkbox" name="checkbox" value="yes" ></td>
                     </tr>
                     <tr>
                         <td><textarea name="content">タスク内容</textarea></td>
@@ -57,11 +59,12 @@
                     </tr>
                     <tr>
                         <td><input type="text" name="to"placeholder="to"></td>
-                        <td><input type="text" name="register"></td>
+                        <td><input type="text" name="register" value="${e.nickname}"></td>
                         <td><input type="submit" value="登録"></td>
                     </tr>
                 </table>
             </form>
+            </c:forEach>
             </main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

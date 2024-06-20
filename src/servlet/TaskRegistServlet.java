@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AccountsDAO;
 import dao.TasksDAO;
 import model.Accounts;
+import model.LoginUser;
 import model.Tasks;
 
 /**
@@ -40,6 +43,18 @@ public class TaskRegistServlet extends HttpServlet {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
+	//registerを自動登録
+		//ユーザー情報の現在の情報を持ってくるselect
+		HttpSession session2 = request.getSession();
+		LoginUser user_ID = (LoginUser)session2.getAttribute("user_ID");
+		String user = user_ID.getLoginUserId();
+
+//		 ユーザーの検索処理を行う
+		AccountsDAO accountDao = new AccountsDAO();
+        List<Accounts> accountList = accountDao.pr_account(new Accounts(user));
+
+//		 検索結果をリクエストスコープに格納する
+		request.setAttribute("accountList", accountList);
 
 		// taskページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_regist.jsp");
@@ -83,9 +98,8 @@ public class TaskRegistServlet extends HttpServlet {
 			request.setAttribute("result", "レコードを登録できませんでした。");
 		}
 
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
-		dispatcher.forward(request, response);
+		// リダイレクトする
+		response.sendRedirect("/C2/TaskServlet");
 	}
 
 }

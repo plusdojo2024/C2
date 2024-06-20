@@ -2,10 +2,12 @@ package dao;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +15,11 @@ import model.Tasks;
 
 public class TasksDAO {
 
-	//タスクの検索:select
-	public List<Tasks> select(String list) {
+	//日付で検索するselect
+	public List<Tasks> select(Tasks task) {
 		Connection conn = null;
-		List<Tasks> tasksList = new ArrayList<Tasks>();
+		List<Tasks> taskList = new ArrayList<Tasks>();
 
-
-
-		//selectの処理内容
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -29,16 +28,12 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM TASKS WHERE to = ? ORDER BY id";
+			String sql ="SELECT * FROM TASKS WHERE register LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-
-			//SQL文を完成させる
-			if (list != null) {
-				pStmt.setString(1, "%" + list + "%");
-			}
-			else {
-				pStmt.setString(1, "%");
-			}
+			Date today= Date.valueOf(LocalDate.now());
+	        java.sql.Date d = java.sql.Date.valueOf("2024-06-20");
+			// SQL文を完成させる
+			pStmt.setString(1,task.getRegister());
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -46,23 +41,22 @@ public class TasksDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Tasks record = new Tasks(
-				rs.getString("To")
+				rs.getInt("id"),
+				rs.getBoolean("checkbox"),
+				rs.getString("task"),
+				rs.getString("to")
 				);
-				tasksList.add(record);
+				taskList.add(record);
 			}
 		}
-
-		//エラー処理
 		catch (SQLException e) {
 			e.printStackTrace();
-			tasksList = null;
+			taskList = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			tasksList = null;
+			taskList = null;
 		}
-
-		//DB切断
 		finally {
 			// データベースを切断
 			if (conn != null) {
@@ -71,17 +65,76 @@ public class TasksDAO {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					tasksList = null;
+					taskList = null;
 				}
 			}
 		}
 
-		//結果を返す
-		return tasksList;
+		// 結果を返す
+		return taskList;
 	}
 
-	//doGetでの一覧表示:select
-	public List<Tasks> selectList(int group_number) {
+	//doGetでのタスク一覧表示:select
+	public List<Tasks> selectTaskList(int group_number) {
+		Connection conn = null;
+		List<Tasks> taskList = new ArrayList<Tasks>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql ="SELECT * FROM TASKS WHERE group_number = ? AND today = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			Date today= Date.valueOf(LocalDate.now());
+			pStmt.setInt(1,group_number);
+			pStmt.setDate(2,today);
+			System.out.println("今日の日付："+Date.valueOf(LocalDate.now()));
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Tasks record = new Tasks(
+				rs.getInt("id"),
+				rs.getBoolean("checkbox"),
+				rs.getString("task"),
+				rs.getString("to")
+				);
+				taskList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			taskList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			taskList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					taskList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return taskList;
+	}
+	//doGetでのスケジュール一覧表示
+	public List<Tasks> selectScheduleList(int group_number) {
 		Connection conn = null;
 		List<Tasks> taskList = new ArrayList<Tasks>();
 

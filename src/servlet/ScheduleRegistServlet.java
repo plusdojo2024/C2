@@ -89,9 +89,7 @@ public class ScheduleRegistServlet extends HttpServlet {
 			System.out.println("スケジュール登録失敗");
 		}
 
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
-		dispatcher.forward(request, response);
-
+		// リダイレクトする
+		response.sendRedirect("/C2/TaskServlet");
 	}
 }
