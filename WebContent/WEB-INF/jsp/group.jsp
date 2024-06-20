@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/group.css">
 	</head>
 	<body>
 		<header>
@@ -39,13 +40,19 @@
 			</div>
 		</header>
 		<main>
+		<div id ="form">
 			<c:forEach var="e" items="${cardList}" >
-			<form class="glist"method="post" action="/C2/GroupServlet" ><!--グループ選択  -->
-			<input type="hidden" name="chgGrpID" value="${e.id}">
-			<input type="submit" name="changeGroup" value="${e.group_name}">
-			</form>
+				<form method="post" action="/C2/GroupServlet" ><!--グループ選択  -->
+					<input type="hidden" name="chgGrpID" value="${e.id}">
+				<input type="submit" name="changeGroup" value="${e.group_name}">
+				</form>
 			</c:forEach>
-			<a href="/C2/GroupCreateServlet"> <img src="/C2/img/" alt="新規作成"></a>
+			<div id="groupplusbutton">
+			<a href="/C2/GroupCreateServlet">
+			 	<img src="/C2/img/groupplusbutton.png">
+			</a>
+			</div>
+		</div>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

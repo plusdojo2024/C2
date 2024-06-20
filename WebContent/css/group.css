@@ -1,5 +1,28 @@
 @charset "UTF-8";
-.glist {
-	margin:15px;
 
-}
+/*グループ一覧について*/
+
+/*要素全体*/
+	#form {
+		display: flex;
+		flex-wrap:wrap;
+		text-align:center;
+	}
+
+/*ボタン*/
+	input[name=changeGroup]{
+		width: 10.3em;
+		height: 248px;
+		font-size:25px;
+		color:#001746;
+		margin:50px 25px 25px 80px;
+		border-radius:30px;
+		background-color:#F9E799;
+		border: none;
+	}
+
+	#groupplusbutton {
+		margin:50px 25px 25px 80px;
+	}
+
+/*並び順*/
