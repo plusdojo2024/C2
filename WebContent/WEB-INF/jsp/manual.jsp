@@ -53,16 +53,19 @@
 	    		<button type="submit"aria-label="検索"></button>
 			</form>
 
+		<form method = "post" action = "/C2/ManualUpdateServlet">
 	      <c:forEach var="e" items="${manualNameList}" >
 	      <table class="table">
 	        <tr>
 	          <td>
-	            <input type="text" name="manual_name" value="${e.manual_name}" readonly="readonly">
+	            <input type = "hidden" name = "manual_id" value="${e.id}">
+	            <input type="submit" name="manual_name" value="${e.manual_name}" readonly="readonly">
 	          </td>
 	        </tr>
 	       </table>
 	      </c:forEach>
-			</main>
+	     </form>
+	</main>
 
 
 			<footer>

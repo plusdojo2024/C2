@@ -91,6 +91,10 @@ public class GroupServlet extends HttpServlet {
 		AccountsDAO accountsdao = new AccountsDAO();
 		boolean change = accountsdao.changeGroup(new Accounts(group_id, user));
 
+		//セッションスコープ情報の書き換え
+		session.setAttribute("user_ID", new LoginUser(user, group_id));
+		session.setAttribute("pr_group", new Accounts(group_id));
+
 		//反映されているかの確認
 		System.out.println("ログインユーザー：" + user);
 		System.out.println("更新結果：" + change);

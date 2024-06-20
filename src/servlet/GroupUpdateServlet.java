@@ -39,8 +39,8 @@ public class GroupUpdateServlet extends HttpServlet {
 		//セッションスコープからpr_groupを持ってくる
 		int groupID = (int)session.getAttribute("group_ID");
 		
-
-
+		
+		
 		//pr_groupを使ってDBから情報持ってくる。
 		
 		

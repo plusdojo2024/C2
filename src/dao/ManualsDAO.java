@@ -215,7 +215,7 @@ public class ManualsDAO {
 
 		//変数設定
 		Connection conn = null;
-		int countNumber = 0;	// 後で更新および削除する番号
+		//int countNumber = 0;	// 後で更新および削除する番号
 		List<Manuals> manualNameList = select(new Manuals()); //これなんだ？？？
 
 		try {
@@ -263,7 +263,7 @@ public class ManualsDAO {
 				}
 			}
 			//結果をコンソールに表示（確認用）
-			System.out.println("countNumber" + countNumber);
+			//System.out.println("countNumber" + countNumber);
 		}
 		//戻り値
 		return manualNameList;
