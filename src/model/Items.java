@@ -43,7 +43,7 @@ public class Items implements Serializable {
 		this.esc = manual;
 		this.esc_g = group;
 	}
-	//ManualRegistServletで使用(count)
+	//ManualRegistServletで使用(count)たぶん使わなくなった
 	public Items(int id, int manual_id,String heading, String contents, String image, String manual, int group) {
 		super();
 		this.id = id;

@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Items;
@@ -14,6 +15,7 @@ public class ItemsDAO {
 	public boolean insert(Items manualregist) {
 		Connection conn = null;
 		boolean result = false;
+		int autoIncrementKey = 0;
 
 		try {
 			// JDBCドライバを読み込む
@@ -22,24 +24,35 @@ public class ItemsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
-			/*
-			//SQL文の準備
-			String sql_manual_select = "SELECT * FROM MANUALS WHERE MANUAL_NAME = ?";
-			PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
-			//SQL文の完成
-			pStmt_manual_select.setString(1, manualregist.getManual_Name());
-			//SQL文の実行および結果の取得
-			ResultSet rs = pStmt_manual_select.executeQuery();
-			manual_id = rs.getInt("ID");	//エラー
-			System.out.println(manual_id);*/
 
+			//Manualsに項目を一つ増やす
+			String sql_manual = "INSERT INTO Manuals VALUES (NULL, ?, ?)";
+			PreparedStatement pStmt_manual = conn.prepareStatement(sql_manual, java.sql.Statement.RETURN_GENERATED_KEYS);
+
+			// SQL文を完成させる
+
+			pStmt_manual.setInt(1, manualregist.getGroup_number());
+
+			pStmt_manual.setString(2, manualregist.getManual_Name());
+
+			// SQL文を実行する
+			if (pStmt_manual.executeUpdate() == 1) {
+				result = true;
+			}
+
+			//試験
+			ResultSet r = pStmt_manual.getGeneratedKeys();
+			if(r.next()){
+	             autoIncrementKey = r.getInt(1);
+	         }
+			System.out.println(autoIncrementKey);
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
 			String sql = "INSERT INTO Items VALUES (NULL,? , ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, manualregist.getManual_id());
+			pStmt.setInt(1, autoIncrementKey);
 			if (manualregist.getHeading() != null && !manualregist.getHeading().equals("")) {
 				pStmt.setString(2, manualregist.getHeading());
 			}
@@ -93,6 +106,16 @@ public class ItemsDAO {
 		// 結果を返す
 		return result;
 	}
+	/*
+	//SQL文の準備
+	String sql_manual_select = "SELECT * FROM MANUALS WHERE MANUAL_NAME = ?";
+	PreparedStatement pStmt_manual_select = conn.prepareStatement(sql_manual_select);
+	//SQL文の完成
+	pStmt_manual_select.setString(1, manualregist.getManual_Name());
+	//SQL文の実行および結果の取得
+	ResultSet rs = pStmt_manual_select.executeQuery();
+	manual_id = rs.getInt("ID");	//エラー
+	System.out.println(manual_id);*/
 
 
 
