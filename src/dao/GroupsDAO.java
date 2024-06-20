@@ -255,7 +255,7 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT * FROM groups WHERE id  =?";
+			String sql = "SELECT * FROM groups_member WHERE id  =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1,group);

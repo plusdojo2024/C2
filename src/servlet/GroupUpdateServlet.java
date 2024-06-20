@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.GroupsDAO;
 import model.Groups;
+import model.LoginUser;
 
 
 /**
@@ -37,14 +39,18 @@ public class GroupUpdateServlet extends HttpServlet {
 		}
 
 		//セッションスコープからpr_groupを持ってくる
-		int groupID = (int)session.getAttribute("group_ID");
-		
-		
-		
+		LoginUser groupID = (LoginUser)session.getAttribute("user_ID");
+		int intGroupID = groupID.getGroupId();
+
+
 		//pr_groupを使ってDBから情報持ってくる。
-		
-		
-		
+		GroupsDAO group = new GroupsDAO();
+		List<Groups> GroupsList = group.select(intGroupID);
+
+		//リクエストスコープに入れる
+		request.setAttribute("GroupsList", GroupsList);
+
+
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group_update.jsp");
 		dispatcher.forward(request, response);
