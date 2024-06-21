@@ -49,14 +49,14 @@ manual_link varchar (30)
 
 /* 予定DB */
 CREATE TABLE schedules ( 
-    ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
-    group_number INTEGER,
-    task VARCHAR(30) ,
-    contents VARCHAR(200),
-    today TIMESTAMP,
-    register VARCHAR(20),
-    PRIMARY KEY  (ID) 
-); 
+   ID INTEGER AUTO_INCREMENT(1), /* 番号 #自動採番*/ 
+   group_number INTEGER,
+   task VARCHAR(30) ,
+   contents VARCHAR(200),
+   register VARCHAR(20),
+   PRIMARY KEY (ID) ,
+   deadline DATE
+);
 
 ALTER TABLE SCHEDULES DROP COLUMN TODAY;
 

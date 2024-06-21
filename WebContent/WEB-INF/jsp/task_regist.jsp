@@ -40,6 +40,13 @@
 		</header>
 		<main>
             <h1>new task</h1>
+            <form method="get" action="/C2/ManualUpdateServlet">
+                  <select name="manual_link" onchange="submit(this.form)">
+                  <c:forEach var="e" items="${manualList}">
+                  	<option value="${e.manual}"></option>
+                  </c:forEach>
+                  </select>
+            </form>
 			<c:forEach var="e" items="${accountList}" >
             <form method="post" action="/C2/TaskServletRegist">
                 <table>
@@ -50,9 +57,6 @@
                     </tr>
                     <tr>
                         <td><textarea name="contents"></textarea></td>
-                        <td><select name="manual_link">
-                            <option><a href="ManualServlet">manual1</a></option>
-                        </select></td>
                     </tr>
                     <tr>
                         <td><input type="text" name="to"placeholder="to"></td>
