@@ -12,8 +12,8 @@ public class Items implements Serializable {
 	private String contents; //内容
 	private String image; //画像
 	private java.sql.Date regist_day; //登録日
-	private String esc;
-	private int esc_g;
+	private String esc;	//マニュアル名
+	private int esc_g; //グループID
 
 	//引数なしのconstructor
 

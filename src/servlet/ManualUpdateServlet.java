@@ -90,11 +90,16 @@ public class ManualUpdateServlet extends HttpServlet {
 
 			//doPostの分岐1：更新を押した場合の処理
 			if(post1.equals("OK")){
+				System.out.println("更新処理------");//コンソール確認(デバック用)
+
 				//更新に必要なリクエストパラメータを取り出す
 				String manual_name = request.getParameter("heading");
-				String[] items = request.getParameterValues("header");
-				String[] contents = request.getParameterValues("contents");
+				String[] items = request.getParameterValues("item");
+				String[] contents = request.getParameterValues("content");
 				String[] images = request.getParameterValues("images");
+				for(String debug : items) {
+				System.out.println("MUpDtServのitem確認:" + debug);//コンソール確認(デバック用)
+				}
 
 				// 登録処理を行う
 				if (bManuals.update(intManual_ID, manual_name, items, contents, images)) {	// 登録成功
@@ -104,8 +109,14 @@ public class ManualUpdateServlet extends HttpServlet {
 					request.setAttribute("result",  new Result("更新失敗！", "レコードを登録できませんでした。"));
 				}
 
+				//manual_idでマニュアルを検索する処理を行う
+				List<Items> itemList = bManuals.selectItems(intManual_ID);
+
+				//検索結果をリクエストスコープに格納する
+				request.setAttribute("itemList", itemList);
+
 				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
 				dispatcher.forward(request, response);
 			}	//更新を押したときの処理ブロック終了
 
@@ -121,8 +132,7 @@ public class ManualUpdateServlet extends HttpServlet {
 				}
 
 				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
-				dispatcher.forward(request, response);
+				response.sendRedirect("/C2/ManualServlet");
 			}	//削除を押したときの処理ブロック終了
 
 
