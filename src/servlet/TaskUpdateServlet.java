@@ -62,7 +62,8 @@ public class TaskUpdateServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		int id = Integer.parseInt(request.getParameter("id"));
+		String i = request.getParameter("id");
+		int id= Integer.parseInt(i);
 		LoginUser login = (LoginUser)session.getAttribute("group_id");
 		int group_Id = login.getGroupId();
 		String task = request.getParameter("task");
@@ -78,8 +79,8 @@ public class TaskUpdateServlet extends HttpServlet {
 		TasksDAO bTask = new TasksDAO();
 		// 登録処理を行う
 		if (request.getParameter("submit").equals("更新")) {
-			if (bTask.update(new Tasks(group_Id, task, contents, deadline, register, to,
-				checkbox, manual_link,id))) {	// 登録成功
+			if (bTask.update(new Tasks(task, contents, deadline, register, to,
+				checkbox,id))) {	// 登録成功
 				request.setAttribute("result", "レコードを登録しました。");
 			}
 			else {												// 登録失敗
