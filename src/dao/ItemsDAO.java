@@ -258,7 +258,7 @@ public class ItemsDAO {
 
 		//大戸作成
 		//マニュアルIDでマニュアルの詳細を表示する
-		public List<Items> selectItems(Items items) {
+		public List<Items> selectItems(int items) {
 			Connection conn = null;
 			List<Items> itemList = new ArrayList<Items>();
 
@@ -274,11 +274,18 @@ public class ItemsDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				pStmt.setInt(1, items.getManual_id());
+				pStmt.setInt(1, items);
 
+				// SQL文を準備する2
+				String sql2 ="SELECT MANUAL_NAME FROM MANUALS WHERE manual_id = ?";
+				PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+				// SQL文を完成させる2
+				pStmt2.setInt(1, items);
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
+				ResultSet rs2 = pStmt2.executeQuery();
 
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
@@ -288,7 +295,8 @@ public class ItemsDAO {
 					rs.getString("heading"),
 					rs.getString("contents"),
 					rs.getString("image"),
-					rs.getDate("regist_day")
+					rs.getDate("regist_day"),
+					rs2.getString("manual_name")
 					);
 					itemList.add(record);
 				}

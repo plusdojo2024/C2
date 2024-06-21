@@ -128,7 +128,7 @@ public class ManualUpdateServlet extends HttpServlet {
 			//doPostの分岐3：一覧から詳細を開く場合の処理
 			else {
 				//manual_idでマニュアルを検索する処理を行う
-				List<Items> itemList = bManuals.selectItems(new Items(intManual_ID));
+				List<Items> itemList = bManuals.selectItems(intManual_ID);
 
 				//検索結果をリクエストスコープに格納する
 				request.setAttribute("itemList", itemList);

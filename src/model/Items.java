@@ -54,6 +54,16 @@ public class Items implements Serializable {
 		this.esc = manual;
 		this.esc_g = group;
 	}
+	public Items(int id, int manual_id, String heading, String contents, String image, java.sql.Date regist_day, String manual) {
+		super();
+		this.id = id;
+		this.manual_id = manual_id;
+		this.heading = heading;
+		this.contents = contents;
+		this.image = image;
+		this.regist_day = regist_day;
+		this.esc = manual;
+	}
 
 	//大戸作成
 	public Items(int manual_ID) {
