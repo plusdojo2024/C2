@@ -2,3 +2,116 @@
 
 /*タスク・スケジュール一覧について*/
 
+/*日付*/
+	#limit {
+		display: flex;
+		padding:50px 0px 0px 580px;
+		font-size:35px;
+	}
+
+/*日付タイトル*/
+	#limit {
+		font-size: 1.5rem;
+		background-color: #C6D7E4;
+		width: 410px;
+		height: 50px;
+		border-radius: 25px 25px 0 0;
+		color: #001746;
+		margin: 30px auto 0px auto;
+		padding: 6px;
+		text-align: center;
+	}
+
+/*全体のボックス*/
+	#all {
+		width: 1400px;
+		border-radius:50px;
+  		margin: 0px auto 30px auto;
+  		border: 5px solid #C6D7E4;
+
+	}
+
+
+/*タスクとスケジュールを分ける*/
+	.flex-container {
+		display: flex;
+	}
+
+/*中身の調節*/
+	#schedule.flex-item {
+		margin: 20px 20px 20px 20px;
+	}
+
+/*タスクタイトル*/
+	#tasktitle {
+		text-align:center;
+		font-size:30px;
+		margin:0px 0px 15px 0px;
+		color:#001746;
+	}
+
+/*タスク*/
+	#task {
+		margin: 30px auto auto 65px;
+	}
+
+/*タスク要素*/
+	input[name=task]{
+		width: 510px;
+		height: auto;
+		font-size:25px;
+		color:#001746;
+		margin: 10px auto 0px auto;
+		border: none;
+		outline: none;
+		background-color:white;
+		border-bottom: 3px solid #7DE3A1;
+		text-align:left;
+	}
+
+/*チェックボックス*/
+	input[type=checkbox]{
+		width:30px;
+		height:30px;
+		accent-color:#7DE3A1;
+	}
+
+
+/*スケジュールタイトル*/
+	#scheduletitle {
+		text-align:center;
+		font-size:30px;
+		margin:10px 0px 15px 0px;
+		color:#001746;
+	}
+
+
+/*スケジュールのボックス*/
+	#schedule {
+		width: 600px;
+		border-radius:30px;
+  		margin: 30px auto auto auto;
+ 		padding: 80px auto 30px 0px;
+  		border: 5px solid #C6D7E4;
+  		background-color: #C6D7E4;
+	}
+
+/*スケジュール要素*/
+	input[name=scheduleDetail]{
+		width: 510px;
+		height: auto;
+		font-size:25px;
+		color:#001746;
+		margin: 10px auto 0px auto;
+		border: none;
+		outline: none;
+		background-color:#C6D7E4;
+		border-bottom: 3px solid white;
+		text-align:left;
+	}
+
+/*プラスボタン*/
+	.plusbutton {
+		margin:20px 0px 0px 0px;
+	}
+

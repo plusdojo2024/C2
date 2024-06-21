@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/task.css">
 	</head>
 	<body>
 		<header>
@@ -41,33 +42,55 @@
 		<main>
 
             <!-- タスクの期限の表示 -->
-           	日付：${deadline}
+            <div id="limit" >
+           &ensp;${deadline}&emsp;
             <form method="post" action="/C2/TaskServlet">
-            	<br>
                 <input type="date" name="deadline">
                 <input type="submit" name="dateChange" value="日付切替">
             </form>
+            </div>
+
             <!-- タスクの一覧表示 -->
+          <div id="all">
+          <div class="flex-container">
+            <div id="task" class="flex-item">
+            <p id="tasktitle">Task&emsp;&emsp;&emsp;&emsp;&emsp;</p>
 			<c:forEach var="e" items="${taskList}" >
 				<form method="get" action="/C2/TaskUpdateServlet" >
 					<input type="hidden" name="id" value="${e.id}">
 					<input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if> disabled>
 					<input type="submit" name="task" value="${e.task}">
-					<input type="text" name="to" value="${e.to}">
+					<input type="text" name="to" value="${e.to}" readonly="readonly">
 				</form>
 			</c:forEach>
-                   <a href="/C2/TaskServletRegist"><button>+</button></a>
+			    <p class=plusbutton>
+                <a href="/C2/TaskServletRegist">
+                  <img src="/C2/img/plusButton4.png">
+                </a>
+                </p>
             <br>
+            </div>
+
             <!-- 予定の一覧表示 -->
-            <p>Schedule</p>
-           	<c:forEach var="e" items="${schedulesList}" >
-            	<form method="get" action="/C2/ScheduleUpdateServlet">
-					<input type="hidden" name="id" value="${e.id}">
-            		<input type="submit" name="scheduleDetail" value="${e.task}">
-				</form>
-            </c:forEach>
-                   <a href="/C2/ScheduleRegistServlet"><button>+</button></a>
+            <div id="schedule" class="flex-item">
+				<p id="scheduletitle">Schedule</p>
+				<c:forEach var="e" items="${schedulesList}" >
+					<form method="get" action="/C2/ScheduleUpdateServlet">
+						<input type="hidden" name="id" value="${e.id}">
+						&emsp;&emsp;<input type="submit" name="scheduleDetail" value="${e.task}">
+					</form>
+				</c:forEach>
+				<p class=plusbutton>
+				&emsp;
+	            <a href="/C2/ScheduleRegistServlet">
+	            <img src="/C2/img/plusButton4.png">
+				</a>
+				</p>
+            </div>
+			</div>
+          </div>
         </main>
+
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
