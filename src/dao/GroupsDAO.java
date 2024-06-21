@@ -126,7 +126,7 @@ public class GroupsDAO {
 
 
 	// グループ（アイコン、グループ名）を更新し、成功したらtrueを返す
-	public boolean update(String g_list) {
+	public boolean update(Groups g_list) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -143,7 +143,8 @@ public class GroupsDAO {
 
 
 			// SQL文を完成させる
-			pStmt.setString(1, g_list);
+			pStmt.setString(1, g_list.getGroup_name());
+
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
