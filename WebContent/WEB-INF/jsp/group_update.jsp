@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
-			  <td><input type="text" value ="${e.use_ID}"></td>
+			  <td><input type="text" value ="${e.user_ID}"></td>
 			  <td><button onclick="deleteExample(this);">-</button></td>
 			  <td><input type="checkbox" class="agreement"></td>
 			</tr>
