@@ -59,6 +59,9 @@ public class ManualUpdateServlet extends HttpServlet {
 
 
 		else {//ログインしていた場合の処理
+			System.out.println();
+			System.out.println("-------ManualUpdate画面-------");//デバック用
+
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
 				//マニュアルのidを取り出す
