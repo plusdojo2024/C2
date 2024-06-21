@@ -155,25 +155,25 @@ public class ItemsDAO {
 				int i = 0;
 
 				pStmt3.setInt(1, manual_id);
-				pStmt3.setString(1, manual_name);
+				pStmt3.setString(2, manual_name);
 				while(i < items.length) {
 					if (items[i] != null && !items[i].equals("")) {
-						pStmt3.setString(2, items[i]);
-					}
-					else {
-						pStmt3.setString(2, "（未設定）");
-					}
-					if (contents[i] != null && !contents[i].equals("")) {
-						pStmt3.setString(3, contents[i]);
+						pStmt3.setString(3, items[i]);
 					}
 					else {
 						pStmt3.setString(3, "（未設定）");
 					}
-					if (images[i] != null && !images[i] .equals("")) {
-						pStmt3.setString(4, images[i] );
+					if (contents[i] != null && !contents[i].equals("")) {
+						pStmt3.setString(4, contents[i]);
 					}
 					else {
 						pStmt3.setString(4, "（未設定）");
+					}
+					if (images[i] != null && !images[i] .equals("")) {
+						pStmt3.setString(5, images[i] );
+					}
+					else {
+						pStmt3.setString(5, "（未設定）");
 					}
 					if (pStmt3.executeUpdate() != 1) {
 						result = false;
