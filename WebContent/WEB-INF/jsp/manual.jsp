@@ -46,11 +46,11 @@
 	      		<div class="manual-header">
 	      			<p class="manual">Manual</p>
 				</div>
-				<form action="#" class="search-form">
+				<form method = "post" action="/C2/ManualUpdateServlet" class="search-form">
 	   			 <label>
-	        	<input type="text" placeholder="検索">
+	        	<input type="text" name = "title" placeholder="検索">
 	    		</label>
-	    		<button type="submit"aria-label="検索"></button>
+	    		<button type="submit" name = "Seach" value = "Seach" aria-label="検索"></button>
 			</form>
 		<c:forEach var="e" items="${manualNameList}" >
 			<form method = "post" action = "/C2/ManualUpdateServlet" id ="getDetail">

@@ -65,7 +65,10 @@ public class ManualUpdateServlet extends HttpServlet {
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
 				//マニュアルのidを取り出す
-				int intManual_ID = Integer.parseInt(request.getParameter("manual_id"));
+				int intManual_ID = 0;
+				if(request.getParameter("manual_id") != null) {
+				intManual_ID = Integer.parseInt(request.getParameter("manual_id"));
+				}
 				System.out.println("manual_ID:"+intManual_ID);//コンソール確認(デバック用)
 
 				//更新メソッド判定用パラメータの取得
@@ -123,6 +126,8 @@ public class ManualUpdateServlet extends HttpServlet {
 
 			//doPostの分岐2：削除を押した場合の処理
 			else if (post2.equals("Delete")){
+				System.out.println("削除処理------");//コンソール確認(デバック用)
+
 				//削除処理を行う
 				if (bManuals.delete(intManual_ID)) {	// 削除成功
 					request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。") );
@@ -136,8 +141,30 @@ public class ManualUpdateServlet extends HttpServlet {
 			}	//削除を押したときの処理ブロック終了
 
 
-			//doPostの分岐3：一覧から詳細を開く場合の処理
+			//doPostの分岐3：検索の処理
+			else if(request.getParameter("Seach").equals("Seach")){
+				System.out.println("検索処理------");//コンソール確認(デバック用)
+
+				//リクエストスコープから値を取得
+				String name = request.getParameter("title");
+				System.out.println("検索ワード:" + name);//コンソール確認(デバック用)
+
+				//manual_idでマニュアルを検索する処理を行う
+				List<Items> itemList = bManuals.seach(name);
+
+				//検索結果をリクエストスコープに格納する
+				request.setAttribute("itemList", itemList);
+
+				// 詳細ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
+				dispatcher.forward(request, response);
+			}	//検索処理ブロック終了
+
+
+			//doPostの分岐4：一覧から詳細を開く場合の処理
 			else {
+				System.out.println("詳細表示処理------");//コンソール確認(デバック用)
+
 				//manual_idでマニュアルを検索する処理を行う
 				List<Items> itemList = bManuals.selectItems(intManual_ID);
 

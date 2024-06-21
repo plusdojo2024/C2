@@ -113,7 +113,7 @@ public class ItemsDAO {
 	}
 
 
-	// マニュアルを更新し、成功したらtrueを返す
+	// 登録の処理2
 	public boolean insert2(int manual_id, String manual_name, String[] items, String[] contents, String[] images) {
 		Connection conn = null;
 		boolean result = false;
@@ -412,5 +412,69 @@ public class ItemsDAO {
 		return itemList;
 	}
 
+	//松岡作成
+	//ホームから検索を行う処理
+	public List<Items> seach(String title) {
+		Connection conn = null;
+		List<Items> seachList = new ArrayList<Items>();
 
+		//処理内容
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql ="SELECT * FROM Items WHERE  manual_name Like ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			if(title != null) {
+				pStmt.setString(1, "%" + title + "%");
+			}
+			else {
+				pStmt.setString(1, "%");
+			}
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				Items record = new Items(
+						rs.getInt("id"),
+						rs.getInt("manual_id"),
+						rs.getString("heading"),
+						rs.getString("contents"),
+						rs.getString("image"),
+						rs.getDate("regist_day"),
+						rs.getString("manual_name")
+						);
+				seachList.add(record);
+			}
+		}	//try終了タグ
+		catch (SQLException e) {
+			e.printStackTrace();
+			seachList = null;
+		}	//catch終了タグ1
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			seachList = null;
+		}	//catch終了タグ2
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					seachList = null;
+				}
+			}
+		}	//finally終了タグ
+
+		return seachList;
+	}	//seach処理終了タグ
 }
