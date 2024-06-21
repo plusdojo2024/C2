@@ -43,18 +43,18 @@
 			<form id ="update" method="post" action="/C2/GroupUpdateServlet"><!--  -->
 			<table>
 			<tr>
-			  <td><input type="file" name="image"></td>
-			  <td><input type="text" name="name" value="${e.group_name}"></td>
+			  <td><input type="file" name="image" class ="gicon"></td>
+			  <td><input type="text" name="name" value="${e.group_name}" class="gName"></td>
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
-			  <td><input type="text" value ="${e.user_ID}"></td>
+			  <td><input type="text" value ="${e.user_ID}" class="member"></td>
 			  <td><button onclick="deleteExample(this);">-</button></td>
 			  <td><input type="checkbox" class="agreement"></td>
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
-			  <td><input type="text" placeholder= "例：para_man"></td>
+			  <td><input type="text" placeholder= "例：para_man" class="newMember"></td>
 			  <td><input type="submit" value="招待"></td>
 			</tr>
 			<tr>

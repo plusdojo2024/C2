@@ -70,6 +70,7 @@ public class GroupUpdateServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+
 		String group_name = request.getParameter("group_name");
 		String user_ID = request.getParameter("user_ID");
 		Boolean editer = Boolean.valueOf(request.getParameter("editer"));
@@ -79,6 +80,8 @@ public class GroupUpdateServlet extends HttpServlet {
 		// 更新または削除を行う
 		GroupsDAO sDao = new GroupsDAO();
 		System.out.println("「"+request.getParameter("submit")+"」");
+
+
 
 		//"Update" == "更新"
 		if (request.getParameter("submit").equals("Update")) {

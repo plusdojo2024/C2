@@ -125,7 +125,79 @@ public class GroupsDAO {
 	}
 
 
-	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
+	// グループ（アイコン、グループ名）を更新し、成功したらtrueを返す
+	public boolean update(String g_list) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql = "DELETE FROM GROUP WHERE group_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);;
+
+
+			// SQL文を完成させる
+			pStmt.setString(1, g_list);
+
+			// SQL文を実行する　一件登録できたら成功
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+
+			//insertのバージョンを作る
+			String sql2 = "INSERT INTO GROUPS VALUES (NULL, ?, ?)";
+			PreparedStatement pStmt3 = conn.prepareStatement(sql2);
+
+			// SQL文を完成させる
+			int i = 0;
+
+			/*pStmt.setString(1, g_list);
+			if (g_list() != null && !g_list.getGroup_name().equals("")) {
+				pStmt.setString(2, g_list.getGroup_name());
+			}
+			else {
+				pStmt.setString(2, "（未設定）");
+			}
+			if (g_list() != null && !g_list.getIcon().equals("")) {
+				pStmt.setString(3, g_list.getIcon());
+			}
+			else {
+				pStmt.setString(3, "");
+			}*/  //一旦エラーが出るのでコメントアウト
+
+
+
+
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// 結果を返す
+					return result;
+	}
+
+	/*// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
 	public boolean update(Groups card) {
 		Connection conn = null;
 		boolean result = false;
@@ -190,7 +262,7 @@ public class GroupsDAO {
 
 		// 結果を返す
 		return result;
-	}
+	}*/
 
 
 
