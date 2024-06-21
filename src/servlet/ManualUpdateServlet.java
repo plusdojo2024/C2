@@ -57,7 +57,7 @@ public class ManualUpdateServlet extends HttpServlet {
 			return;
 		}
 
-		else {
+		else {//ログインしていた場合の処理
 			/*
 			//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
 			request.setCharacterEncoding("UTF-8");
@@ -85,10 +85,10 @@ public class ManualUpdateServlet extends HttpServlet {
 			HttpSession session2 = request.getSession();
 			String manual_ID = (String)session2.getAttribute("manual_id");
 			System.out.println("manual_ID:"+manual_ID);
-			//int intManual_ID = Integer.parseInt(manual_ID);
+			int intManual_ID = Integer.parseInt(manual_ID);
 
-			//doPostの分岐2：更新を押した場合の処理
-			if(request.getParameter("submit").equals("ok")){
+			//doPostの分岐1：更新を押した場合の処理
+			if(request.getParameter("manual_update").equals("OK")){
 
 				// リクエストパラメータを取得する
 				request.setCharacterEncoding("UTF-8");

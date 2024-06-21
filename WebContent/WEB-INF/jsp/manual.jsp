@@ -16,8 +16,8 @@
 					<div class="gnavi__wrap">
 						 <ul class="gnavi__lists">
 							 <li class="gnavi__list">
-						     	<a href="#"><img src="/C2/img/accountNull.png"></a>
-						        <ul class="dropdown__lists">
+						     	<a href="#"><img src="/C2/img/accountNull.png"></a><!-- ここを押したらプルダウンリストが表示される -->
+						        <ul class="dropdown__lists"><!-- 以下４つの項目がプルダウンで表示される -->
 						       		<li class="dropdown__list"><a href="/C2/AccountServlet">アカウント画面</a></li>
 							       	<li class="dropdown__list"><a href="/C2/GroupServlet">グループ一覧</a></li>
 							       	<li class="dropdown__list"><a href="/C2/GroupUpdateServlet">グループ詳細</a></li>
