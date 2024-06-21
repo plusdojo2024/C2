@@ -60,6 +60,16 @@ public class Tasks implements Serializable {
 		this.to = to;
 		this.checkbox = checkbox;
 	}
+	public Tasks( String task, String contents, Date deadline, String register, String to, boolean checkbox, int id) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.contents = contents;
+		this.deadline = deadline;
+		this.register = register;
+		this.to = to;
+		this.checkbox = checkbox;
+	}
 	public Tasks(int id, String task, String contents, Date deadline, String register, String to, boolean checkbox) {
 		super();
 		this.id = id;
