@@ -126,6 +126,10 @@ public class Items implements Serializable {
 	public int getGroup_number() {
 		return this.esc_g;
 	}
+	public String getEsc() {
+		return this.esc;
+	}
+
 
 }
 
