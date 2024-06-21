@@ -50,28 +50,29 @@ public class ItemsDAO {
 			System.out.println("ItemsDAO/AI:"+ autoIncrementKey);//デバック用
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO Items VALUES (NULL,? , ?, ?, ?, CURRENT_TIMESTAMP)";
+			String sql = "INSERT INTO Items VALUES (NULL,?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setInt(1, autoIncrementKey);
+			pStmt.setString(2, manualregist.getManual_Name());
 			if (manualregist.getHeading() != null && !manualregist.getHeading().equals("")) {
-				pStmt.setString(2, manualregist.getHeading());
-			}
-			else {
-				pStmt.setString(2, "（未設定）");
-			}
-			if (manualregist.getContents() != null && !manualregist.getContents().equals("")) {
-				pStmt.setString(3, manualregist.getContents());
+				pStmt.setString(3, manualregist.getHeading());
 			}
 			else {
 				pStmt.setString(3, "（未設定）");
 			}
-			if (manualregist.getImage() != null && !manualregist.getImage().equals("")) {
-				pStmt.setString(4, manualregist.getImage());
+			if (manualregist.getContents() != null && !manualregist.getContents().equals("")) {
+				pStmt.setString(4, manualregist.getContents());
 			}
 			else {
 				pStmt.setString(4, "（未設定）");
+			}
+			if (manualregist.getImage() != null && !manualregist.getImage().equals("")) {
+				pStmt.setString(5, manualregist.getImage());
+			}
+			else {
+				pStmt.setString(5, "（未設定）");
 			}
 				//pStmt.setDate(5, manualregist.getRegist_day());
 			// SQL文を実行する
@@ -122,7 +123,7 @@ public class ItemsDAO {
 
 
 	// マニュアルを更新し、成功したらtrueを返す
-		public boolean update(int manual_id, String[] items, String[] contents, String[] images) {
+		public boolean update(int manual_id, String manual_name, String[] items, String[] contents, String[] images) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -147,13 +148,14 @@ public class ItemsDAO {
 				}
 
 				//insertのバージョンを作る
-				String sql2 = "INSERT INTO Items VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+				String sql2 = "INSERT INTO Items VALUES (NULL, ?,  ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 				PreparedStatement pStmt3 = conn.prepareStatement(sql2);
 
 				// SQL文を完成させる
 				int i = 0;
 
 				pStmt3.setInt(1, manual_id);
+				pStmt3.setString(1, manual_name);
 				while(i < items.length) {
 					if (items[i] != null && !items[i].equals("")) {
 						pStmt3.setString(2, items[i]);
@@ -177,7 +179,7 @@ public class ItemsDAO {
 						result = false;
 						break;
 					}
-					System.out.println(i + "件目のデータを登録");
+					System.out.println("項目登録数:" + (i + 1));//デバック用
 					i ++;
 				}//while end
 				if(i == items.length) {
@@ -276,16 +278,8 @@ public class ItemsDAO {
 				// SQL文を完成させる
 				pStmt.setInt(1, items);
 
-				// SQL文を準備する2
-				String sql2 ="SELECT MANUAL_NAME FROM MANUALS WHERE manual_id = ?";
-				PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-				// SQL文を完成させる2
-				pStmt2.setInt(1, items);
-
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
-				ResultSet rs2 = pStmt2.executeQuery();
 
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
@@ -296,10 +290,13 @@ public class ItemsDAO {
 					rs.getString("contents"),
 					rs.getString("image"),
 					rs.getDate("regist_day"),
-					rs2.getString("manual_name")
+					rs.getString("manual_name")
 					);
+					System.out.println("ItemsDAOの結果表/ID:" + rs.getInt("id"));//デバック用
+					System.out.println("ItemsDAOの結果表/manual_name:" + rs.getString("manual_name"));//デバック用
 					itemList.add(record);
 				}
+				System.out.println("ItemsDAOの詳細/itemList:"+ itemList);//デバック用
 			}
 			catch (SQLException e) {
 				e.printStackTrace();

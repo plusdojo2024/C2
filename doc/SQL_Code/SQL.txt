@@ -72,6 +72,7 @@ CREATE TABLE manuals (
 CREATE TABLE items ( 
   id  INTEGER AUTO_INCREMENT(1),
   manual_id	INTEGER,
+  manual_name VARCHAR(30),
   heading	VARCHAR(30)		,
   contents  VARCHAR(200)		,
   image VARCHAR(100)		,

@@ -237,6 +237,7 @@ public class ManualsDAO {
 
 			//SQL文の実行および結果の取得
 			ResultSet rs = pStmt.executeQuery();
+
 			//結果表のコピー
 			while (rs.next()) {
 				Manuals record = new Manuals(
@@ -248,6 +249,7 @@ public class ManualsDAO {
 				System.out.println("ManualsDAOの結果表/manual_name:" + rs.getString("manual_name"));//デバック用
 				manualNameList.add(record);
 			}
+			System.out.println("ManualsDAOの結果表/manualNameList:" + manualNameList);//デバック用
 		}	//try終了タグ
 		//エラー処理
 		catch (SQLException e) {

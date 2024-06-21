@@ -91,12 +91,13 @@ public class ManualUpdateServlet extends HttpServlet {
 			//doPostの分岐1：更新を押した場合の処理
 			if(post1.equals("OK")){
 				//更新に必要なリクエストパラメータを取り出す
+				String manual_name = request.getParameter("heading");
 				String[] items = request.getParameterValues("header");
 				String[] contents = request.getParameterValues("contents");
 				String[] images = request.getParameterValues("images");
 
 				// 登録処理を行う
-				if (bManuals.update(intManual_ID, items, contents, images)) {	// 登録成功
+				if (bManuals.update(intManual_ID, manual_name, items, contents, images)) {	// 登録成功
 					request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
 				}
 				else {												// 登録失敗
