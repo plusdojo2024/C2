@@ -47,8 +47,9 @@
 		<main>
 			<h2>Schedule Detail</h2>
 			<c:forEach var="e" items="${scheduleList}">
-			<form id="schedule_form" method="get" action="/C2/ScheduleUpdateServlet"><!--アクションにサーブレットを入力する-->
-                <input type="date" id="day" name="deadline" value="${deadline}">
+			<form id="schedule_form" method="post" action="/C2/ScheduleUpdateServlet"><!--アクションにサーブレットを入力する-->
+                <input type="hidden" name="id" value="${e.id}">
+                <input type="date" id="day" name="deadline" value="${e.deadline}">
 				<input type="text"  name="task" value="${e.task}">
 				<br>
 				<textarea name="contents">${e.contents}</textarea>

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.TasksDAO;
-import model.LoginUser;
 import model.Tasks;
 
 /**
@@ -59,13 +58,11 @@ public class TaskUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String i = request.getParameter("id");
+		System.out.println(i);
 		int id= Integer.parseInt(i);
-		LoginUser login = (LoginUser)session.getAttribute("group_id");
-		int group_Id = login.getGroupId();
 		String task = request.getParameter("task");
 		String contents = request.getParameter("contents");
 		String d= request.getParameter("deadline");
@@ -74,7 +71,11 @@ public class TaskUpdateServlet extends HttpServlet {
 		String bool = request.getParameter("checkbox");
 		String manual_link = request.getParameter("manual_link");
 		java.sql.Date deadline = Date.valueOf(d);
-		boolean checkbox = Boolean.valueOf(bool);
+		boolean checkbox = false;
+        String yes = "yes";
+		if (yes.equals(bool)) {
+			checkbox = true;
+		}
 
 		TasksDAO bTask = new TasksDAO();
 		// 登録処理を行う
@@ -87,7 +88,7 @@ public class TaskUpdateServlet extends HttpServlet {
 				request.setAttribute("result", "レコードを登録できませんでした。");
 			}
 		}
-		else {
+		else if(request.getParameter("submit").equals("削除")){
 			if (bTask.delete(id)) {	// 削除成功
 				request.setAttribute("result", "レコードを削除しました。");
 			}
@@ -97,8 +98,7 @@ public class TaskUpdateServlet extends HttpServlet {
 		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("/C2/TaskServlet");
 	}
 }
 

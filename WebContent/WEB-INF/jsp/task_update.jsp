@@ -42,6 +42,7 @@
             <h1>task detail</h1>
             <c:forEach var="e" items="${taskList}">
             <form method="post" action="/C2/TaskUpdateServlet">
+            	<input type="hidden" name="id" value="${e.id}" >
                 <table>
                     <tr>
                         <td><input type="date" id="day" name="deadline" value="${e.deadline}"></td><!-- 期限 -->
@@ -57,7 +58,8 @@
                     <tr>
                         <td><input type="text" name="to" value="${e.to}"></td>
                         <td><input type="text" name="register" value="${e.register}"></td>
-                        <td><input type="submit" value="登録"></td>
+                        <td><input type="submit" name="submit" value="更新"></td>
+                        <td><input type="submit" name="submit" value="削除"></td>
                     </tr>
                 </table>
             </form>

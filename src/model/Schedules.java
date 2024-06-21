@@ -7,6 +7,15 @@ public class Schedules implements Serializable {
 
 	//field
 	private int id;					//管理番号
+	public Schedules( String task, String contents, String register, Date deadline,int id) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.contents = contents;
+		this.register = register;
+		this.deadline = deadline;
+	}
+
 	private int group_number;		//グループDB_管理番号
 	private String task;			//予定名
 	private String contents;		//内容
@@ -43,6 +52,14 @@ public class Schedules implements Serializable {
 		this.task = task;
 		this.contents = contents;
 		this.register = register;
+	}
+
+	public Schedules(String task, String contents, String register, Date deadline) {
+		super();
+		this.task = task;
+		this.contents = contents;
+		this.register = register;
+		this.deadline = deadline;
 	}
 
 	public Schedules(int id, int group_number, String task, String contents, String register) {

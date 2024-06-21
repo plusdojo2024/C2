@@ -39,7 +39,6 @@
 			</div>
 		</header>
 		<main>
-		<a href="/C2/ScheduleUpdateServlet">a</a>
             <h1>new task</h1>
 			<c:forEach var="e" items="${accountList}" >
             <form method="post" action="/C2/TaskServletRegist">

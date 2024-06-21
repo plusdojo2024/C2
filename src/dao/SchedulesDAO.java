@@ -100,7 +100,9 @@ public class SchedulesDAO {
 				Schedules record = new Schedules(
 				rs.getString("task"),
 				rs.getString("contents"),
-				rs.getString("register")
+				rs.getString("register"),
+				rs.getDate("deadline"),
+				rs.getInt("id")
 				);
 				scheduleList.add(record);
 			}
@@ -207,7 +209,7 @@ public class SchedulesDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE schedules SET task=?, contents=?, register=? WHERE id=?";
+			String sql = "UPDATE schedules SET task=?, contents=?, register=?,deadline=? WHERE id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -224,11 +226,9 @@ public class SchedulesDAO {
 			else {
 				pStmt.setString(2, null);
 			}
-
 			pStmt.setString(3, s_detail.getRegister());
-
-			pStmt.setInt(4, s_detail.getId());
-
+			pStmt.setDate(4, s_detail.getDeadline());
+			pStmt.setInt(5, s_detail.getId());
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
 				result = true;

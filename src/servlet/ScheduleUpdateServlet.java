@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -52,12 +53,6 @@ public class ScheduleUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user_ID") == null) {
-			response.sendRedirect("/famiLink/LoginServlet");
-			return;
-		}
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -65,28 +60,26 @@ public class ScheduleUpdateServlet extends HttpServlet {
 		String task = request.getParameter("task");
 		String contents = request.getParameter("contents");
 		String register = request.getParameter("register");
-
-		// セッションパラメーター
-		int group_number =(int)session.getAttribute("group_number");
-
-
+		String d = request.getParameter("deadline");
+		java.sql.Date deadline = Date.valueOf(d);
 
 		// 更新または削除を行う
 		SchedulesDAO sDao = new SchedulesDAO();
-		System.out.println("「"+request.getParameter("submit")+"」");
 
 		//"Update" == "更新"
-		if (request.getParameter("submit").equals("Update")) {
+		if (request.getParameter("submit").equals("更新")) {
 
-		if (sDao.update(new Schedules(0, group_number, task, contents, register))) {		// 更新成功
+		if (sDao.update(new Schedules(task, contents, register,deadline,id))) {		// 更新成功
 
 				request.setAttribute("result","内容を更新しました。");
+				System.out.println("スケジュール更新成功");
 		}
 		else {			// 更新失敗
 				request.setAttribute("result","内容を更新できませんでした。");
-			}
+				System.out.println("スケジュール更新失敗");
 		}
-		else {
+		}
+		else if(request.getParameter("submit").equals("削除")) {
 			if (sDao.delete(id)) {	// 削除成功
 				request.setAttribute("result", "削除しました。");
 			}
@@ -95,9 +88,8 @@ public class ScheduleUpdateServlet extends HttpServlet {
 			}
 		}
 
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task.jsp");
-		dispatcher.forward(request, response);
+		//リダイレクト
+		response.sendRedirect("/C2/TaskServlet");
 
 	}
 }
