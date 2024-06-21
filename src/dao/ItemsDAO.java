@@ -32,22 +32,22 @@ public class ItemsDAO {
 			PreparedStatement pStmt_manual = conn.prepareStatement(sql_manual, java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			// SQL文を完成させる
-
 			pStmt_manual.setInt(1, manualregist.getGroup_number());
-
+			System.out.println("ItemsDAO/group_ID:"+ manualregist.getGroup_number());//デバック用
 			pStmt_manual.setString(2, manualregist.getManual_Name());
+			System.out.println("ItemsDAO/group_name:"+ manualregist.getManual_Name());//デバック用
 
 			// SQL文を実行する
 			if (pStmt_manual.executeUpdate() == 1) {
 				result = true;
 			}
 
-			//試験
+			//AI取得
 			ResultSet r = pStmt_manual.getGeneratedKeys();
 			if(r.next()){
 	             autoIncrementKey = r.getInt(1);
 	         }
-			System.out.println(autoIncrementKey);
+			System.out.println("ItemsDAO/AI:"+ autoIncrementKey);//デバック用
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
 			String sql = "INSERT INTO Items VALUES (NULL,? , ?, ?, ?, CURRENT_TIMESTAMP)";
@@ -102,7 +102,7 @@ public class ItemsDAO {
 					e.printStackTrace();
 				}
 			}
-			System.out.println("itemsの登録結果" + result);
+			System.out.println("登録結果:" + result);
 		}
 
 		// 結果を返す

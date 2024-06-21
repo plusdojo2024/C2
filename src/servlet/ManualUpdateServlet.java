@@ -44,7 +44,7 @@ public class ManualUpdateServlet extends HttpServlet {
 		// manualUpdateページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
 		dispatcher.forward(request, response);
-	}
+	}	//doGetメソッドの処理終了
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,79 +57,75 @@ public class ManualUpdateServlet extends HttpServlet {
 			return;
 		}
 
+
 		else {//ログインしていた場合の処理
-			/*
-			//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
+			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
-			if(request.getParameter("manualID").equals("マニュアル詳細へ遷移")) {
-
 				//マニュアルのidを取り出す
-				HttpSession session2 = request.getSession();
-				String manual_ID = (String)session2.getAttribute("manual_id");
-				System.out.println("manual_ID:"+manual_ID);
-				int intManual_ID = Integer.parseInt(manual_ID);
+				int intManual_ID = Integer.parseInt(request.getParameter("manual_id"));
+				System.out.println("manual_ID:"+intManual_ID);//コンソール確認(デバック用)
 
+				//更新メソッド判定用パラメータの取得
+				String post1 = request.getParameter("manual_update");
+				System.out.println("Post1値変更前:" + post1);//コンソール確認(デバック用)
+				if(post1 == null) {
+					post1 = "このメソッドは呼ばれていません。";
+				}
+				System.out.println("Post1値変更後:" + post1);//コンソール確認(デバック用)
 
-				//manual_idでマニュアルを検索する処理を行う
-				ItemsDAO itemsDao = new ItemsDAO();
-		        List<Items> itemList = itemsDao.selectItems(new Items(intManual_ID));
+				//削除メソッド判定用パラメータの取得
+				String post2 = request.getParameter("manual_delete");
+				System.out.println("Post2値変更前:" + post2);//コンソール確認(デバック用)
+				if(post2 == null) {
+					post2 = "このメソッドは呼ばれていません。";
+				}
+				System.out.println("Post2値変更後:" + post2);//コンソール確認(デバック用)
 
-		        //検索結果をリクエストスコープに格納する
-				request.setAttribute("itemList", itemList);
+			//インスタンスの生成
+			ItemsDAO bManuals = new ItemsDAO();
 
-				// 詳細ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
-				dispatcher.forward(request, response);
-			}*/
-			//マニュアルのidを取り出す
-			HttpSession session2 = request.getSession();
-			String manual_ID = (String)session2.getAttribute("manual_id");
-			System.out.println("manual_ID:"+manual_ID);
-			int intManual_ID = Integer.parseInt(manual_ID);
 
 			//doPostの分岐1：更新を押した場合の処理
-			if(request.getParameter("manual_update").equals("OK")){
-
-				// リクエストパラメータを取得する
-				request.setCharacterEncoding("UTF-8");
-				int number = Integer.parseInt(request.getParameter("id"));
-				//String task = request.getParameter("group_id");
-				//int group_id = Integer.parseInt(task);
+			if(post1.equals("OK")){
+				//更新に必要なリクエストパラメータを取り出す
 				String[] items = request.getParameterValues("header");
 				String[] contents = request.getParameterValues("contents");
 				String[] images = request.getParameterValues("images");
-				//String today = request.getParameter("today");
 
-				//java.sql.Date date = Date.valueOf(today);
-
-				ItemsDAO bManuals = new ItemsDAO();
 				// 登録処理を行う
-				if (request.getParameter("submit").equals("更新")) {
-					if (bManuals.update(intManual_ID, items, contents, images)) {	// 登録成功
-						request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
-					}
-					else {												// 登録失敗
-						request.setAttribute("result",  new Result("更新失敗！", "レコードを登録できませんでした。"));
-					}
+				if (bManuals.update(intManual_ID, items, contents, images)) {	// 登録成功
+					request.setAttribute("result", new Result("更新成功！", "レコードを登録しました。") );
 				}
-				else {
-					if (bManuals.delete(number)) {	// 削除成功
-						request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。") );
-					}
-					else {						// 削除失敗
-						request.setAttribute("result",  new Result("削除失敗！", "レコードを削除できませんでした。"));
-					}
+				else {												// 登録失敗
+					request.setAttribute("result",  new Result("更新失敗！", "レコードを登録できませんでした。"));
 				}
 
 				// 結果ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
 				dispatcher.forward(request, response);
-			}
+			}	//更新を押したときの処理ブロック終了
+
+
+			//doPostの分岐2：削除を押した場合の処理
+			else if (post2.equals("Delete")){
+				//削除処理を行う
+				if (bManuals.delete(intManual_ID)) {	// 削除成功
+					request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。") );
+				}
+				else {	// 削除失敗
+					request.setAttribute("result",  new Result("削除失敗！", "レコードを削除できませんでした。"));
+				}
+
+				// 結果ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
+				dispatcher.forward(request, response);
+			}	//削除を押したときの処理ブロック終了
+
+
+			//doPostの分岐3：一覧から詳細を開く場合の処理
 			else {
-				//doPostの分岐1：マニュアルを押して詳細画面が出される場合の処理
 				//manual_idでマニュアルを検索する処理を行う
-				ItemsDAO itemsDao = new ItemsDAO();
-				List<Items> itemList = itemsDao.selectItems(new Items(intManual_ID));
+				List<Items> itemList = bManuals.selectItems(new Items(intManual_ID));
 
 				//検索結果をリクエストスコープに格納する
 				request.setAttribute("itemList", itemList);
@@ -137,8 +133,7 @@ public class ManualUpdateServlet extends HttpServlet {
 				// 詳細ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
 				dispatcher.forward(request, response);
-				}
-			}
-		}
-
-	}
+			}	//詳細を押したときの処理ブロック終了
+		}	//ログインしていた場合の処理終了
+	}	//doPostメソッドの処理終了
+}

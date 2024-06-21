@@ -228,19 +228,24 @@ public class ManualsDAO {
 
 
 			//SQL文の準備
-			String sql = "SELECT manual_name FROM MANUALS WHERE GROUP_NUMBER = ?";
+			String sql = "SELECT * FROM MANUALS WHERE GROUP_NUMBER = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文の完成
 			pStmt.setInt(1, manuals.getGroup_number());
+			System.out.println("ManualsDAOのselectManualsメソッド/group_ID:" + manuals.getGroup_number());//デバック用
 
 			//SQL文の実行および結果の取得
 			ResultSet rs = pStmt.executeQuery();
 			//結果表のコピー
 			while (rs.next()) {
 				Manuals record = new Manuals(
+					rs.getInt("id"),
+					rs.getInt("group_number"),
 					rs.getString("manual_name")
 				);
+				System.out.println("ManualsDAOの結果表/ID:" + rs.getInt("id"));//デバック用
+				System.out.println("ManualsDAOの結果表/manual_name:" + rs.getString("manual_name"));//デバック用
 				manualNameList.add(record);
 			}
 		}	//try終了タグ

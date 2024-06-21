@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -39,18 +40,18 @@
 		</header>
 	<main>
       <p>ManualDetails</p>
-      <c:forEach var="e" items="${List}">
+      <c:forEach var="e" items="${itemList}">
       <form>
         <table>
 			<tr>
           		<td>
-					<input type="text" name="heading" value="${e.}" class="heading">
+					<input type="text" name="heading" value="${e.esc}" class="heading">
               	</td>
         	</tr>
           	<tr id = "target">
-            	<td><input type="text" name="item" value="${e.}" class="items"></td>
-            	<td><input type="text" name="content" value="${e.}" class="contents"></td>
-            	<td><input type="file" name="images" value="${e.}" class="images"></td>
+            	<td><input type="text" name="item" value="${e.heading}" class="items"></td>
+            	<td><input type="text" name="content" value="${e.contents}" class="contents"></td>
+            	<td><input type="file" name="images" value="${e.image}" class="images"></td>
             	<td><button onclick="deleteExample(this);">-</button><br></td>
           	</tr>
         </table>

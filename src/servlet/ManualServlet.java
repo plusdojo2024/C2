@@ -42,15 +42,16 @@ public class ManualServlet extends HttpServlet {
 			response.sendRedirect("/famiLink/LoginServlet");
 			return;
 		}
-
+		System.out.println();
+		System.out.println("-------ホーム画面-------");//デバック用
 
 		//ユーザー情報の現在の情報を持ってくるselect
 		HttpSession session2 = request.getSession();
 		LoginUser user_ID = (LoginUser)session2.getAttribute("user_ID");
 		String user = user_ID.getLoginUserId();
-		System.out.println("user_ID:"+user);
+		System.out.println("ホーム画面のセッションスコープ確認/user_ID:"+user);//デバック用
 		int groupID = user_ID.getGroupId();
-		System.out.println("group_ID:"+ groupID);
+		System.out.println("ホーム画面のセッションスコープ確認/group_ID:"+ groupID);//デバック用
 
 		//group_idでマニュアルを検索する処理を行う
 		ManualsDAO manualsDao = new ManualsDAO();

@@ -21,6 +21,13 @@ public class Manuals implements Serializable {
 		this.manual_name = manual_name;
 
 	}
+	public Manuals(int id, int pr_group, String manual_name) {
+		super();
+		this.id = id;
+		this.group_number = pr_group;
+		this.manual_name = manual_name;
+
+	}
 
 	public Manuals(String manual_name, int pr_group) {
 		super();
