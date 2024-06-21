@@ -77,8 +77,7 @@ public class ScheduleRegistServlet extends HttpServlet {
 		HttpSession session2 = request.getSession();
 		Accounts group = (Accounts)session2.getAttribute("pr_group");
 		int group_number = group.getPr_group();
-		LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
-		String register = user_ID.getLoginUserId();
+		String register = request.getParameter("register");
 
 		// 登録処理を行う
 		SchedulesDAO sDao = new SchedulesDAO();
