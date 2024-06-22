@@ -8,7 +8,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
-		<link rel="stylesheet" href="/C2/css/task.css">
+		<link rel="stylesheet" href="/C2/css/schedule_update.css">
 	</head>
 
 
@@ -45,20 +45,29 @@
 
 
 		<main>
-			<h2>Schedule Detail</h2>
+		<div id="scheduledetailtitle">
+			<p id="updateschedule">Schedule Detail</p>
+		</div>
+		<div id="form" class=boxradius>
 			<c:forEach var="e" items="${scheduleList}">
 			<form id="schedule_form" method="post" action="/C2/ScheduleUpdateServlet"><!--アクションにサーブレットを入力する-->
+              <div id="formbox">
                 <input type="hidden" name="id" value="${e.id}">
                 <input type="date" id="day" name="deadline" value="${e.deadline}">
 				<input type="text"  name="task" value="${e.task}">
 				<br>
 				<textarea name="contents">${e.contents}</textarea>
 				<br>
+		<div id="line">
 				<input type="text" name="register" value="${e.register}">
-              	<input type="submit" id="update" name="submit" value="更新">
-              	<input type="submit" id="delete" name="submit" value="削除">
+			<div id="okdeletebutton">
+              	<input type="submit" id="update" name="submit" value="OK" class=okdeletebutton>
+              	<input type="submit" id="delete" name="submit" value="Delete" class=okdeletebutton>
+            </div>
+        </div>
       		</form>
       		</c:forEach>
+      	</div>
     	</main>
 
 		<footer>
