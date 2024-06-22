@@ -13,7 +13,7 @@
 	#limit {
 		font-size: 1.5rem;
 		background-color: #C6D7E4;
-		width: 410px;
+		width: 550px;
 		height: 50px;
 		border-radius: 25px 25px 0 0;
 		color: #001746;
@@ -22,15 +22,38 @@
 		text-align: center;
 	}
 
+/*日付切り替え*/
+	input[name=deadline] {
+		width: 180px;
+		height: 35px;
+		border: none;
+		outline: none;
+		border-radius:10px;
+		color:#001746;
+		background-color:white;
+		font:20px UD デジタル 教科書体 NK-B;
+		text-align:center;
+	}
+
+	input[name=dateChange] {
+		width: 140px;
+		height: 35px;
+		border: none;
+		outline: none;
+		border-radius:10px;
+		color:white;
+		background-color:#001746;
+		font:20px UD デジタル 教科書体 NK-B;
+		text-align:center;
+	}
+
 /*全体のボックス*/
 	#all {
 		width: 1400px;
 		border-radius:50px;
   		margin: 0px auto 30px auto;
   		border: 5px solid #C6D7E4;
-
 	}
-
 
 /*タスクとスケジュールを分ける*/
 	.flex-container {
@@ -46,22 +69,22 @@
 	#tasktitle {
 		text-align:center;
 		font-size:30px;
-		margin:0px 0px 15px 0px;
+		margin:0px 0px 10px 0px;
 		color:#001746;
 	}
 
 /*タスク*/
 	#task {
-		margin: 30px auto auto 65px;
+		margin: 30px auto auto 30px;
 	}
 
 /*タスク要素*/
 	input[name=task]{
-		width: 510px;
+		width: 500px;
 		height: auto;
-		font-size:25px;
+		font:25px UD デジタル 教科書体 NK-B;
 		color:#001746;
-		margin: 10px auto 0px auto;
+		margin: 20px auto 0px auto;
 		border: none;
 		outline: none;
 		background-color:white;
@@ -69,11 +92,22 @@
 		text-align:left;
 	}
 
+	input[name=to] {
+		width: 120px;
+		height: 35px;
+		border: none;
+		outline: none;
+		border-radius:10px;
+		color:#001746;
+		background-color:#E0E9F0;
+		font:20px UD デジタル 教科書体 NK-B;
+		text-align:center;
+	}
+
 /*チェックボックス*/
 	input[type=checkbox]{
-		width:30px;
-		height:30px;
-		accent-color:#7DE3A1;
+		width:35px;
+		height:35px;
 	}
 
 
@@ -84,7 +118,6 @@
 		margin:10px 0px 15px 0px;
 		color:#001746;
 	}
-
 
 /*スケジュールのボックス*/
 	#schedule {
@@ -100,9 +133,9 @@
 	input[name=scheduleDetail]{
 		width: 510px;
 		height: auto;
-		font-size:25px;
+		font:25px UD デジタル 教科書体 NK-B;
 		color:#001746;
-		margin: 10px auto 0px auto;
+		margin: 10px auto 10px auto;
 		border: none;
 		outline: none;
 		background-color:#C6D7E4;

@@ -46,7 +46,7 @@
            &ensp;${deadline}&emsp;
             <form method="post" action="/C2/TaskServlet">
                 <input type="date" name="deadline">
-                <input type="submit" name="dateChange" value="日付切替">
+                <input type="submit" name="dateChange" value="Day Change">
             </form>
             </div>
 
@@ -54,7 +54,7 @@
           <div id="all">
           <div class="flex-container">
             <div id="task" class="flex-item">
-            <p id="tasktitle">Task&emsp;&emsp;&emsp;&emsp;&emsp;</p>
+            <p id="tasktitle">Task&emsp;&emsp;</p>
 			<c:forEach var="e" items="${taskList}" >
 				<form method="get" action="/C2/TaskUpdateServlet" >
 					<input type="hidden" name="id" value="${e.id}">
