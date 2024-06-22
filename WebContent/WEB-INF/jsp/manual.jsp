@@ -53,18 +53,20 @@
 	    		<button type="submit" name = "Seach" value = "Seach" aria-label="検索"></button>
 			</form>
 		<c:forEach var="e" items="${manualNameList}" >
-			<form method = "post" action = "/C2/ManualUpdateServlet" id ="getDetail">
+			<div class="manualNameLine">
+				<form method = "post" action = "/C2/ManualUpdateServlet" id ="getDetail">
 
-		      <table class="table">
-		        <tr>
-		          <td>
-		          	<input type = "hidden" name = "manualID" value="マニュアル詳細へ遷移">
-		            <input type = "hidden" name = "manual_id" value="${e.id}">
-		            <input type="submit" name="manual_name" value="${e.manual_name}" readonly="readonly">
-		          </td>
-		        </tr>
-		       </table>
-	    	</form>
+			      <table class="table">
+			        <tr>
+			          <td>
+			          	<input type = "hidden" name = "manualID" value="マニュアル詳細へ遷移">
+			            <input type = "hidden" name = "manual_id" value="${e.id}">
+			            <input type="submit" name="manual_name" value="${e.manual_name}" readonly="readonly"  class="manualName">
+			          </td>
+			        </tr>
+			       </table>
+		    	</form>
+		    </div>
 	    </c:forEach>
 	</main>
 

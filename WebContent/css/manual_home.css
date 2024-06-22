@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
-
-
+/*検索ボックス*/
 .manual{
 	font-size: 1.5rem;
 	background-color: #F3B4AB;
@@ -12,9 +11,12 @@
 
 }
 
+/*マニュアルのヘッダー*/
 .manual-header{
 	text-align: center;
 }
+
+/*検索ボックス*/
 .search-form {
     display: flex;
     justify-content: center;
@@ -60,13 +62,35 @@
     background-repeat: no-repeat;
     content: '';
 }
+/*検索ボックスここまで*/
 
+/*＋ボタン*/
 .plus-button{
 	text-align: right;
 	margin-right: 400px;
 	margin-bottom: 0;
 }
 
-.table{
-	background-color: #F7CDC6;
+/*マニュアル一覧*/
+
+.manualNameLine{
+	display: flex;
+    justify-content: center;
+	margin-top: 40px;
+}
+
+.manualName{
+	border: none;
+  	background-color: #F8D5D0;
+	height: 50px;
+	width: 550px;
+	height: 90px;
+	border-radius: 15px;
+	color: #001746;
+	font-family: UD デジタル 教科書体 NP-B;
+	font-size: 1.5rem;
+}
+
+.manualName:hover{
+	background-color: #FCF1C4;
 }
