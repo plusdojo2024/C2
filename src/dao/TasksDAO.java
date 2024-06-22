@@ -361,7 +361,7 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE Tasks SET task=?, contents=?, deadline=?, register=?, to=? ,checkbox=? WHERE id=?";
+			String sql = "UPDATE Tasks SET task=?, contents=?, deadline=?, register=?, to=? ,checkbox=? ,manual_link=?,manual_id=? WHERE id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
@@ -391,8 +391,20 @@ public class TasksDAO {
 				pStmt.setString(5, "全員");
 			}
 			pStmt.setBoolean(6, up.isCheckbox());
-			//id文
-			pStmt.setInt(7, up.getId());
+
+			if (up.getManual_link() != null && !up.getManual_link().equals("")) {
+				pStmt.setString(7, up.getManual_link());
+			}
+			else {
+				pStmt.setString(7, "");
+			}
+			if (up.getManual_id() != 0){
+				pStmt.setInt(8, up.getManual_id());
+			}
+			else {
+				pStmt.setInt(8, 0);
+			}
+			pStmt.setInt(9, up.getId());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {

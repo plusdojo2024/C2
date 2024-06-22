@@ -84,8 +84,19 @@ public class TaskUpdateServlet extends HttpServlet {
 		String register = request.getParameter("register");
 		String to = request.getParameter("to");
 		String bool = request.getParameter("checkbox");
-		String manual_link = request.getParameter("manual_link");
+		int manual_id=Integer.parseInt(request.getParameter("manual_id"));
 		java.sql.Date deadline = Date.valueOf(d);
+		ManualsDAO mDao = new ManualsDAO();
+		List<Manuals> manualNameList = mDao.selectManualName(manual_id);
+		String manual_link;
+		if(manual_id!=0) {//マニュアルリンクが選択されている
+			Manuals m=manualNameList.get(0);
+			manual_link = m.getManual_name();
+		}
+		else{//マニュアルリンクが未選択
+			manual_link = "未登録";
+		}
+
 		boolean checkbox = false;
         String yes = "yes";
 		if (yes.equals(bool)) {
@@ -96,7 +107,7 @@ public class TaskUpdateServlet extends HttpServlet {
 		// 登録処理を行う
 		if (request.getParameter("submit").equals("更新")) {
 			if (bTask.update(new Tasks(task, contents, deadline, register, to,
-				checkbox,id))) {	// 登録成功
+				checkbox,manual_link,manual_id,id))) {	// 登録成功
 				request.setAttribute("result", "レコードを登録しました。");
 			}
 			else {												// 登録失敗

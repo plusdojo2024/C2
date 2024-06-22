@@ -50,7 +50,7 @@
                         <td><input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if>></td>
                     </tr>
                     <tr>
-                        <td><textarea name="content">${e.contents}</textarea></td>
+                        <td><textarea name="contents">${e.contents}</textarea></td>
                     </tr>
                     <tr>
                         <td>To<input type="text" name="to" value="${e.to}"></td>
@@ -58,12 +58,12 @@
                     </tr>
                 </table>
                 マニュアルリンク
-                <select name="manual_link" >
-                	<option></option>
-                  <c:forEach var="e" items="${manualList}">
-    			    <option value="${e.id}">${e.manual_name}</option>
-       		      </c:forEach>
-                </select>
+                	<select name="manual_id" >
+                    	<option label="　">0</option>
+                      <c:forEach var="e" items="${manualList}">
+                        <option label="${e.manual_name}">${e.id}</option>
+                	  </c:forEach>
+               	    </select>
                         <input type="submit" name="submit" value="更新">
                         <input type="submit" name="submit" value="削除">
             </form>
@@ -74,7 +74,7 @@
               <tr>
                 <td>マニュアルボタン
 			  <c:forEach var="e" items="${taskList}">
-				<input type="hidden" name="id" value="${e.manual_id}">
+				<input type="hidden" name="manual_id" value="${e.manual_id}">
 				<input type="submit" value="${e.manual_link}">
 			  </c:forEach>
 			    </td>
