@@ -139,41 +139,49 @@ public class GroupsDAO {
 
 			// SQL文を準備する
 			String sql = "DELETE FROM GROUP WHERE group_id=?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
+			//グループ（アイコン、グループ名）insertのバージョンを作る(group_id, group_name, user_ID, editer)
+			String sql2 = "UPDATE groups_member SET group_name =?, user_ID =?, WHERE group_id=?";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			// SQL文を完成させる
 			pStmt.setString(1, g_list.getGroup_name());
-
+			pStmt.setString(2, g_list.getIcon());
+			pStmt2.setString(1, g_list.getGroup_name());
+			pStmt2.setString(2, g_list.getUser_ID());
+			pStmt2.setInt(3, g_list.getGroup_id());
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
 
-			//insertのバージョンを作る
-			String sql2 = "INSERT INTO GROUPS VALUES (NULL, ?, ?)";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql2);
+			//グループ（アイコン、グループ名）insertのバージョンを作る（ group_name, user_ID, group_id)
+			/*String sql2 = "INSERT INTO GROUPS VALUES (NULL, ?, ?, ?, ?)";
+			PreparedStatement pStmt3 = conn.prepareStatement(sql2);*/
 
 			// SQL文を完成させる
-			int i = 0;
 
-			/*pStmt.setString(1, g_list);
 			if (g_list() != null && !g_list.getGroup_name().equals("")) {
-				pStmt.setString(2, g_list.getGroup_name());
+				pStmt2.setString(1, g_list.getGroup_name());
 			}
 			else {
-				pStmt.setString(2, "（未設定）");
+				pStmt2.setString(1, null);
 			}
-			if (g_list() != null && !g_list.getIcon().equals("")) {
-				pStmt.setString(3, g_list.getIcon());
+			if (g_list() != null && !g_list.getUser_ID().equals("")) {
+				pStmt2.setString(2, g_list.getUser_ID());
 			}
 			else {
-				pStmt.setString(3, "");
-			}*/  //一旦エラーが出るのでコメントアウト
+				pStmt2.setString(2, null);
+			}
+				pStmt2.setInt(3, g_list.getGroup_id());
 
 
-
+			//SQLを実行する
+			if (pStmt2.executeUpdate() == 1) {
+				result = true;
+			}
 
 
 		}
@@ -197,6 +205,107 @@ public class GroupsDAO {
 		// 結果を返す
 					return result;
 	}
+
+	//メンバーの招待
+	public boolean insert(Int g_member) {
+
+		Connection conn = null;
+		boolean result = false;
+		int autoIncrementKey = 0;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			//SQLを準備する
+			String sql = "INSERT INTO groups_member VALUES = (NULL, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			//SQL文を完成させる
+			if (g_member.getUser_ID() != null && !g_member.getUser_ID().equals("")) {
+				pStmt.setString(1, g_member.getUser_ID());
+			}
+			else {
+				pStmt.setString(1, "（未設定）");
+			}
+
+			// SQL文を実行する　一件登録できたら成功
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+	//ユーザーの追放
+	public boolean delete(int g_id) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql = "DELETE FROM groups_member WHERE user_ID =?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, user_ID);
+
+			// SQL文を実行する　一件登録できたら成功
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
 
 	/*// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
 	public boolean update(Groups card) {
