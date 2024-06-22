@@ -57,7 +57,7 @@
                         <td>From<input type="text" name="register" value="${e.register}"></td>
                     </tr>
                 </table>
-                マニュアルリンク
+            	<!-- マニュアルリンク -->
                 	<select name="manual_id" >
                     	<option label="　">0</option>
                       <c:forEach var="e" items="${manualList}">
@@ -68,24 +68,47 @@
                         <input type="submit" name="submit" value="削除">
             </form>
             </c:forEach>
-            <form method="post" action="/C2/ManualUpdateServlet">
-            <br>
-            <table>
-              <tr>
-                <td>マニュアルボタン
+            <!-- マニュアルボタン  -->
+            <form id="MB" method="post" action="/C2/ManualUpdateServlet">
+              <c:forEach var="e" items="${taskList}">
+              	<input type="hidden" name="id" value="${e.id}">
+			  </c:forEach>
 			  <c:forEach var="e" items="${taskList}">
-				<input type="hidden" name="manual_id" value="${e.manual_id}">
+				<input type="hidden"  id="manual_id" name="manual_id" value="${e.manual_id}">
 				<input type="submit" value="${e.manual_link}">
 			  </c:forEach>
-			    </td>
-			  </tr>
-			</table>
 	        </form>
-
+	        <p>
+				<span id="error_message"></span>
+			</p>
     		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
-		<script src="/C2/js/common.js"></script>
+	<script src="/C2/js/common.js"></script>
+	<script>
+	'use strict';
+	//登録結果Windowアラート表示
+		if('${result}' === '') {
+		}
+		else {
+			window.alert('${result}');
+		}
+	</script>
+	<script>
+	'use strict';
+
+	 /* HTML要素をオブジェクトとして取得する */
+	 	let formObj = document.getElementById('MB');
+		let errorMessageObj = document.getElementById('error_message');
+
+	 /* [ログイン]ボタンをクリックしたときの処理 */
+		formObj.onsubmit = function() {
+	 	 if (formObj.manual_id.value == 0) {
+	   	 return false;
+	  	}
+	 	 errorMessageObj.textContent = null;
+		};
+	</script>
 	</body>
 </html>

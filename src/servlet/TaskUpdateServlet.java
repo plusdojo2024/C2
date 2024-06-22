@@ -72,12 +72,9 @@ public class TaskUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String i = request.getParameter("id");
-		System.out.println(i);
-		int id= Integer.parseInt(i);
+		int id= Integer.parseInt(request.getParameter("id"));
 		String task = request.getParameter("task");
 		String contents = request.getParameter("contents");
 		String d= request.getParameter("deadline");
@@ -88,13 +85,10 @@ public class TaskUpdateServlet extends HttpServlet {
 		java.sql.Date deadline = Date.valueOf(d);
 		ManualsDAO mDao = new ManualsDAO();
 		List<Manuals> manualNameList = mDao.selectManualName(manual_id);
-		String manual_link;
+		String manual_link=null;
 		if(manual_id!=0) {//マニュアルリンクが選択されている
 			Manuals m=manualNameList.get(0);
 			manual_link = m.getManual_name();
-		}
-		else{//マニュアルリンクが未選択
-			manual_link = "未登録";
 		}
 
 		boolean checkbox = false;
@@ -105,9 +99,18 @@ public class TaskUpdateServlet extends HttpServlet {
 
 		TasksDAO bTask = new TasksDAO();
 		// 登録処理を行う
-		if (request.getParameter("submit").equals("更新")) {
+		if (request.getParameter("submit").equals("更新") && manual_id!=0) {
 			if (bTask.update(new Tasks(task, contents, deadline, register, to,
 				checkbox,manual_link,manual_id,id))) {	// 登録成功
+				request.setAttribute("result", "レコードを登録しました。");
+			}
+			else {												// 登録失敗
+				request.setAttribute("result", "レコードを登録できませんでした。");
+			}
+		}
+		else if(request.getParameter("submit").equals("更新") && manual_id==0) {
+			if (bTask.updateNoLink(new Tasks(task, contents, deadline, register, to,
+				checkbox,id))) {	// 登録成功
 				request.setAttribute("result", "レコードを登録しました。");
 			}
 			else {												// 登録失敗

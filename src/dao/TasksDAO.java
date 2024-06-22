@@ -304,8 +304,8 @@ public class TasksDAO {
 			if (list.getManual_link() != null && !list.getManual_link().equals("")) {
 				pStmt.setString(8, list.getManual_link());
 			}
-			else {
-				pStmt.setString(8, "");
+			else if(list.getManual_id()==0){
+				pStmt.setString(8, "Manual");
 			}
 			if (list.getManual_id() != 0){
 				pStmt.setInt(9, list.getManual_id());
@@ -395,8 +395,8 @@ public class TasksDAO {
 			if (up.getManual_link() != null && !up.getManual_link().equals("")) {
 				pStmt.setString(7, up.getManual_link());
 			}
-			else {
-				pStmt.setString(7, "");
+			else if(up.getManual_id()==0){
+				pStmt.setString(7, "Manual");
 			}
 			if (up.getManual_id() != 0){
 				pStmt.setInt(8, up.getManual_id());
@@ -438,6 +438,85 @@ public class TasksDAO {
 		return result;
 	}
 
+	//タスクの更新(マニュアルリンクを洗濯していない場合):update
+	public boolean updateNoLink(Tasks up) {
+
+		Connection conn = null;
+		boolean result = false;
+
+		//処理内容
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql = "UPDATE Tasks SET task=?, contents=?, deadline=?, register=?, to=? ,checkbox=? WHERE id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			//SQL文を完成させる
+			//task文
+			if (up.getTask() != null && !up.getTask().equals("")) {
+				pStmt.setString(1, up.getTask());
+			}
+			else {
+				pStmt.setString(1, null);
+			}
+			//Contents文
+			if (up.getContents() != null && !up.getContents().equals("")) {
+				pStmt.setString(2, up.getContents());
+			}
+			else {
+				pStmt.setString(2, null);
+			}
+			//day文
+				pStmt.setDate(3, up.getDeadline());
+			//from文
+				pStmt.setString(4, up.getRegister());
+			//to文
+			if (up.getTo() != null && !up.getTo().equals("")) {
+				pStmt.setString(5, up.getTo());
+			}
+			else {
+				pStmt.setString(5, "全員");
+			}
+			pStmt.setBoolean(6, up.isCheckbox());
+
+			pStmt.setInt(7, up.getId());
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+
+		}
+
+		//エラー処理
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		//DB切断
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 
 
 	//タスクの削除(成功でtrueを返す):delete
