@@ -51,9 +51,14 @@
                     </tr>
                     <tr>
                         <td><textarea name="content">${e.contents}</textarea></td>
-                        <td><select name="manual_link">
-                            <option><a href="ManualServlet">manual1</a></option>
-                        </select></td>
+                  		<td>
+                  		  <select name="manual_link" >
+                         	  <option></option>
+                  		    <c:forEach var="e" items="${manualList}">
+                  			  <option value="${e.id}">${e.manual_name}</option>
+                  		    </c:forEach>
+                  		  </select>
+						</td>
                     </tr>
                     <tr>
                         <td><input type="text" name="to" value="${e.to}"></td>
@@ -62,6 +67,10 @@
                         <td><input type="submit" name="submit" value="削除"></td>
                     </tr>
                 </table>
+            </form>
+            <form method="get" action="/C2/ManualUpdateServlet">
+				<input type="hidden" name="id" value="${e.id}">
+				<input type="submit" value="${e.manual_name}">
             </form>
             </c:forEach>
     		</main>

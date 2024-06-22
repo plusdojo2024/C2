@@ -48,7 +48,6 @@ public class TaskServlet extends HttpServlet {
 		HttpSession session2 = request.getSession();
 		Accounts pr_group = (Accounts)session2.getAttribute("pr_group");
 		int group_number = pr_group.getPr_group();
-		System.out.println("group:"+group_number);
 
 		//検索処理をおこなう
 		Date deadline= Date.valueOf(LocalDate.now());

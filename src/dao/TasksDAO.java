@@ -160,9 +160,10 @@ public class TasksDAO {
 				rs.getString("task"),
 				rs.getString("contents"),
 				rs.getDate("deadline"),
-				rs.getString("to"),
 				rs.getString("register"),
-				rs.getBoolean("checkbox")
+				rs.getString("to"),
+				rs.getBoolean("checkbox"),
+				rs.getString("manual_name")
 				);
 				taskList.add(record);
 			}
@@ -265,7 +266,7 @@ public class TasksDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO Tasks VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Tasks VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
@@ -305,7 +306,12 @@ public class TasksDAO {
 			else {
 				pStmt.setString(8, "");
 			}
-
+			if (list.getManual_id() != 0){
+				pStmt.setInt(9, list.getManual_id());
+			}
+			else {
+				pStmt.setInt(9, 0);
+			}
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;

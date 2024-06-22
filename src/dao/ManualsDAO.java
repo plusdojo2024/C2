@@ -82,6 +82,121 @@ public class ManualsDAO {
 		return manualitemsList;
 	}
 
+	//マニュアルリンクのプルダウンにマニュアルidを入れるためのselect
+	public List<Manuals> selectManuals(int pr_group) {
+		Connection conn = null;
+		List<Manuals> manualList = new ArrayList<Manuals>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql ="SELECT * FROM Manuals WHERE group_number = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+			pStmt.setInt(1, pr_group);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Manuals record = new Manuals(
+				rs.getInt("id"),
+				rs.getInt("group_number"),
+				rs.getString("manual_name")
+				);
+				manualList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			manualList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			manualList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					manualList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return manualList;
+	}
+	//マニュアルリンクでマニュアル名を登録するためのselect
+	public List<Manuals> selectManualName(int manual_id) {
+		Connection conn = null;
+		List<Manuals> manualNameList = new ArrayList<Manuals>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+			// SQL文を準備する
+			String sql ="SELECT * FROM Manuals WHERE id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+			pStmt.setInt(1, manual_id);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Manuals record = new Manuals(
+				rs.getInt("id"),
+				rs.getInt("group_number"),
+				rs.getString("manual_name")
+				);
+				manualNameList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			manualNameList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			manualNameList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					manualNameList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return manualNameList;
+	}
+
 	public boolean manu(Items manualregist) {
 		Connection conn = null;
 		boolean result = false;

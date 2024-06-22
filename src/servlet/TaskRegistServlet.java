@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AccountsDAO;
+import dao.ManualsDAO;
 import dao.TasksDAO;
 import model.Accounts;
 import model.LoginUser;
+import model.Manuals;
 import model.Tasks;
 
 /**
@@ -55,6 +57,17 @@ public class TaskRegistServlet extends HttpServlet {
 
 //		 検索結果をリクエストスコープに格納する
 		request.setAttribute("accountList", accountList);
+//マニュアルリンクのプルダウンにグループの全てのmanual_name,idを埋め込む
+      //セッションスコープからpr_groupを取得
+		Accounts group = (Accounts)session2.getAttribute("pr_group");
+		int pr_group = group.getPr_group();
+
+	  //pr_groupを使用して全てのマニュアルを検索
+		ManualsDAO mDao = new ManualsDAO();
+        List<Manuals> manualList = mDao.selectManuals(pr_group);
+
+        //結果リストを格納
+        request.setAttribute("manualList", manualList);
 
 		// taskページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_regist.jsp");
@@ -79,9 +92,20 @@ public class TaskRegistServlet extends HttpServlet {
 		String register = request.getParameter("register");
 		String to = request.getParameter("to");
 		String checkbox = request.getParameter("checkbox");
-		String manual_link = request.getParameter("manual_link");
+		int manual_id=Integer.parseInt(request.getParameter("manual_id"));
+		ManualsDAO mDao = new ManualsDAO();
 
-//		boolean boo1 = Boolean.valueOf(checkbox);
+		//manual_idをもとにマニュアル名を検索しリストに格納
+		List<Manuals> manualNameList =mDao.selectManualName(manual_id);
+		String manual_link;
+		if(manual_id!=0) {//マニュアルリンクが選択されている
+			Manuals m=manualNameList.get(0);
+			manual_link = m.getManual_name();
+		}
+		else{//マニュアルリンクが未選択
+			manual_link = null;
+		}
+				//		boolean boo1 = Boolean.valueOf(checkbox);
 		//favoritesの値が"yes"かそれ以外の判定を行う。
 		boolean check = false;
         String yes = "yes";
@@ -91,7 +115,7 @@ public class TaskRegistServlet extends HttpServlet {
 		// 登録処理を行う
 		TasksDAO bTask = new TasksDAO();
 		if (bTask.insert(new Tasks(0, group_number, task, content, date, register, to,
-				check, manual_link))) {	// 登録成功
+				check, manual_link,manual_id))) {	// 登録成功
 			request.setAttribute("result", "レコードを登録しました。");
 		}
 		else {												// 登録失敗

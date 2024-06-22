@@ -15,6 +15,7 @@ public class Tasks implements Serializable {
 	private String to;	//to
 	private boolean checkbox;	//チェックボックス
 	private String manual_link;	//マニュアルリンク
+	private int manual_id;
 
 
 	public Tasks(int id, int group_number, String task, boolean checkbox) {
@@ -80,6 +81,18 @@ public class Tasks implements Serializable {
 		this.to = to;
 		this.checkbox = checkbox;
 	}
+	public Tasks(int id, String task, String contents, Date deadline, String register, String to, boolean checkbox,
+			String manual_link) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.contents = contents;
+		this.deadline = deadline;
+		this.register = register;
+		this.to = to;
+		this.checkbox = checkbox;
+		this.manual_link = manual_link;
+	}
 	public Tasks(int id, int group_number, String task, String contents, Date deadline, String register, String to,
 			boolean checkbox, String manual_link) {
 		super();
@@ -94,6 +107,20 @@ public class Tasks implements Serializable {
 		this.manual_link = manual_link;
 	}
 
+	public Tasks(int id, int group_number, String task, String contents, Date deadline, String register, String to,
+			boolean checkbox, String manual_link, int manual_id) {
+		super();
+		this.id = id;
+		this.group_number = group_number;
+		this.task = task;
+		this.contents = contents;
+		this.deadline = deadline;
+		this.register = register;
+		this.to = to;
+		this.checkbox = checkbox;
+		this.manual_link = manual_link;
+		this.manual_id = manual_id;
+	}
 	//method
 	public int getId() {
 		return id;
@@ -148,6 +175,15 @@ public class Tasks implements Serializable {
 	}
 	public void setManual_link(String manual_link) {
 		this.manual_link = manual_link;
+	}
+	public int getManual_id() {
+		return manual_id;
+	}
+	public void setManual_id(int manual_id) {
+		this.manual_id = manual_id;
+	}
+	public void setDeadline(java.sql.Date deadline) {
+		this.deadline = deadline;
 	}
 
 
