@@ -49,14 +49,15 @@
 		<div id="manualdetailtitle">
 			<p id="updatemanual">ManualDetails</p>
 		</div>
-		<form method="post" action="/C2/ManualUpdateServlet">
+		<form method="post" action="/C2/ManualUpdateServlet" class=boxradius>
 
 		<c:forEach var="e" items="${itemList}" begin="1" end="1">
 			<td><input type="text" name="heading" value="${e.esc}" class="heading"></td>
 		</c:forEach>
 
 			<c:forEach var="e" items="${itemList}">
-				<table>
+				<div class="manualDetailLine">
+					<table>
 					<tr>
 						<td><input type="hidden" name="manual_id" value="${e.manual_id}"></td>
 					</tr>
@@ -70,7 +71,9 @@
 							class="images"></td>
 						<td><button onclick="deleteExample(this);">-</button> <br></td>
 					</tr>
-				</table>
+					</table>
+					</div>
+
 			</c:forEach>
 			<input type="submit" id="ok" name="manual_update" value="OK"
 				onclick="checkMessage();"> <input type="submit" id="delete"
