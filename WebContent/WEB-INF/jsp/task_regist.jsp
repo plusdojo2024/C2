@@ -47,7 +47,6 @@
                     <tr>
                         <td><input type="date" id="day" name="day"></td><!-- 期限 -->
                         <td><input type="text" name="task"placeholder="見出し"></td>
-                        <td><input type="checkbox" name="checkbox" value="yes" disabled></td>
                     </tr>
                     <tr>
                         <td><textarea name="contents"></textarea></td>
