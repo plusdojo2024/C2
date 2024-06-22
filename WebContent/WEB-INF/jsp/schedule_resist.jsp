@@ -44,18 +44,28 @@
 		</header>
 
 		<main>
-			<h2>New Schedule</h2>
+		<div id="newscheduletitle">
+			<p id="newschedule">New Schedule</p>
+		</div>
+		<div id="form" class=boxradius>
 			<c:forEach var="e" items="${accountList}" >
       		<form id="schedule_form" method="post" action="/C2/ScheduleRegistServlet"><!--アクションにサーブレットを入力する-->
+	            <div id="formbox">
 	                        <input type="date" id="day" name="deadline">
-                			<input type="text" name="task" placeholder="zoom会議">
+                			<input type="text" name="task" placeholder="スケジュール">
                 			<br>
-                			<textarea name="contents" id="詳細" placeholder="14:00～"></textarea>
+                			<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
               				<br>
+              		<div id="line">
               				<input type="text" name="register" value="${e.nickname}" readonly="readonly">
-              				<input type="submit" id="regist" name="submit" value="登録">
+              			<div id="okbutton">
+              				<input type="submit" id="regist" name="submit" value="OK" class=okbutton>
+      					</div>
+      				</div>
+      			</div>
       		</form>
       		</c:forEach>
+      		</div>
     	</main>
 
 
