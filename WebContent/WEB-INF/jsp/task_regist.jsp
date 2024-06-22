@@ -40,33 +40,32 @@
 		</header>
 		<main>
             <h1>new task</h1>
-			<c:forEach var="e" items="${accountList}" >
+
             <form method="post" action="/C2/TaskServletRegist">
+			<c:forEach var="e" items="${accountList}" >
                 <table>
                     <tr>
                         <td><input type="date" id="day" name="day"></td><!-- 期限 -->
                         <td><input type="text" name="task"placeholder="見出し"></td>
-                        <td><input type="checkbox" name="checkbox" value="yes" ></td>
+                        <td><input type="checkbox" name="checkbox" value="yes" disabled></td>
                     </tr>
                     <tr>
                         <td><textarea name="contents"></textarea></td>
-                  		<td>
-                  		  <select name="manual_id" >
-                         	  <option label="　">0</option>
-                  		    <c:forEach var="e" items="${manualList}">
-                  			  <option label="${e.manual_name}">${e.id}</option>
-                  		    </c:forEach>
-                  		  </select>
-						</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="to"placeholder="to"></td>
-                        <td><input type="text" name="register" value="${e.nickname}"></td>
-                        <td><input type="submit" value="登録"></td>
+                        <td>To<input type="text" name="to"></td>
+                        <td>From<input type="text" name="register" value="${e.nickname}" readonly="readonly"></td>
                     </tr>
                 </table>
+            	</c:forEach>
+                	<select name="manual_id" >
+                    	<option label="　">0</option>
+                      <c:forEach var="e" items="${manualList}">
+                        <option label="${e.manual_name}">${e.id}</option>
+                	  </c:forEach>
+               	    </select>
+                <input type="submit" value="登録">
             </form>
-            </c:forEach>
             </main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

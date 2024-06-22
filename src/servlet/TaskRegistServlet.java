@@ -86,7 +86,7 @@ public class TaskRegistServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String task = request.getParameter("task");
-		String content = request.getParameter("content");
+		String content = request.getParameter("contents");
 		String day = request.getParameter("day");
 		java.sql.Date date = Date.valueOf(day);
 		String register = request.getParameter("register");

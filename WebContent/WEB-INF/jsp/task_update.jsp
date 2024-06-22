@@ -51,28 +51,37 @@
                     </tr>
                     <tr>
                         <td><textarea name="content">${e.contents}</textarea></td>
-                  		<td>
-                  		  <select name="manual_link" >
-                         	  <option></option>
-                  		    <c:forEach var="e" items="${manualList}">
-                  			  <option value="${e.id}">${e.manual_name}</option>
-                  		    </c:forEach>
-                  		  </select>
-						</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="to" value="${e.to}"></td>
-                        <td><input type="text" name="register" value="${e.register}"></td>
-                        <td><input type="submit" name="submit" value="更新"></td>
-                        <td><input type="submit" name="submit" value="削除"></td>
+                        <td>To<input type="text" name="to" value="${e.to}"></td>
+                        <td>From<input type="text" name="register" value="${e.register}"></td>
                     </tr>
                 </table>
-            </form>
-            <form method="get" action="/C2/ManualUpdateServlet">
-				<input type="hidden" name="id" value="${e.id}">
-				<input type="submit" value="${e.manual_name}">
+                マニュアルリンク
+                <select name="manual_link" >
+                	<option></option>
+                  <c:forEach var="e" items="${manualList}">
+    			    <option value="${e.id}">${e.manual_name}</option>
+       		      </c:forEach>
+                </select>
+                        <input type="submit" name="submit" value="更新">
+                        <input type="submit" name="submit" value="削除">
             </form>
             </c:forEach>
+            <form method="post" action="/C2/ManualUpdateServlet">
+            <br>
+            <table>
+              <tr>
+                <td>マニュアルボタン
+			  <c:forEach var="e" items="${taskList}">
+				<input type="hidden" name="id" value="${e.manual_id}">
+				<input type="submit" value="${e.manual_link}">
+			  </c:forEach>
+			    </td>
+			  </tr>
+			</table>
+	        </form>
+
     		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

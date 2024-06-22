@@ -163,7 +163,8 @@ public class TasksDAO {
 				rs.getString("register"),
 				rs.getString("to"),
 				rs.getBoolean("checkbox"),
-				rs.getString("manual_name")
+				rs.getString("manual_link"),
+				rs.getInt("manual_id")
 				);
 				taskList.add(record);
 			}

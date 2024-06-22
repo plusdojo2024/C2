@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ManualsDAO;
 import dao.TasksDAO;
+import model.Accounts;
+import model.Manuals;
 import model.Tasks;
 
 /**
@@ -48,7 +51,19 @@ public class TaskUpdateServlet extends HttpServlet {
         List<Tasks> taskList = tasksDao.selectDetail(id);
 
 		request.setAttribute("taskList", taskList);
-		// taskページにフォワードする
+//マニュアルリンクのプルダウンにグループの全てのmanual_name,idを埋め込む
+    //セッションスコープからpr_groupを取得
+		Accounts group = (Accounts)session.getAttribute("pr_group");
+		int pr_group = group.getPr_group();
+
+    //pr_groupを使用して全てのマニュアルを検索
+		ManualsDAO mDao = new ManualsDAO();
+        List<Manuals> manualList = mDao.selectManuals(pr_group);
+
+    //結果リストを格納
+        request.setAttribute("manualList", manualList);
+
+	// taskページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/task_update.jsp");
 		dispatcher.forward(request, response);
 	}
