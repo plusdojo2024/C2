@@ -87,6 +87,14 @@ public class ManualUpdateServlet extends HttpServlet {
 				}
 				System.out.println("Post2値変更後:" + post2);//コンソール確認(デバック用)
 
+				//検索メソッド判定用パラメータの取得
+				String post3 = request.getParameter("manual_search");
+				System.out.println("Post3値変更前:" + post3);//コンソール確認(デバック用)
+				if(post3 == null) {
+					post3 = "このメソッドは呼ばれていません。";
+				}
+				System.out.println("Post2値変更後:" + post3);//コンソール確認(デバック用)
+
 			//インスタンスの生成
 			ItemsDAO bManuals = new ItemsDAO();
 
@@ -139,6 +147,26 @@ public class ManualUpdateServlet extends HttpServlet {
 				// 結果ページにフォワードする
 				response.sendRedirect("/C2/ManualServlet");
 			}	//削除を押したときの処理ブロック終了
+
+
+			//doPostの分岐3：検索の処理
+			else if(post3.equals("Search")){
+				System.out.println("検索処理------");//コンソール確認(デバック用)
+
+				//リクエストスコープから値を取得
+				String name = request.getParameter("title");
+				System.out.println("検索ワード:" + name);//コンソール確認(デバック用)
+
+				//manual_idでマニュアルを検索する処理を行う
+				List<Items> itemList = bManuals.seach(name);
+
+				//検索結果をリクエストスコープに格納する
+				request.setAttribute("itemList", itemList);
+
+				// 詳細ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
+				dispatcher.forward(request, response);
+			}	//検索処理ブロック終了
 
 
 			//doPostの分岐4：一覧から詳細を開く場合の処理

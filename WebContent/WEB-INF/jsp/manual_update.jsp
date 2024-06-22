@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>famiLink</title>
 <link rel="stylesheet" href="/C2/css/common.css">
+<link rel="stylesheet" href="/C2/css/manual_update.css">
 </head>
 <body>
 	<header>
@@ -45,17 +46,21 @@
 		</div>
 	</header>
 	<main>
-		<p>ManualDetails</p>
+		<div id="manualdetailtitle">
+			<p id="updatemanual">ManualDetails</p>
+		</div>
 		<form method="post" action="/C2/ManualUpdateServlet">
+
+		<c:forEach var="e" items="${itemList}" begin="1" end="1">
+			<td><input type="text" name="heading" value="${e.esc}" class="heading"></td>
+		</c:forEach>
+
 			<c:forEach var="e" items="${itemList}">
 				<table>
 					<tr>
 						<td><input type="hidden" name="manual_id" value="${e.manual_id}"></td>
 					</tr>
-					<tr>
-						<td><input type="text" name="heading" value="${e.esc}"
-							class="heading"></td>
-					</tr>
+
 					<tr id="target">
 						<td><input type="text" name="item" value="${e.heading}"
 							class="items"></td>

@@ -50,7 +50,7 @@
 	   			 <label>
 	        	<input type="text" name = "title" placeholder="検索">
 	    		</label>
-	    		<button type="submit" name = "Seach" value = "Seach" aria-label="検索"></button>
+	    		<button type="submit" name = "manual_search" value = "Search" aria-label="検索"></button>
 			</form>
 		<c:forEach var="e" items="${manualNameList}" >
 			<div class="manualNameLine">
