@@ -4,7 +4,7 @@
 /*タイトル部分*/
 #updatemanual {
 	font-size: 1.5rem;
-	background-color: #8AAEC9;
+	background-color: #F3B4AB;
 	width: 280px;
 	height: 50px;
 	border-radius: 25px 25px 0 0;
@@ -15,6 +15,30 @@
 }
 
 #manualdetailtitle {
-		text-align: center;
-		padding-top: 30px;
-	}
+	text-align: center;
+	padding-top: 30px;
+}
+
+/*フォームのボックス*/
+#form {
+	width: 1300px;
+	margin: 0px auto 80px auto;
+	padding: 80px auto 30px auto;
+	border: 5px solid #F3B4AB;
+	background-color: white;
+}
+
+.boxradius {
+	border-radius:50px;
+	border:2px solid #F3B4AB;
+}
+
+
+.manualDetailLine{
+	display: flex;
+    justify-content: center;
+}
+
+.items{
+	
+}

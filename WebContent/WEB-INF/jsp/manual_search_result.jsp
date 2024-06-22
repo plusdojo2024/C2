@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/manual_home.css">
 	</head>
 	<body>
 		<header>
@@ -38,17 +39,32 @@
 			</div>
 		</header>
 		<main>
-      <p>Manual List</p>
-      <form method="post" action="/C2/ManualServlet">
-        <input type="search">
-        <input type="submit" id="search" name="search" value="search">
-      </form>
-      <a href="/C2/ManualRegistServlet">+</a>
-      <table>
-        <tr><th>お風呂掃除</th></tr>
-        <tr><th>洗濯</th></tr>
-        <tr><th>棚の整理</th></tr>
-      </table>
+			<p class="plus-button"><a href="/C2/ManualRegistServlet"><img src="/C2/img/plusButton2.png" alt="＋ボタン"></a></p>
+	      	<div class="manual-header">
+	      		<p class="manual">Manual</p>
+			</div>
+			<form method = "post" action="/C2/ManualServlet" class="search-form">
+   			 	<label>
+        			<input type="text" name = "title" placeholder="検索">
+    			</label>
+    			<button type="submit" name = "manual_search" value = "Search" aria-label="検索"></button>
+			</form>
+
+			<c:forEach var="e" items="${itemList}" >
+				<div class="manualNameLine">
+					<form method = "post" action = "/C2/ManualUpdateServlet" id ="getDetail">
+						<table class="table">
+		        			<tr>
+					          <td>
+					          	<input type = "hidden" name = "manualID" value="マニュアル詳細へ遷移">
+					            <input type = "hidden" name = "manual_id" value="${e.id}">
+					            <input type="submit" name="manual_name" value="${e.manual_name}" readonly="readonly"  class="manualName">
+					          </td>
+					        </tr>
+					     </table>
+				   	</form>
+				 </div>
+			</c:forEach>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

@@ -165,6 +165,7 @@ public class ManualUpdateServlet extends HttpServlet {
 
 				// 詳細ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_search_result.jsp");
 				dispatcher.forward(request, response);
 			}	//検索処理ブロック終了
 
@@ -181,6 +182,7 @@ public class ManualUpdateServlet extends HttpServlet {
 
 				// 詳細ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_search_result.jsp");
 				dispatcher.forward(request, response);
 			}	//詳細を押したときの処理ブロック終了
 		}	//ログインしていた場合の処理終了
