@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>famiLink</title>
 		<link rel="stylesheet" href="/C2/css/common.css">
+		<link rel="stylesheet" href="/C2/css/task_regist.css">
 	</head>
 	<body>
 		<header>
@@ -39,33 +40,44 @@
 			</div>
 		</header>
 		<main>
-            <h1>new task</h1>
-
+		<div id="newtasktitle">
+            <p id="newtask">New Task</p>
+		</div>
+		<div id="form" class=boxradius>
             <form method="post" action="/C2/TaskServletRegist">
 			<c:forEach var="e" items="${accountList}" >
-                <table>
-                    <tr>
-                        <td><input type="date" id="day" name="day"></td><!-- 期限 -->
-                        <td><input type="text" name="task"placeholder="見出し"></td>
-                    </tr>
-                    <tr>
-                        <td><textarea name="contents"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>To<input type="text" name="to"></td>
-                        <td>From<input type="text" name="register" value="${e.nickname}" readonly="readonly"></td>
-                    </tr>
-                </table>
+				<div class="formbox">
+				 	<input type="date" id="day" name="day">
+				 	<input type="text" name="task" placeholder="タスク">
+                 	<br>
+
+                  <div id="line">
+                 	<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
+                 	<div class="formbox">
+                		&emsp;&emsp;&emsp;<select name="manual_id" >
+                    		<option label="　">0</option>
+                     	 <c:forEach var="e" items="${manualList}">
+                      	  <option label="${e.manual_name}">${e.id}</option>
+                	  	 </c:forEach>
+               	    	</select>
+                    </div>
+                  </div>
+
+              <div id="line2">
+                 <div id="moji">
+                 		&emsp;To<input type="text" name="to">
+                 		From<input type="text" name="register" value="${e.nickname}" readonly="readonly">
+           		</div>
+           			<div id="okbutton">
+           			<input type="submit" value="OK" class=okbutton>
+           			</div>
+           	  </div>
+           	  <br>
+           		</div>
             	</c:forEach>
-                	<select name="manual_id" >
-                    	<option label="　">0</option>
-                      <c:forEach var="e" items="${manualList}">
-                        <option label="${e.manual_name}">${e.id}</option>
-                	  </c:forEach>
-               	    </select>
-                <input type="submit" value="登録">
             </form>
-            </main>
+            </div>
+        </main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
