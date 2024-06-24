@@ -303,6 +303,59 @@ public class GroupsDAO {
 	}
 
 
+	//メンバーの招待チェック
+		public boolean cheack2(int g_id, String name) {
+			Connection conn = null;
+			boolean result = true;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+				//SQLを準備する
+				String sql = "SELECT COUNT(*) FROM groups_member WHERE group_id = ? AND user_id = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				//SQL文を完成させる
+				pStmt.setInt(1, g_id);
+				pStmt.setString(2, name);
+
+				// SQL文を実行する　一件登録できたら成功
+				ResultSet rs = pStmt.executeQuery();
+
+				// ユーザーIDが一致するユーザーがいたかどうかをチェックする
+				rs.next();
+				if (rs.getInt("COUNT(*)") == 1) {
+					result = false;
+					//↓コンソール確認↓
+					System.out.println();
+					System.out.println("ユーザーが重複しています。");
+				}
+			}	//tryEnd
+			catch (SQLException e) {
+				e.printStackTrace();
+			}	//catchEnd1
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}	//catchEnd2
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}	//finallyEnd
+			return result;
+		}
+
+
 	//ユーザーの追放
 	public boolean delete(int g_id, String g_UserId) {
 		Connection conn = null;
