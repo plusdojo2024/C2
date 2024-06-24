@@ -148,9 +148,11 @@ public class GroupsDAO {
 			// SQL文を完成させる
 			pStmt.setString(1, g_list.getGroup_name());
 			pStmt.setString(2, g_list.getIcon());
+			pStmt.setInt(3, g_list.getId());
 
 			// SQL文を完成させるgroups_member
 			pStmt1.setString(1, g_list.getGroup_name());
+			pStmt1.setInt(2, g_list.getId());
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
@@ -210,14 +212,12 @@ public class GroupsDAO {
 
 			pStmt.setString(2, group_name);
 
-			if (user_id!= null && user_id.equals("")) {
-				pStmt.setString(3, user_id);
+			pStmt.setString(3, user_id);
 
 				// SQL文を実行する　一件登録できたら成功
 				if (pStmt.executeUpdate() == 1) {
 					result = true;
 				}
-			}
 
 		}
 
@@ -464,7 +464,7 @@ public class GroupsDAO {
 	}
 
 
-	//groupの一覧表示
+	//groupの詳細表示
 	public List<Groups> select(String card) {
 		Connection conn = null;
 		List<Groups> cardList = new ArrayList<Groups>();

@@ -85,6 +85,8 @@ public class GroupUpdateServlet extends HttpServlet {
 		Boolean editer = Boolean.valueOf(request.getParameter("editer"));
 		String icon = request.getParameter("icon");
 		String invite = request.getParameter("invite");
+		System.out.println("招待状:" + invite);//デバック用
+
 
 
 		// 更新または削除を行う
@@ -96,7 +98,7 @@ public class GroupUpdateServlet extends HttpServlet {
 		//"Update" == "更新"
 		if (request.getParameter("submit").equals("登録")) {
 
-			if (sDao.update(new Groups(0,group_name, user_ID, editer, icon))) {		// 更新成功
+			if (sDao.update(new Groups(intGroupID, group_name, user_ID, editer, icon))) {		// 更新成功
 
 				request.setAttribute("result","内容を更新しました。");
 			}
@@ -106,7 +108,7 @@ public class GroupUpdateServlet extends HttpServlet {
 		}
 		else if(request.getParameter("submit").equals("招待")) {
 			if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
-
+				System.out.println(request.getParameter("submit") + "実行");
 				request.setAttribute("result","内容を更新しました。");
 			}
 			else {			// 更新失敗
