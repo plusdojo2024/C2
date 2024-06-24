@@ -244,7 +244,7 @@ public class GroupsDAO {
 	}
 
 	//ユーザーの追放
-	public boolean delete(String g_id) {
+	public boolean delete(int g_id, String g_UserId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -256,11 +256,12 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM groups_member WHERE user_ID =?";
+			String sql = "DELETE FROM groups_member WHERE group_id =? and user_ID =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setString(1, g_id);
+			pStmt.setInt(1, g_id);
+			pStmt.setString(2, g_UserId);
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
@@ -420,7 +421,7 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT * FROM groups_member WHERE id  =?";
+			String sql = "SELECT * FROM groups_member WHERE group_id  =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1,group);
