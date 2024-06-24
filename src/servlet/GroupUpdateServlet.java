@@ -119,15 +119,17 @@ public class GroupUpdateServlet extends HttpServlet {
 		}
 		else if(post1.equals("招待")) {
 			if(sDao.cheack(invite)) {
-				if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
-					System.out.println(request.getParameter("submit") + "実行");
-					System.out.println();
-					request.setAttribute("result","内容を更新しました。");
-				}
-				else {			// 更新失敗
-					request.setAttribute("result","内容を更新できませんでした。");
-				}
-			}
+				if(sDao.cheack2(intGroupID, invite)) {
+					if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
+						System.out.println(request.getParameter("submit") + "実行");
+						System.out.println();
+						request.setAttribute("result","内容を更新しました。");
+					}
+					else {			// 更新失敗
+						request.setAttribute("result","内容を更新できませんでした。");
+					}
+				}	//cheack2End
+			}	//cheackEnd
 		}
 
 		else {
