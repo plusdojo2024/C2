@@ -48,7 +48,7 @@
 		<form id="update" method="post" action="/C2/GroupUpdateServlet">
 			<!--  -->
 			<table>
-				<c:forEach var="e" items="${GroupsList}" begin="1" end="1">
+				<c:forEach var="e" items="${GroupsList}" begin="0" end="0">
 					<tr>
 						<!--  <td><input type="file" name="image" class="gicon"></td> -->
 						<td><input type="text" name="group_name"
