@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AccountsDAO;
+import dao.GroupsDAO;
 import model.Accounts;
+import model.Groups;
 import model.LoginUser;
 import model.Result;
 
@@ -49,6 +51,18 @@ public class AccountServlet extends HttpServlet {
 
 //		 検索結果をリクエストスコープに格納する
 		request.setAttribute("accountList", accountList);
+
+//ここから現在のグループ名を表示する処理
+		//pr_groupを取得
+		Accounts group = (Accounts)session.getAttribute("pr_group");
+		int pr_group = group.getPr_group();
+		GroupsDAO gDao = new GroupsDAO();
+        List<Groups> cardList = gDao.selectGroupName(pr_group);
+		Groups g = cardList.get(0);
+		String group_name =g.getGroup_name();
+        request.setAttribute("group_name", group_name);
+//ここまで現在のグループ名を表示する処理
+
 		//フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
 		dispatcher.forward(request, response);
@@ -61,15 +75,6 @@ public class AccountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-
-//セッションスコープから取得(グループ参加機能ができてから実装)
-//	HttpSession session = request.getSession();
-//	Accounts pr_group = (Accounts)session.getAttribute("pr_group");
-//	int group = pr_group.getPr_group();
-//	System.out.println("pr_group:"+pr_group);
-
-	//古いパスワードを取得
-		//新しいパスワード変更の場合分け
 
 //リクエストスコープから取得(ユーザーが打ち込んだ情報)
 	request.setCharacterEncoding("UTF-8");

@@ -137,50 +137,34 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
-			// SQL文を準備する
-			String sql = "DELETE FROM GROUP WHERE group_id=?";
+			// SQL文を準備する(UPDATE)
+			String sql = "UPDATE groups set group_name =?, icon =? WHERE id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			//グループ（アイコン、グループ名）insertのバージョンを作る(group_id, group_name, user_ID, editer)
-			String sql2 = "UPDATE groups_member SET group_name =?, user_ID =?, WHERE group_id=?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+			// SQL文を準備する(UPDATE)GROUPS_MEMBER
+			String sql1 = "UPDATE groups_member set group_name =? WHERE group_id=?";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
 			pStmt.setString(1, g_list.getGroup_name());
 			pStmt.setString(2, g_list.getIcon());
-			pStmt2.setString(1, g_list.getGroup_name());
-			pStmt2.setString(2, g_list.getUser_ID());
-			pStmt2.setInt(3, g_list.getGroup_id());
+			pStmt.setInt(3, g_list.getId());
+
+			// SQL文を完成させるgroups_member
+			pStmt1.setString(1, g_list.getGroup_name());
+			pStmt1.setInt(2, g_list.getId());
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
 
-			//グループ（アイコン、グループ名）insertのバージョンを作る（ group_name, user_ID, group_id)
-			/*String sql2 = "INSERT INTO GROUPS VALUES (NULL, ?, ?, ?, ?)";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql2);*/
-
-			// SQL文を完成させる
-
-			if (g_list() != null && !g_list.getGroup_name().equals("")) {
-				pStmt2.setString(1, g_list.getGroup_name());
-			}
-			else {
-				pStmt2.setString(1, null);
-			}
-			if (g_list() != null && !g_list.getUser_ID().equals("")) {
-				pStmt2.setString(2, g_list.getUser_ID());
-			}
-			else {
-				pStmt2.setString(2, null);
-			}
-				pStmt2.setInt(3, g_list.getGroup_id());
-
-
-			//SQLを実行する
-			if (pStmt2.executeUpdate() == 1) {
+			// SQL文を実行する　一件登録できたら成功groups_member
+			if (pStmt1.executeUpdate() == 1) {
 				result = true;
+			}
+			else {
+				result = false;
 			}
 
 
@@ -203,15 +187,14 @@ public class GroupsDAO {
 			}
 		}
 		// 結果を返す
-					return result;
+		return result;
 	}
 
 	//メンバーの招待
-	public boolean insert(Int g_member) {
+	public boolean invite(int group_id, String group_name, String user_id) {
 
 		Connection conn = null;
 		boolean result = false;
-		int autoIncrementKey = 0;
 
 		try {
 			// JDBCドライバを読み込む
@@ -221,21 +204,21 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			//SQLを準備する
-			String sql = "INSERT INTO groups_member VALUES = (NULL, ?)";
+			String sql = "INSERT INTO groups_member VALUES  (NULL, ?, ?, ?, true)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
-			if (g_member.getUser_ID() != null && !g_member.getUser_ID().equals("")) {
-				pStmt.setString(1, g_member.getUser_ID());
-			}
-			else {
-				pStmt.setString(1, "（未設定）");
-			}
+			pStmt.setInt(1, group_id);
 
-			// SQL文を実行する　一件登録できたら成功
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
-			}
+			pStmt.setString(2, group_name);
+
+			pStmt.setString(3, user_id);
+
+				// SQL文を実行する　一件登録できたら成功
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+
 		}
 
 		catch (SQLException e) {
@@ -261,7 +244,7 @@ public class GroupsDAO {
 	}
 
 	//ユーザーの追放
-	public boolean delete(int g_id) {
+	public boolean delete(int g_id, String g_UserId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -273,11 +256,12 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM groups_member WHERE user_ID =?";
+			String sql = "DELETE FROM groups_member WHERE group_id =? and user_ID =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, user_ID);
+			pStmt.setInt(1, g_id);
+			pStmt.setString(2, g_UserId);
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
@@ -377,7 +361,7 @@ public class GroupsDAO {
 
 
 	// 引数user_IDで指定されたレコードを削除し、成功したらtrueを返す
-	public boolean delete(String user_ID) {
+	/*public boolean delete(String user_ID) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -421,7 +405,7 @@ public class GroupsDAO {
 
 		// 結果を返す
 		return result;
-	}
+	}*/
 
 
 
@@ -437,7 +421,7 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT * FROM groups_member WHERE id  =?";
+			String sql = "SELECT * FROM groups_member WHERE group_id  =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1,group);
@@ -481,7 +465,7 @@ public class GroupsDAO {
 	}
 
 
-	//groupの一覧表示
+	//groupの詳細表示
 	public List<Groups> select(String card) {
 		Connection conn = null;
 		List<Groups> cardList = new ArrayList<Groups>();
@@ -507,6 +491,60 @@ public class GroupsDAO {
 						rs.getString("group_name"),
 						rs.getInt("group_id"),
 						rs.getString("user_ID"));
+				cardList.add(record);
+
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+			cardList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			cardList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					cardList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return cardList;
+	}
+	//groupの一覧表示
+	public List<Groups> selectGroupName(int pr_group) {
+		Connection conn = null;
+		List<Groups> cardList = new ArrayList<Groups>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+			// SQL文を準備する
+			String sql = "SELECT * FROM groups WHERE ID  =?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, pr_group);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Groups record = new Groups(
+						rs.getString("group_name")
+						);
 				cardList.add(record);
 
 			}

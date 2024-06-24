@@ -65,6 +65,7 @@
                         <option label="${e.manual_name}">${e.id}</option>
                 	  </c:forEach>
                	    </select>
+
                         <input type="submit" name="submit" value="更新">
                         <input type="submit" name="submit" value="削除">
             </form>

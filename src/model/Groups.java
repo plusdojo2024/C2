@@ -18,6 +18,16 @@ public class Groups implements Serializable {
 
 	}
 
+	public Groups(int id) {
+		super();
+		this.id = id;
+	}
+
+	public Groups(String group_name) {
+		super();
+		this.group_name = group_name;
+	}
+
 	public Groups(String user_ID, String group_name) {
 		super();
 		this.user_ID = user_ID;

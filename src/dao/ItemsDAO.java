@@ -414,7 +414,7 @@ public class ItemsDAO {
 
 	//松岡作成
 	//ホームから検索を行う処理
-	public List<Items> seach(String title) {
+	public List<Items> seach(int ID, String title) {
 		Connection conn = null;
 		List<Items> seachList = new ArrayList<Items>();
 
@@ -427,15 +427,15 @@ public class ItemsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			// SQL文を準備する
-			String sql ="SELECT * FROM Items WHERE  manual_name Like ?";
+			String sql ="SELECT * FROM Items WHERE manual_name Like ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			if(title != null) {
-				pStmt.setString(1, "%" + title + "%");
+				pStmt.setString(2, "%" + title + "%");
 			}
 			else {
-				pStmt.setString(1, "%");
+				pStmt.setString(2, "%");
 			}
 
 			// SQL文を実行し、結果表を取得する
