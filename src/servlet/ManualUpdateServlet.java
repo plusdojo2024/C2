@@ -165,10 +165,10 @@ public class ManualUpdateServlet extends HttpServlet {
 				System.out.println("検索ワード:" + name);//コンソール確認(デバック用)
 
 				//manual_idでマニュアルを検索する処理を行う
-				List<Manuals> manualNameList = aManuals.search(intManual_ID, name);
+				List<Manuals> manualSearchList = aManuals.search(groupID, name);		//オオト変更
 
 				//検索結果をリクエストスコープに格納する
-				request.setAttribute("manualNameList", manualNameList);
+				request.setAttribute("manualSearchList", manualSearchList);
 
 				// 詳細ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_search_result.jsp");

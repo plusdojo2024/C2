@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -50,7 +51,7 @@
     			<button type="submit" name = "manual_search" value = "Search" aria-label="検索"></button>
 			</form>
 
-			<c:forEach var="e" items="${itemList}" >
+			<c:forEach var="e" items="${manualSearchList}" >
 				<div class="manualNameLine">
 					<form method = "post" action = "/C2/ManualUpdateServlet" id ="getDetail">
 						<table class="table">

@@ -393,13 +393,13 @@ public class ManualsDAO {
 
 
 	//大戸作成
-	//グループ番号からマニュアルを選択して画面に表示する
+	//グループ番号と検索ワードからマニュアル一覧を表示する
 	public List<Manuals> search(int group_number, String title) {
 
 		//変数設定
 		Connection conn = null;
 		//int countNumber = 0;	// 後で更新および削除する番号
-		List<Manuals> manualNameList = select(new Manuals()); //これなんだ？？？
+		List<Manuals> manualSearchList = select(new Manuals());
 
 		try {
 
@@ -418,7 +418,7 @@ public class ManualsDAO {
 			pStmt.setInt(1, group_number);
 			System.out.println("ManualsDAOのselectManualsメソッド/group_ID:" + group_number);//デバック用
 			pStmt.setString(2, "%" + title + "%");
-			System.out.println("ManualsDAOのselectManualsメソッド/group_ID:" + title);//デバック用
+			System.out.println("ManualsDAOのselectManualsメソッド/title:" + title);//デバック用
 
 			//SQL文の実行および結果の取得
 			ResultSet rs = pStmt.executeQuery();
@@ -431,10 +431,11 @@ public class ManualsDAO {
 					rs.getString("manual_name")
 				);
 				System.out.println("ManualsDAOの結果表/ID:" + rs.getInt("id"));//デバック用
+				System.out.println("ManualsDAOの結果表/group_number:" + rs.getInt("group_number"));//デバック用
 				System.out.println("ManualsDAOの結果表/manual_name:" + rs.getString("manual_name"));//デバック用
-				manualNameList.add(record);
+				manualSearchList.add(record);
 			}
-			System.out.println("ManualsDAOの結果表/manualNameList:" + manualNameList);//デバック用
+			System.out.println("ManualsDAOの結果表/manualNameList:" + manualSearchList);//デバック用
 		}	//try終了タグ
 		//エラー処理
 		catch (SQLException e) {
@@ -458,7 +459,7 @@ public class ManualsDAO {
 			//System.out.println("countNumber" + countNumber);
 		}
 		//戻り値
-		return manualNameList;
+		return manualSearchList;
 	}	//search終了タグ
 
 
