@@ -72,6 +72,11 @@ public class GroupUpdateServlet extends HttpServlet {
 		LoginUser login = (LoginUser)session.getAttribute("user_ID");
 		String user = login.getLoginUserId();
 
+		//セッションスコープからpr_groupを持ってくる
+		LoginUser groupID = (LoginUser)session.getAttribute("user_ID");
+		int intGroupID = groupID.getGroupId();
+
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 
@@ -100,7 +105,7 @@ public class GroupUpdateServlet extends HttpServlet {
 			}
 		}
 		else if(request.getParameter("submit").equals("招待")) {
-			if (sDao.insert(invite)) {		// 更新成功
+			if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
 
 				request.setAttribute("result","内容を更新しました。");
 			}

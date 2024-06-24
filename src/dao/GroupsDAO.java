@@ -185,11 +185,11 @@ public class GroupsDAO {
 			}
 		}
 		// 結果を返す
-					return result;
+		return result;
 	}
 
 	//メンバーの招待
-	public boolean insert(String g_member) {
+	public boolean invite(int group_id, String group_name, String user_id) {
 
 		Connection conn = null;
 		boolean result = false;
@@ -202,12 +202,17 @@ public class GroupsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
 			//SQLを準備する
-			String sql = "INSERT INTO groups_member VALUES = (NULL, ?)";
+			String sql = "INSERT INTO groups_member VALUES  (NULL, ?, ?, ?, true)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
-			if (g_member != null && !g_member.equals("")) {
-				pStmt.setString(1, g_member);
+			pStmt.setInt(1, group_id);
+
+			pStmt.setString(2, group_name);
+
+			if (user_id!= null && user_id.equals("")) {
+				pStmt.setString(3, user_id);
+
 				// SQL文を実行する　一件登録できたら成功
 				if (pStmt.executeUpdate() == 1) {
 					result = true;
