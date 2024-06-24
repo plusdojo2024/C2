@@ -54,11 +54,11 @@
 			</tr>
 			<tr>
 			  <td><h2>MEMBER</h2></td>
-			  <td><input type="text" placeholder= "例：para_man" class="newMember"></td>
-			  <td><input type="submit" value="招待"></td>
+			  <td><input type="text" placeholder= "例：para_man" class="newMember" name ="invite"></td>
+			  <td><input type="submit" name="submit" value="招待"></td>
 			</tr>
 			<tr>
-			  <td><input type="submit" value ="登録"></td>
+			  <td><input type="submit" name="submit" value ="登録"></td>
 			</tr>
 			</table>
 			</form>

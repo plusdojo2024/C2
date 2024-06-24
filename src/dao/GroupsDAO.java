@@ -137,50 +137,32 @@ public class GroupsDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
 
-			// SQL文を準備する
-			String sql = "DELETE FROM GROUP WHERE group_id=?";
+			// SQL文を準備する(UPDATE)
+			String sql = "UPDATE groups set group_name =?, icon =? WHERE id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			//グループ（アイコン、グループ名）insertのバージョンを作る(group_id, group_name, user_ID, editer)
-			String sql2 = "UPDATE groups_member SET group_name =?, user_ID =?, WHERE group_id=?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+			// SQL文を準備する(UPDATE)GROUPS_MEMBER
+			String sql1 = "UPDATE groups_member set group_name =? WHERE group_id=?";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
 			pStmt.setString(1, g_list.getGroup_name());
 			pStmt.setString(2, g_list.getIcon());
-			pStmt2.setString(1, g_list.getGroup_name());
-			pStmt2.setString(2, g_list.getUser_ID());
-			pStmt2.setInt(3, g_list.getGroup_id());
+
+			// SQL文を完成させるgroups_member
+			pStmt1.setString(1, g_list.getGroup_name());
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
 
-			//グループ（アイコン、グループ名）insertのバージョンを作る（ group_name, user_ID, group_id)
-			/*String sql2 = "INSERT INTO GROUPS VALUES (NULL, ?, ?, ?, ?)";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql2);*/
-
-			// SQL文を完成させる
-
-			if (g_list() != null && !g_list.getGroup_name().equals("")) {
-				pStmt2.setString(1, g_list.getGroup_name());
-			}
-			else {
-				pStmt2.setString(1, null);
-			}
-			if (g_list() != null && !g_list.getUser_ID().equals("")) {
-				pStmt2.setString(2, g_list.getUser_ID());
-			}
-			else {
-				pStmt2.setString(2, null);
-			}
-				pStmt2.setInt(3, g_list.getGroup_id());
-
-
-			//SQLを実行する
-			if (pStmt2.executeUpdate() == 1) {
+			// SQL文を実行する　一件登録できたら成功groups_member
+			if (pStmt1.executeUpdate() == 1) {
 				result = true;
+			}
+			else {
+				result = false;
 			}
 
 
@@ -207,11 +189,10 @@ public class GroupsDAO {
 	}
 
 	//メンバーの招待
-	public boolean insert(Int g_member) {
+	public boolean insert(String g_member) {
 
 		Connection conn = null;
 		boolean result = false;
-		int autoIncrementKey = 0;
 
 		try {
 			// JDBCドライバを読み込む
@@ -225,17 +206,14 @@ public class GroupsDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//SQL文を完成させる
-			if (g_member.getUser_ID() != null && !g_member.getUser_ID().equals("")) {
-				pStmt.setString(1, g_member.getUser_ID());
-			}
-			else {
-				pStmt.setString(1, "（未設定）");
+			if (g_member != null && !g_member.equals("")) {
+				pStmt.setString(1, g_member);
+				// SQL文を実行する　一件登録できたら成功
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
 			}
 
-			// SQL文を実行する　一件登録できたら成功
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
-			}
 		}
 
 		catch (SQLException e) {
@@ -261,7 +239,7 @@ public class GroupsDAO {
 	}
 
 	//ユーザーの追放
-	public boolean delete(int g_id) {
+	public boolean delete(String g_id) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -277,7 +255,7 @@ public class GroupsDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, user_ID);
+			pStmt.setString(1, g_id);
 
 			// SQL文を実行する　一件登録できたら成功
 			if (pStmt.executeUpdate() == 1) {
@@ -377,7 +355,7 @@ public class GroupsDAO {
 
 
 	// 引数user_IDで指定されたレコードを削除し、成功したらtrueを返す
-	public boolean delete(String user_ID) {
+	/*public boolean delete(String user_ID) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -421,7 +399,7 @@ public class GroupsDAO {
 
 		// 結果を返す
 		return result;
-	}
+	}*/
 
 
 

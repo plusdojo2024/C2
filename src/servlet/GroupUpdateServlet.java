@@ -68,6 +68,10 @@ public class GroupUpdateServlet extends HttpServlet {
 			return;
 		}
 
+		//ユーザーごとに所属しているグループのデータを取得
+		LoginUser login = (LoginUser)session.getAttribute("user_ID");
+		String user = login.getLoginUserId();
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 
@@ -75,6 +79,7 @@ public class GroupUpdateServlet extends HttpServlet {
 		String user_ID = request.getParameter("user_ID");
 		Boolean editer = Boolean.valueOf(request.getParameter("editer"));
 		String icon = request.getParameter("icon");
+		String invite = request.getParameter("invite");
 
 
 		// 更新または削除を行う
@@ -84,16 +89,26 @@ public class GroupUpdateServlet extends HttpServlet {
 
 
 		//"Update" == "更新"
-		if (request.getParameter("submit").equals("Update")) {
+		if (request.getParameter("submit").equals("登録")) {
 
-		if (sDao.update(new Groups(0,group_name, user_ID, editer, icon))) {		// 更新成功
+			if (sDao.update(new Groups(0,group_name, user_ID, editer, icon))) {		// 更新成功
 
 				request.setAttribute("result","内容を更新しました。");
-		}
-		else {			// 更新失敗
+			}
+			else {			// 更新失敗
 				request.setAttribute("result","内容を更新できませんでした。");
 			}
 		}
+		else if(request.getParameter("submit").equals("招待")) {
+			if (sDao.insert(invite)) {		// 更新成功
+
+				request.setAttribute("result","内容を更新しました。");
+			}
+			else {			// 更新失敗
+				request.setAttribute("result","内容を更新できませんでした。");
+			}
+		}
+
 		else {
 			if (sDao.delete(user_ID)) {	// 削除成功
 				request.setAttribute("result", "削除しました。");
@@ -102,6 +117,14 @@ public class GroupUpdateServlet extends HttpServlet {
 				request.setAttribute("result", "削除できませんでした。");
 			}
 		}
+
+		//GroupsDAOに処理してもらう
+		GroupsDAO groupsDao = new GroupsDAO();
+        List<Groups> cardList = groupsDao.select(user);
+
+
+		//リクエストスコープに格納する
+		request.setAttribute("cardList", cardList);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
