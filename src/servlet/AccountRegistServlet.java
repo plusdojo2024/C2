@@ -57,6 +57,7 @@ public class AccountRegistServlet extends HttpServlet {
         }
         else {
         	System.out.println("失敗");
+			request.setAttribute("result","既に利用されているUserIDです！");
     		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/create_account.jsp");
     		dispatcher.forward(request, response);
         }

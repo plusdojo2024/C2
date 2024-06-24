@@ -59,15 +59,42 @@
 			    <tr>
 			      <td>
 					<input type="submit" name="submit" value="OK" class=okbutton>
+					<p>
+						<span id="error_message"></span>
+					</p>
 			      <td>
 			    </tr>
 			  </table>
 			</form>
-		</div>
 		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
 		<script src="/C2/js/common.js"></script>
+		<script>
+		'use strict';
+		//登録結果Windowアラート表示
+			if('${result}' === '') {
+			}
+			else {
+				window.alert('${result}');
+			}
+		</script>
+	<script>
+		'use strict';
+
+		 /* HTML要素をオブジェクトとして取得する */
+		 	let formObj = document.getElementById('account_regist_form');
+			let errorMessageObj = document.getElementById('error_message');
+
+		 /* [ログイン]ボタンをクリックしたときの処理 */
+			formObj.onsubmit = function() {
+		 	 if (!formObj.user_ID.value || !formObj.pw.value || !formObj.mail.value || !formObj.nickname.value) {
+		  	  errorMessageObj.textContent = '未入力の項目があります。';
+		   	 return false;
+		  	}
+		 	 errorMessageObj.textContent = null;
+			};
+	</script>
 	</body>
 </html>
