@@ -115,6 +115,7 @@ public class ManualUpdateServlet extends HttpServlet {
 				String[] items = request.getParameterValues("item");
 				String[] contents = request.getParameterValues("content");
 				String[] images = request.getParameterValues("images");
+
 				for(String debug : items) {
 				System.out.println("MUpDtServのitem確認:" + debug);//コンソール確認(デバック用)
 				}

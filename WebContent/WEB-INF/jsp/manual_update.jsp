@@ -49,48 +49,46 @@
 		<div id="manualdetailtitle">
 			<p id="updatemanual">ManualDetails</p>
 		</div>
-		<form method="post" action="/C2/ManualUpdateServlet" class=boxradius>
+		<div class="pinkLine">
+			<form method="post" action="/C2/ManualUpdateServlet" class=boxradius>
 
-		<c:forEach var="e" items="${itemList}" begin="1" end="1">
-			<div class="fb">
-				<div id="formbox">
-					<input type="text" name="heading" value="${e.esc}" class="heading">
-				</div>
-			</div>
-		</c:forEach>
-
-			<c:forEach var="e" items="${itemList}">
-				<div class="manualDetailLine">
-					<table class="table">
-						<tr id="target">
-							<td class="hidden"><input type="hidden" name="manual_id" value="${e.manual_id}" ></td>
-
-
-							<td class="item-td"><input type="text" name="item" value="${e.heading}"
-								class="items"></td>
-							<td class="content-td"><input type="text" name="content" value="${e.contents}"
-								class="contents"></td>
-							<td class="img">
-								<p>画像
-									<input type="file" name="images" value="${e.image}"
-								class="images">
-								</p>
-							</td>
-							<td>
-							<img src="/C2/img/minusButton3.png"  id = "minus" onclick="deleteExample(this);">&emsp;</td>
-						</tr>
-					</table>
+			<c:forEach var="e" items="${itemList}" begin="0" end="0">
+				<div class="fb">
+					<div id="formbox">
+						<input type="text" name="heading" value="${e.esc}" class="heading">
 					</div>
-
+				</div>
 			</c:forEach>
-			<input type="submit" id="ok" name="manual_update" value="OK"
-				onclick="checkMessage();"> <input type="submit" id="delete"
-				name="manual_delete" value="Delete" onclick="manualDelete();">
 
-		</form>
+				<c:forEach var="e" items="${itemList}">
+					<div class="manualDetailLine">
+						<table class="table">
+							<tr id="target">
+								<td class="hidden"><input type="hidden" name="manual_id" value="${e.manual_id}" >
+								<input type="hidden" name="image" value="${e.image}"></td>
 
+								<td class="item-td"><input type="text" name="item" value="${e.heading}"
+									class="items"></td>
+								<td class="content-td"><input type="text" name="content" value="${e.contents}"
+									class="contents">
+								<td class="m-button">
+								<img src="/C2/img/minusButton3.png"  id = "minus" onclick="deleteExample(this);">&emsp;</td>
+							</tr>
+						</table>
+						</div>
 
-		<button id="add" onclick="addExample();">+</button>
+				</c:forEach>
+				<p class="buttons">
+					<img src="/C2/img/plusButton2.png" id = "add" onclick="addExample();">
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					<input type="submit" id="ok" name="manual_update" value="OK"
+					onclick="checkMessage();"> <input type="submit" id="delete"
+					name="manual_delete" value="Delete" onclick="manualDelete();">
+				</p>
+			</form>
+
+		</div>
 	</main>
 	<footer>
 		<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights

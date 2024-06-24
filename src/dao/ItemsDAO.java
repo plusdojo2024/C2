@@ -255,12 +255,16 @@ public class ItemsDAO {
 				else {
 					pStmt3.setString(4, "（未設定）");
 				}
-				if (images[i] != null && !images[i] .equals("")) {
+				/*if (images[i] != null && !images[i] .equals("")) {
 					pStmt3.setString(5, images[i] );
 				}
 				else {
 					pStmt3.setString(5, "（未設定）");
 				}
+				*/
+
+				pStmt3.setString(5, "image" );
+
 				if (pStmt3.executeUpdate() != 1) {
 					result = false;
 					break;

@@ -48,7 +48,7 @@
 				</div>
 				<form method = "post" action="/C2/ManualUpdateServlet" class="search-form">
 	   			 <label>
-	        	<input type="text" name = "title" placeholder="検索">
+	        	<input type="text" name = "title" placeholder="　　検索">
 	    		</label>
 	    		<button type="submit" name = "manual_search" value = "Search" aria-label="検索"></button>
 			</form>
