@@ -67,6 +67,8 @@ public class GroupUpdateServlet extends HttpServlet {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
+		System.out.println();
+		System.out.println("-----グループ詳細画面------");//コンソール確認(デバック用)
 
 		//ユーザーごとに所属しているグループのデータを取得
 		LoginUser login = (LoginUser)session.getAttribute("user_ID");
@@ -80,14 +82,23 @@ public class GroupUpdateServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 
+		//更新メソッド判定用パラメータの取得
+		String post1 = request.getParameter("submit");
+		System.out.println("Post1値変更まえ:" + post1);//コンソール確認(デバック用)
+		if(post1 == null) {
+			post1 = "このメソッドは呼ばれていません。";
+		}
+		System.out.println("Post1値変更あと:" + post1);//コンソール確認(デバック用)
+
+
+
 		String group_name = request.getParameter("group_name");
 		String user_ID = request.getParameter("user_ID");
 		Boolean editer = Boolean.valueOf(request.getParameter("editer"));
 		String icon = request.getParameter("icon");
 		String invite = request.getParameter("invite");
 		System.out.println("招待状:" + invite);//デバック用
-
-
+		String delete = request.getParameter("delete");
 
 		// 更新または削除を行う
 		GroupsDAO sDao = new GroupsDAO();
@@ -96,7 +107,7 @@ public class GroupUpdateServlet extends HttpServlet {
 
 
 		//"Update" == "更新"
-		if (request.getParameter("submit").equals("登録")) {
+		if (post1.equals("登録")) {
 
 			if (sDao.update(new Groups(intGroupID, group_name, user_ID, editer, icon))) {		// 更新成功
 
@@ -106,18 +117,23 @@ public class GroupUpdateServlet extends HttpServlet {
 				request.setAttribute("result","内容を更新できませんでした。");
 			}
 		}
-		else if(request.getParameter("submit").equals("招待")) {
-			if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
-				System.out.println(request.getParameter("submit") + "実行");
-				request.setAttribute("result","内容を更新しました。");
-			}
-			else {			// 更新失敗
-				request.setAttribute("result","内容を更新できませんでした。");
-			}
+		else if(post1.equals("招待")) {
+			if(sDao.cheack(invite)) {
+				if(sDao.cheack2(intGroupID, invite)) {
+					if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
+						System.out.println(request.getParameter("submit") + "実行");
+						System.out.println();
+						request.setAttribute("result","内容を更新しました。");
+					}
+					else {			// 更新失敗
+						request.setAttribute("result","内容を更新できませんでした。");
+					}
+				}	//cheack2End
+			}	//cheackEnd
 		}
 
 		else {
-			if (sDao.delete(user_ID)) {	// 削除成功
+			if (sDao.delete(intGroupID,delete)) {	// 削除成功
 				request.setAttribute("result", "削除しました。");
 			}
 			else {			// 削除失敗

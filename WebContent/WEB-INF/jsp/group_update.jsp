@@ -48,9 +48,9 @@
 		<form id="update" method="post" action="/C2/GroupUpdateServlet">
 			<!--  -->
 			<table>
-				<c:forEach var="e" items="${GroupsList}" begin="1" end="1">
+				<c:forEach var="e" items="${GroupsList}" begin="0" end="0">
 					<tr>
-						<td><input type="file" name="image" class="gicon"></td>
+						<!--  <td><input type="file" name="image" class="gicon"></td> -->
 						<td><input type="text" name="group_name"
 							value="${e.group_name}" class="gName"></td>
 					</tr>
@@ -58,9 +58,8 @@
 				<c:forEach var="e" items="${GroupsList}">
 					<tr>
 						<td><h2>MEMBER</h2></td>
-						<td><input type="text" value="${e.user_ID}" class="member"></td>
-						<td><button onclick="deleteExample(this);">-</button></td>
-						<td><input type="checkbox" class="agreement"></td>
+						<td><input type="text" value="${e.user_ID}" class="member" name="delete"></td>
+						<!-- <td><button onclick="deleteExample(this);">-</button></td> -->
 					</tr>
 				</c:forEach>
 				<tr>

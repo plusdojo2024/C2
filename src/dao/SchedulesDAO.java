@@ -161,7 +161,7 @@ public class SchedulesDAO {
 				pStmt.setString(3, s_detail.getContents());
 			}
 			else {
-				pStmt.setString(3, "（未設定）");
+				pStmt.setString(3, null);
 			}
 			pStmt.setString(4, s_detail.getRegister());
 			pStmt.setDate(5, s_detail.getDeadline());
@@ -217,7 +217,7 @@ public class SchedulesDAO {
 				pStmt.setString(1, s_detail.getTask());
 			}
 			else {
-				pStmt.setString(1, null);
+				pStmt.setString(1,"未設定");
 			}
 
 			if (s_detail.getContents() != null && !s_detail.getContents().equals("")) {

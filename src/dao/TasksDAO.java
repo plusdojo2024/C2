@@ -285,7 +285,7 @@ public class TasksDAO {
 				pStmt.setString(3, list.getContents());
 			}
 			else {
-				pStmt.setString(3, "（未設定）");
+				pStmt.setString(3, "");
 			}
 			//today文
 				pStmt.setDate(4, list.getDeadline());
@@ -370,7 +370,7 @@ public class TasksDAO {
 				pStmt.setString(1, up.getTask());
 			}
 			else {
-				pStmt.setString(1, null);
+				pStmt.setString(1, "未設定");
 			}
 			//Contents文
 			if (up.getContents() != null && !up.getContents().equals("")) {
@@ -438,7 +438,7 @@ public class TasksDAO {
 		return result;
 	}
 
-	//タスクの更新(マニュアルリンクを洗濯していない場合):update
+	//タスクの更新(マニュアルリンクを選択していない場合):update
 	public boolean updateNoLink(Tasks up) {
 
 		Connection conn = null;
@@ -462,7 +462,7 @@ public class TasksDAO {
 				pStmt.setString(1, up.getTask());
 			}
 			else {
-				pStmt.setString(1, null);
+				pStmt.setString(1, "未設定");
 			}
 			//Contents文
 			if (up.getContents() != null && !up.getContents().equals("")) {
