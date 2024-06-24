@@ -392,5 +392,74 @@ public class ManualsDAO {
 	}	//selectManuals終了タグ
 
 
+	//大戸作成
+	//グループ番号からマニュアルを選択して画面に表示する
+	public List<Manuals> search(int group_number, String title) {
+
+		//変数設定
+		Connection conn = null;
+		//int countNumber = 0;	// 後で更新および削除する番号
+		List<Manuals> manualNameList = select(new Manuals()); //これなんだ？？？
+
+		try {
+
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/famiLink", "sa", "");
+
+
+			//SQL文の準備
+			String sql = "SELECT * FROM MANUALS WHERE GROUP_NUMBER = ? AND MANUAL_NAME LIKE ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			//SQL文の完成
+			pStmt.setInt(1, group_number);
+			System.out.println("ManualsDAOのselectManualsメソッド/group_ID:" + group_number);//デバック用
+			pStmt.setString(2, "%" + title + "%");
+			System.out.println("ManualsDAOのselectManualsメソッド/group_ID:" + title);//デバック用
+
+			//SQL文の実行および結果の取得
+			ResultSet rs = pStmt.executeQuery();
+
+			//結果表のコピー
+			while (rs.next()) {
+				Manuals record = new Manuals(
+					rs.getInt("id"),
+					rs.getInt("group_number"),
+					rs.getString("manual_name")
+				);
+				System.out.println("ManualsDAOの結果表/ID:" + rs.getInt("id"));//デバック用
+				System.out.println("ManualsDAOの結果表/manual_name:" + rs.getString("manual_name"));//デバック用
+				manualNameList.add(record);
+			}
+			System.out.println("ManualsDAOの結果表/manualNameList:" + manualNameList);//デバック用
+		}	//try終了タグ
+		//エラー処理
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		//finaly処理
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			//結果をコンソールに表示（確認用）
+			//System.out.println("countNumber" + countNumber);
+		}
+		//戻り値
+		return manualNameList;
+	}	//search終了タグ
+
 
 }//manualDAO終了タグ

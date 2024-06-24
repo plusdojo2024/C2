@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ItemsDAO;
+import dao.ManualsDAO;
 import model.Items;
+import model.LoginUser;
+import model.Manuals;
 import model.Result;
 
 /**
@@ -64,6 +67,9 @@ public class ManualUpdateServlet extends HttpServlet {
 
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
+			LoginUser user_ID = (LoginUser)session.getAttribute("user_ID");
+			int groupID = user_ID.getGroupId();
+			System.out.println("ホーム画面のセッションスコープ確認/group_ID:"+ groupID);//デバック用
 				//マニュアルのidを取り出す
 				int intManual_ID = 0;
 				if(request.getParameter("manual_id") != null) {
@@ -97,6 +103,7 @@ public class ManualUpdateServlet extends HttpServlet {
 
 			//インスタンスの生成
 			ItemsDAO bManuals = new ItemsDAO();
+			ManualsDAO aManuals = new ManualsDAO();
 
 
 			//doPostの分岐1：更新を押した場合の処理
@@ -158,14 +165,13 @@ public class ManualUpdateServlet extends HttpServlet {
 				System.out.println("検索ワード:" + name);//コンソール確認(デバック用)
 
 				//manual_idでマニュアルを検索する処理を行う
-				List<Items> itemList = bManuals.seach(name);
+				List<Manuals> manualNameList = aManuals.search(intManual_ID, name);
 
 				//検索結果をリクエストスコープに格納する
-				request.setAttribute("itemList", itemList);
+				request.setAttribute("manualNameList", manualNameList);
 
 				// 詳細ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
-				//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_search_result.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_search_result.jsp");
 				dispatcher.forward(request, response);
 			}	//検索処理ブロック終了
 
@@ -182,7 +188,6 @@ public class ManualUpdateServlet extends HttpServlet {
 
 				// 詳細ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
-				//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_search_result.jsp");
 				dispatcher.forward(request, response);
 			}	//詳細を押したときの処理ブロック終了
 		}	//ログインしていた場合の処理終了
