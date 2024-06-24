@@ -36,7 +36,7 @@ function today(){
 		   break;
 	   }
 
-	    document.getElementById('today').textContent = year + "/" + month + "/" + date + "/" + "（" + day + "）";
+	    document.getElementById('today').textContent = year + "/" + month + "/" + date + "（" + day + "）";
 
 	    refresh();
 	}
