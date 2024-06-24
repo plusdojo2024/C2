@@ -52,7 +52,7 @@ public class AccountServlet extends HttpServlet {
 //		 検索結果をリクエストスコープに格納する
 		request.setAttribute("accountList", accountList);
 
-//現在のグループ名を表示する処理
+//ここから現在のグループ名を表示する処理
 		//pr_groupを取得
 		Accounts group = (Accounts)session.getAttribute("pr_group");
 		int pr_group = group.getPr_group();
@@ -60,8 +60,8 @@ public class AccountServlet extends HttpServlet {
         List<Groups> cardList = gDao.selectGroupName(pr_group);
 		Groups g = cardList.get(0);
 		String group_name =g.getGroup_name();
-		System.out.println("group_name"+group_name);
-        request.setAttribute("pr_group", pr_group);
+        request.setAttribute("group_name", group_name);
+//ここまで現在のグループ名を表示する処理
 
 		//フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account_update.jsp");
