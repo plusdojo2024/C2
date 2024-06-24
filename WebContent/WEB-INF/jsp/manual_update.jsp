@@ -52,25 +52,33 @@
 		<form method="post" action="/C2/ManualUpdateServlet" class=boxradius>
 
 		<c:forEach var="e" items="${itemList}" begin="1" end="1">
-			<td><input type="text" name="heading" value="${e.esc}" class="heading"></td>
+			<div class="fb">
+				<div id="formbox">
+					<input type="text" name="heading" value="${e.esc}" class="heading">
+				</div>
+			</div>
 		</c:forEach>
 
 			<c:forEach var="e" items="${itemList}">
 				<div class="manualDetailLine">
-					<table>
-					<tr>
-						<td><input type="hidden" name="manual_id" value="${e.manual_id}"></td>
-					</tr>
+					<table class="table">
+						<tr id="target">
+							<td class="hidden"><input type="hidden" name="manual_id" value="${e.manual_id}" ></td>
 
-					<tr id="target">
-						<td><input type="text" name="item" value="${e.heading}"
-							class="items"></td>
-						<td><input type="text" name="content" value="${e.contents}"
-							class="contents"></td>
-						<td><input type="file" name="images" value="${e.image}"
-							class="images"></td>
-						<td><button onclick="deleteExample(this);">-</button> <br></td>
-					</tr>
+
+							<td class="item-td"><input type="text" name="item" value="${e.heading}"
+								class="items"></td>
+							<td class="content-td"><input type="text" name="content" value="${e.contents}"
+								class="contents"></td>
+							<td class="img">
+								<p>画像
+									<input type="file" name="images" value="${e.image}"
+								class="images">
+								</p>
+							</td>
+							<td>
+							<img src="/C2/img/minusButton3.png"  id = "minus" onclick="deleteExample(this);">&emsp;</td>
+						</tr>
 					</table>
 					</div>
 

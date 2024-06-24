@@ -44,7 +44,7 @@
 	      	<div class="manual-header">
 	      		<p class="manual">Manual</p>
 			</div>
-			<form method = "post" action="/C2/ManualServlet" class="search-form">
+			<form method = "post" action="/C2/ManualUpdateServlet" class="search-form">
    			 	<label>
         			<input type="text" name = "title" placeholder="検索">
     			</label>
