@@ -51,8 +51,14 @@
         		<table class="table">
           			<tr>
             			<td>
-              				<label>User ID ※変更不可<br>
+              				<label>　　　　　　User ID （変更不可）<br>
                 				<input type="text" name="user_ID" value="${e.user_ID}" class=radius readonly="readonly">
+              				</label>
+            			</td>
+            		<tr>
+            			<td>
+              				<label>Nickname<br>
+                				<input type="text" name="nickname" value="${e.nickname}" class=radius>
               				</label>
             			</td>
           			</tr>
@@ -74,13 +80,6 @@
             			<td>
               				<label>New Password<br>
                 				<input type="text" name="newPassword" class=radius placeholder="新しいパスワードを入力">
-              				</label>
-            			</td>
-          			</tr>
-          			<tr>
-            			<td>
-              				<label>Nickname<br>
-                				<input type="text" name="nickname" value="${e.nickname}" class=radius>
               				</label>
             			</td>
           			</tr>
