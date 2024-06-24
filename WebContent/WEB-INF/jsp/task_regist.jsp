@@ -51,17 +51,8 @@
 				 	<input type="text" name="task" placeholder="タスク">
                  	<br>
 
-                  <div id="line">
+
                  	<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
-                 	<div class="formbox">
-                		&emsp;&emsp;&emsp;<select name="manual_id" >
-                    		<option label="　">0</option>
-                     	 <c:forEach var="e" items="${manualList}">
-                      	  <option label="${e.manual_name}">${e.id}</option>
-                	  	 </c:forEach>
-               	    	</select>
-                    </div>
-                  </div>
 
               <div id="line2">
                  <div id="moji">
@@ -75,6 +66,15 @@
            	  <br>
            		</div>
             	</c:forEach>
+					<div class="formbox">
+                		&emsp;&emsp;&emsp;<select name="manual_id" >
+                    		<option label="　">0</option>
+                     	 <c:forEach var="e" items="${manualList}">
+                      	  <option label="${e.manual_name}">${e.id}</option>
+                	  	 </c:forEach>
+               	    	</select>
+                    </div>
+
             </form>
             </div>
         </main>

@@ -67,11 +67,6 @@
 		border-bottom: 4px solid #7DE3A1;
 	}
 
-/*テキストボックスとマニュアルボタンを並べる*/
-	#line {
-		display: flex;
-		margin:auto 0px 10px 98px;
-	}
 
 /*フォームのテキストボックスの大きさ*/
 	textarea[name=contents] {
