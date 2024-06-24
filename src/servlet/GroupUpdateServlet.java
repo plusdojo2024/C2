@@ -67,6 +67,8 @@ public class GroupUpdateServlet extends HttpServlet {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
+		System.out.println();
+		System.out.println("-----グループ詳細画面------");//コンソール確認(デバック用)
 
 		//ユーザーごとに所属しているグループのデータを取得
 		LoginUser login = (LoginUser)session.getAttribute("user_ID");
@@ -82,11 +84,11 @@ public class GroupUpdateServlet extends HttpServlet {
 
 		//更新メソッド判定用パラメータの取得
 		String post1 = request.getParameter("submit");
-		System.out.println("Post1値変更前:" + post1);//コンソール確認(デバック用)
+		System.out.println("Post1値変更まえ:" + post1);//コンソール確認(デバック用)
 		if(post1 == null) {
 			post1 = "このメソッドは呼ばれていません。";
 		}
-		System.out.println("Post1値変更後:" + post1);//コンソール確認(デバック用)
+		System.out.println("Post1値変更あと:" + post1);//コンソール確認(デバック用)
 
 
 
@@ -97,9 +99,6 @@ public class GroupUpdateServlet extends HttpServlet {
 		String invite = request.getParameter("invite");
 		System.out.println("招待状:" + invite);//デバック用
 		String delete = request.getParameter("delete");
-		System.out.println("追放:" + delete);//デバック用
-
-
 
 		// 更新または削除を行う
 		GroupsDAO sDao = new GroupsDAO();
@@ -119,12 +118,15 @@ public class GroupUpdateServlet extends HttpServlet {
 			}
 		}
 		else if(post1.equals("招待")) {
-			if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
-				System.out.println(request.getParameter("submit") + "実行");
-				request.setAttribute("result","内容を更新しました。");
-			}
-			else {			// 更新失敗
-				request.setAttribute("result","内容を更新できませんでした。");
+			if(sDao.cheack(invite)) {
+				if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
+					System.out.println(request.getParameter("submit") + "実行");
+					System.out.println();
+					request.setAttribute("result","内容を更新しました。");
+				}
+				else {			// 更新失敗
+					request.setAttribute("result","内容を更新できませんでした。");
+				}
 			}
 		}
 
