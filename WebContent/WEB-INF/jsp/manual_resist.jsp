@@ -67,7 +67,7 @@
 	          			    <input type="text" name="content" placeholder="内容">
 	          			  </td>
 	          			  <td>
-	          			    <input type="file" name="images">
+	          			    <input type="hidden" name="images">
 	          			  </td>
 	          			  <td>
 	          			    <img src="/C2/img/minusButton3.png"  id = "minus" onclick="deleteExample(this);">&emsp;<br>
