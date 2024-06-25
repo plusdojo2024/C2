@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GroupsDAO;
 import dao.SchedulesDAO;
 import dao.TasksDAO;
 import model.Accounts;
+import model.Groups;
 import model.Schedules;
 import model.Tasks;
 
@@ -61,6 +63,16 @@ public class TaskServlet extends HttpServlet {
 		//検索処理をおこなう
 		SchedulesDAO schedulesDao = new SchedulesDAO();
         List<Schedules> schedulesList = schedulesDao.selectList(group_number,deadline);
+      //ここから現在のグループ名を表示する処理
+      		//pr_groupを取得
+      		Accounts group = (Accounts)session.getAttribute("pr_group");
+      		int g = group.getPr_group();
+      		GroupsDAO gDao = new GroupsDAO();
+              List<Groups> cardList = gDao.selectGroupName(g);
+      		Groups gr = cardList.get(0);
+      		String group_name =gr.getGroup_name();
+              request.setAttribute("group_name", group_name);
+      //ここまで現在のグループ名を表示する処理
 
 		//リクエストスコープに格納する
 		request.setAttribute("schedulesList", schedulesList);

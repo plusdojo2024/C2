@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GroupsDAO;
 import dao.SchedulesDAO;
+import model.Accounts;
+import model.Groups;
 import model.Schedules;
 
 /**
@@ -43,6 +46,18 @@ public class ScheduleUpdateServlet extends HttpServlet {
         List<Schedules> scheduleList = schedulesDao.selectDetail(id);
 
 		request.setAttribute("scheduleList", scheduleList);
+
+		//ここから現在のグループ名を表示する処理
+  		//pr_groupを取得
+  		Accounts group = (Accounts)session.getAttribute("pr_group");
+  		int g = group.getPr_group();
+  		GroupsDAO gDao = new GroupsDAO();
+          List<Groups> cardList = gDao.selectGroupName(g);
+  		Groups gr = cardList.get(0);
+  		String group_name =gr.getGroup_name();
+          request.setAttribute("group_name", group_name);
+  //ここまで現在のグループ名を表示する処理
+
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_update.jsp");
 		dispatcher.forward(request, response);

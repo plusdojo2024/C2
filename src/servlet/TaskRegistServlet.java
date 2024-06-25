@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AccountsDAO;
+import dao.GroupsDAO;
 import dao.ManualsDAO;
 import dao.TasksDAO;
 import model.Accounts;
+import model.Groups;
 import model.LoginUser;
 import model.Manuals;
 import model.Tasks;
@@ -54,13 +56,23 @@ public class TaskRegistServlet extends HttpServlet {
 //		 ユーザーの検索処理を行う
 		AccountsDAO accountDao = new AccountsDAO();
         List<Accounts> accountList = accountDao.pr_account(new Accounts(user));
+        //ここから現在のグループ名を表示する処理
+  		//pr_groupを取得
+  		Accounts group = (Accounts)session.getAttribute("pr_group");
+  		int g = group.getPr_group();
+  		GroupsDAO gDao = new GroupsDAO();
+          List<Groups> cardList = gDao.selectGroupName(g);
+  		Groups gr = cardList.get(0);
+  		String group_name =gr.getGroup_name();
+          request.setAttribute("group_name", group_name);
+  //ここまで現在のグループ名を表示する処理
 
 //		 検索結果をリクエストスコープに格納する
 		request.setAttribute("accountList", accountList);
 //マニュアルリンクのプルダウンにグループの全てのmanual_name,idを埋め込む
       //セッションスコープからpr_groupを取得
-		Accounts group = (Accounts)session2.getAttribute("pr_group");
-		int pr_group = group.getPr_group();
+		Accounts grp = (Accounts)session2.getAttribute("pr_group");
+		int pr_group = grp.getPr_group();
 
 	  //pr_groupを使用して全てのマニュアルを検索
 		ManualsDAO mDao = new ManualsDAO();
