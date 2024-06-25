@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.GroupsDAO;
+import model.Accounts;
 import model.Groups;
 import model.LoginUser;
 
@@ -41,6 +42,16 @@ public class GroupCreateServlet extends HttpServlet {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
+		//ここから現在のグループ名を表示する処理
+				//pr_groupを取得
+				Accounts group = (Accounts)session.getAttribute("pr_group");
+				int pr_group = group.getPr_group();
+				GroupsDAO gDao = new GroupsDAO();
+		        List<Groups> cardList = gDao.selectGroupName(pr_group);
+				Groups g = cardList.get(0);
+				String group_name =g.getGroup_name();
+		        request.setAttribute("group_name", group_name);
+		//ここまで現在のグループ名を表示する処理
 
 		//グループ新規登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/create_group.jsp");

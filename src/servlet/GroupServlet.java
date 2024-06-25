@@ -55,6 +55,18 @@ public class GroupServlet extends HttpServlet {
 		//リクエストスコープに格納する
 		request.setAttribute("cardList", cardList);
 
+		//ここから現在のグループ名を表示する処理
+				//pr_groupを取得
+				Accounts group = (Accounts)session.getAttribute("pr_group");
+				int pr_group = group.getPr_group();
+				GroupsDAO gDao = new GroupsDAO();
+		        List<Groups> cList = gDao.selectGroupName(pr_group);
+				Groups g = cList.get(0);
+				String group_name =g.getGroup_name();
+		        request.setAttribute("group_name", group_name);
+		//ここまで現在のグループ名を表示する処理
+
+
 		// グループ一覧ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
 		dispatcher.forward(request, response);

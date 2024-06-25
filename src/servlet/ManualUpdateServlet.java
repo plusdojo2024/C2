@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GroupsDAO;
 import dao.ItemsDAO;
 import dao.ManualsDAO;
+import model.Accounts;
+import model.Groups;
 import model.Items;
 import model.LoginUser;
 import model.Manuals;
@@ -43,6 +46,16 @@ public class ManualUpdateServlet extends HttpServlet {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
+		//ここから現在のグループ名を表示する処理
+				//pr_groupを取得
+				Accounts group = (Accounts)session.getAttribute("pr_group");
+				int g = group.getPr_group();
+				GroupsDAO gDao = new GroupsDAO();
+		        List<Groups> cardList = gDao.selectGroupName(g);
+				Groups gr = cardList.get(0);
+				String group_name =gr.getGroup_name();
+		        request.setAttribute("group_name", group_name);
+		//ここまで現在のグループ名を表示する処理
 
 		// manualUpdateページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_update.jsp");
@@ -64,6 +77,14 @@ public class ManualUpdateServlet extends HttpServlet {
 		else {//ログインしていた場合の処理
 			System.out.println();
 			System.out.println("-------ManualUpdate画面-------");//デバック用
+
+			Accounts group = (Accounts)session.getAttribute("pr_group");
+			int g = group.getPr_group();
+			GroupsDAO gDao = new GroupsDAO();
+	        List<Groups> cardList = gDao.selectGroupName(g);
+			Groups gr = cardList.get(0);
+			String group_name =gr.getGroup_name();
+	        request.setAttribute("group_name", group_name);
 
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");

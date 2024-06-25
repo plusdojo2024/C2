@@ -37,7 +37,7 @@
 			</div>
 			<h5></h5>
 			<!-- 空の枠 -->
-			<h5></h5>
+			<h5>${group_name}</h5>
 			<!-- 空の枠 -->
 			<div class="today-logo">
 				<h5 id="today" class="header-content"></h5>

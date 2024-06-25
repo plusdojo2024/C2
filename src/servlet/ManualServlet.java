@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GroupsDAO;
 import dao.ManualsDAO;
+import model.Accounts;
+import model.Groups;
 import model.LoginUser;
 import model.Manuals;
 
@@ -56,7 +59,16 @@ public class ManualServlet extends HttpServlet {
 		//group_idでマニュアルを検索する処理を行う
 		ManualsDAO manualsDao = new ManualsDAO();
         List<Manuals> manualNameList = manualsDao.selectManuals(new Manuals(groupID));
-
+//ここから現在のグループ名を表示する処理
+		//pr_groupを取得
+		Accounts group = (Accounts)session.getAttribute("pr_group");
+		int g = group.getPr_group();
+		GroupsDAO gDao = new GroupsDAO();
+        List<Groups> cardList = gDao.selectGroupName(g);
+		Groups gr = cardList.get(0);
+		String group_name =gr.getGroup_name();
+        request.setAttribute("group_name", group_name);
+//ここまで現在のグループ名を表示する処理
         //検索結果をリクエストスコープに格納する
 		request.setAttribute("manualNameList", manualNameList);
 

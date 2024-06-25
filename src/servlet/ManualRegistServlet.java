@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.GroupsDAO;
 import dao.ItemsDAO;
+import model.Accounts;
+import model.Groups;
 import model.Items;
 import model.LoginUser;
 import model.Result;
@@ -40,6 +44,17 @@ public class ManualRegistServlet extends HttpServlet {
 			response.sendRedirect("/C2/LoginServlet");
 			return;
 		}
+
+		//ここから現在のグループ名を表示する処理
+				//pr_groupを取得
+				Accounts group = (Accounts)session.getAttribute("pr_group");
+				int g = group.getPr_group();
+				GroupsDAO gDao = new GroupsDAO();
+		        List<Groups> cardList = gDao.selectGroupName(g);
+				Groups gr = cardList.get(0);
+				String group_name =gr.getGroup_name();
+		        request.setAttribute("group_name", group_name);
+		//ここまで現在のグループ名を表示する処理
 
 		// manual_regist.jspページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manual_resist.jsp");
