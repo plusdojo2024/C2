@@ -40,9 +40,11 @@
 			</div>
 		</header>
 		<main>
-            <h1>task detail</h1>
+		  <div id="updatetasktitle">
+            <h1 id="updatetask">task detail</h1>
+          </div>
             <c:forEach var="e" items="${taskList}">
-            <form method="post" action="/C2/TaskUpdateServlet">
+            <form id="form" method="post" action="/C2/TaskUpdateServlet">
             	<input type="hidden" name="id" value="${e.id}" >
                 <table>
                     <tr>
@@ -65,9 +67,10 @@
                         <option label="${e.manual_name}">${e.id}</option>
                 	  </c:forEach>
                	    </select>
-
+					  <div class="formbox">
                         <input type="submit" name="submit" value="更新">
                         <input type="submit" name="submit" value="削除">
+					  </div>
             </form>
             </c:forEach>
             <!-- マニュアルボタン  -->

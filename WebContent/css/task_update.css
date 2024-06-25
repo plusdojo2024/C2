@@ -32,3 +32,25 @@
 		border:2px solid #8AAEC9;
 	}
 
+/*テキストボックス全体*/
+
+	.formbox {
+		text-align:center;
+		margin:auto 5px auto 5px;
+	}
+
+
+/*日付*/
+	input[name=deadline] {
+		width: 190px;
+		height: 40px;
+		border: none;
+		outline: none;
+		border-radius:10px;
+		color:#001746;
+		background-color:#C0F2D2;
+		font:22px UD デジタル 教科書体 NK-B;
+		text-align:center;
+	}
+
+
