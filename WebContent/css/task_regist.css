@@ -20,8 +20,8 @@
 
 /*フォームのボックス*/
 	#form {
-		width: 1300px;
-  		margin: 0px auto 80px auto;
+		width: 80%;
+  		/*margin: 0px auto 80px auto;*/
  		padding: 80px auto 30px auto;
 		/*border: 5px solid #8AAEC9;*/
   		background-color: white;
@@ -33,11 +33,15 @@
 
 	}
 
+.main-content{
+	display: flex;
+	justify-content: center;
+}
+
 /*テキストボックス全体*/
 
 	.formbox {
 		text-align:center;
-		margin:auto 5px auto 5px;
 	}
 
 
@@ -56,7 +60,7 @@
 
 /*タスクタイトル*/
 	input[name=task] {
-		width: 30em;
+		width: 70%;
 		height: 60px;
 		font:30px UD デジタル 教科書体 NK-B;
 		color:#001746;
@@ -71,13 +75,14 @@
 .dayLine{
 	border-bottom: 4px solid #7DE3A1;
 	width: 90%;
-	margin-left: 70px;
+	margin-left: 60px;
+
 }
 
 
 /*フォームのテキストボックスの大きさ*/
 	textarea[name=contents] {
-		width: 50em;
+		width: 700px;
 		height: 120px;
 		font:22px UD デジタル 教科書体 NK-B;
 		color:#001746;
@@ -125,6 +130,7 @@
 		border-radius:15px;
 		background-color:#F8D5D0;
 		text-align:center;
+		margin-top: 20px;
 	}
 
 /*toとfromの背景と文字*/
@@ -138,7 +144,7 @@
 
 /*okボタン列*/
 	#okbutton {
-		text-align: center;
+		/*text-align: center;*/
 		padding-right:0;
 		height: 120px;
 	}
@@ -161,6 +167,8 @@
     	text-align: center;
     	text-decoration: none;
     	transition: .3s;
+    	margin-top: 20px;
+    	margin-right: 60px;
 	}
 
 	.okbutton:hover {
@@ -172,3 +180,15 @@
 	#line2 {
 		display: flex;
 	}
+
+/*blockaとblockbを横に並べる*/
+div.blocka{
+	float: left;
+	width:70%;
+}
+
+div.blockb{
+	float: right;
+	width:30%;
+
+}

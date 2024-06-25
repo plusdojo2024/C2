@@ -43,40 +43,51 @@
 			<div id="newtasktitle">
             	<p id="newtask">New Task</p>
 			</div>
-			<div id="form" class=boxradius>
-            	<form method="post" action="/C2/TaskServletRegist">
-					<c:forEach var="e" items="${accountList}" >
-						<div class="formbox">
-							<div class="dayLine">
-					 			<input type="date" id="day" name="day">
-					 			<input type="text" name="task" placeholder="タスク　　　　　　　　　　　　">
-	                 			<br>
-	                 		</div>
-							<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
+			<div class="main-content">
+				<div id="form" class=boxradius>
+	            	<form method="post" action="/C2/TaskServletRegist">
 
-              				<div id="line2">
-                 				<div id="moji">
-                 					&emsp;To<input type="text" name="to">
-                 					From<input type="text" name="register" value="${e.nickname}" readonly="readonly">
-           						</div>
-           						<!-- ここにあったokボタンフォームを数行下に移動！ -->
-           	  				</div>
-           	  				<br>
-           				</div>
-            		</c:forEach>
-					<div class="formbox">
-						<div id="okbutton">
-           					<input type="submit" value="OK" class=okbutton>
-                			&emsp;&emsp;&emsp;<select name="manual_id" >
-                   				<option label="　">0</option>
-                      			<c:forEach var="e" items="${manualList}">
-                   	  				<option label="${e.manual_name}">${e.id}</option>
-               	 				</c:forEach>
-               				</select>
-               			</div>
-                    </div>
-				</form>
-            </div>
+							<c:forEach var="e" items="${accountList}" >
+								<div class="formbox">
+									<div class="dayLine">
+							 			<input type="date" id="day" name="day">
+							 			<input type="text" name="task" placeholder="タスク　　　　　　　　　　　　">
+			                 			<br>
+			                 		</div>
+									<div class="blocka">
+									<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
+
+		              					<div id="line2">
+		                 					<div id="moji">
+		                 						&emsp;To<input type="text" name="to">
+		                 						From<input type="text" name="register" value="${e.nickname}" readonly="readonly">
+		           							</div>
+		           							<!-- ここにあったokボタンフォームを数行下に移動！ -->
+		           	  					</div>
+		           	  					<br>
+		           					</div>
+		           				</div>
+		            		</c:forEach>
+
+
+						<div class="formbox">
+							<div id="okbutton">
+
+								<div class="blockb">
+	                				<select name="manual_id" >
+	                   					<option label="　">0</option>
+	                      				<c:forEach var="e" items="${manualList}">
+	                   	  					<option label="${e.manual_name}">${e.id}</option>
+	               	 					</c:forEach>
+	               					</select>
+	               					&emsp;&emsp;&emsp;
+	               					<input type="submit" value="OK" class=okbutton>
+	               				</div>
+	                    	</div>
+	               		</div>
+					</form>
+	            </div>
+	    	</div>
         </main>
 
 
