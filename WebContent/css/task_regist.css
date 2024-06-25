@@ -23,13 +23,14 @@
 		width: 1300px;
   		margin: 0px auto 80px auto;
  		padding: 80px auto 30px auto;
-  		border: 5px solid #8AAEC9;
+		/*border: 5px solid #8AAEC9;*/
   		background-color: white;
 	}
 
 	.boxradius {
 		border-radius:50px;
-		border:2px solid #8AAEC9;
+		border:5px solid #8AAEC9;
+
 	}
 
 /*テキストボックス全体*/
@@ -64,13 +65,19 @@
 		background-color:white;
 		border: none;
 		outline: none;
-		border-bottom: 4px solid #7DE3A1;
+
 	}
+
+.dayLine{
+	border-bottom: 4px solid #7DE3A1;
+	width: 90%;
+	margin-left: 70px;
+}
 
 
 /*フォームのテキストボックスの大きさ*/
 	textarea[name=contents] {
-		width: 36em;
+		width: 50em;
 		height: 120px;
 		font:22px UD デジタル 教科書体 NK-B;
 		color:#001746;
@@ -79,6 +86,7 @@
 		outline: none;
 		text-align: left;
 		border-radius:20px;
+		text-align: center;
 	}
 
 	input[name=to] {
@@ -128,21 +136,22 @@
 		font-size:28px;
 	}
 
-/*okボタン*/
+/*okボタン列*/
 	#okbutton {
 		text-align: center;
-		padding-right:130px;
+		padding-right:0;
+		height: 120px;
 	}
 
 	input[type=submit]{
   		width: 7em;
- 		height: 50px;
+ 		height: 80px;
 	}
 
 	.okbutton {
-		border-radius:10px;
+		border-radius:20px;
 		background-color: #001746;
-    	border: 2px solid #001746;
+    	border: 3px solid #001746;
     	font: 25px UD デジタル 教科書体 NK-B;
     	box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
 		color: white;

@@ -40,44 +40,46 @@
 			</div>
 		</header>
 		<main>
-		<div id="newtasktitle">
-            <p id="newtask">New Task</p>
-		</div>
-		<div id="form" class=boxradius>
-            <form method="post" action="/C2/TaskServletRegist">
-			<c:forEach var="e" items="${accountList}" >
-				<div class="formbox">
-				 	<input type="date" id="day" name="day">
-				 	<input type="text" name="task" placeholder="タスク">
-                 	<br>
+			<div id="newtasktitle">
+            	<p id="newtask">New Task</p>
+			</div>
+			<div id="form" class=boxradius>
+            	<form method="post" action="/C2/TaskServletRegist">
+					<c:forEach var="e" items="${accountList}" >
+						<div class="formbox">
+							<div class="dayLine">
+					 			<input type="date" id="day" name="day">
+					 			<input type="text" name="task" placeholder="タスク　　　　　　　　　　　　">
+	                 			<br>
+	                 		</div>
+							<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
 
-
-                 	<textarea name="contents" id="詳細" placeholder="詳細"></textarea>
-
-              <div id="line2">
-                 <div id="moji">
-                 		&emsp;To<input type="text" name="to">
-                 		From<input type="text" name="register" value="${e.nickname}" readonly="readonly">
-           		</div>
-           			<div id="okbutton">
-           			<input type="submit" value="OK" class=okbutton>
-           			</div>
-           	  </div>
-           	  <br>
-           		</div>
-            	</c:forEach>
+              				<div id="line2">
+                 				<div id="moji">
+                 					&emsp;To<input type="text" name="to">
+                 					From<input type="text" name="register" value="${e.nickname}" readonly="readonly">
+           						</div>
+           						<!-- ここにあったokボタンフォームを数行下に移動！ -->
+           	  				</div>
+           	  				<br>
+           				</div>
+            		</c:forEach>
 					<div class="formbox">
-                		&emsp;&emsp;&emsp;<select name="manual_id" >
-                    		<option label="　">0</option>
-                     	 <c:forEach var="e" items="${manualList}">
-                      	  <option label="${e.manual_name}">${e.id}</option>
-                	  	 </c:forEach>
-               	    	</select>
+						<div id="okbutton">
+           					<input type="submit" value="OK" class=okbutton>
+                			&emsp;&emsp;&emsp;<select name="manual_id" >
+                   				<option label="　">0</option>
+                      			<c:forEach var="e" items="${manualList}">
+                   	  				<option label="${e.manual_name}">${e.id}</option>
+               	 				</c:forEach>
+               				</select>
+               			</div>
                     </div>
-
-            </form>
+				</form>
             </div>
         </main>
+
+
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->
 		</footer>
