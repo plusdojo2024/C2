@@ -37,7 +37,23 @@
 			</div>
 			<h5></h5>
 			<!-- 空の枠 -->
-			<h5>${group_name}</h5>
+
+			<div style="position:relative; width:204px; height:141px; text-align:center;">
+				<a href="/C2/GroupServlet" class="header-content">
+						<img src="/C2/img/groupbutton.png" id="groupnamebutton">
+						<span style="
+							font-family:UD デジタル 教科書体 NK-B;
+							font-size:12px;
+							position:absolute;
+							top:60px;
+							display:block;
+							height:100%;
+							width:100%;
+						">${group_name}
+						</span>
+				</a>
+				</div>
+
 			<!-- 空の枠 -->
 			<div class="today-logo">
 				<h5 id="today" class="header-content"></h5>

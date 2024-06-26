@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>famiLink</title>
 <link rel="stylesheet" href="/C2/css/common.css">
+<link rel="stylesheet" href="/C2/css/group_update.css">
 </head>
 <body>
 	<header>
@@ -34,17 +35,33 @@
 					src="/C2/img/headerLogo2.png"></a>
 				<!-- ロゴ -->
 			</div>
-			<h5></h5>
-			<!-- 空の枠 -->
-			<h5>${group_name}</h5>
-			<!-- 空の枠 -->
+			<h5></h5><!-- 空の枠 -->
+
+				<div style="position:relative; width:204px; height:141px; text-align:center;">
+				<a href="/C2/GroupServlet" class="header-content">
+						<img src="/C2/img/groupbutton.png" id="groupnamebutton">
+						<span style="
+							font-family:UD デジタル 教科書体 NK-B;
+							font-size:12px;
+							position:absolute;
+							top:60px;
+							display:block;
+							height:100%;
+							width:100%;
+						">${group_name}
+						</span>
+				</a>
+				</div>
+
 			<div class="today-logo">
 				<h5 id="today" class="header-content"></h5>
 				<!-- 今日の日付 -->
 			</div>
 		</div>
 	</header>
+
 	<main>
+	<div id="form" class=boxradius>
 		<form id="update" method="post" action="/C2/GroupUpdateServlet">
 			<!--  -->
 			<table>
@@ -66,13 +83,18 @@
 					<td><h2>MEMBER</h2></td>
 					<td><input type="text" placeholder="例：para_man"
 						class="newMember" name="invite"></td>
-					<td><input type="submit" name="submit" value="招待"></td>
+					<td><input type="submit" name="submit" value="Invitation"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="submit" value="登録"></td>
+					<td>
+					<div id="okbutton">
+					<input type="submit" name="submit" value="OK" class=okbutton>
+					</div>
+					</td>
 				</tr>
 			</table>
 		</form>
+		</div>
 	</main>
 	<footer>
 		<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights
