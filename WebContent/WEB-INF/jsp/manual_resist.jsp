@@ -76,10 +76,10 @@
 	        			  </td>
 	        			</tr>
 						<tr id = "target">
-	          			  <td>
+	          			  <td class="tdclass">
 	          				&emsp;<input type="text" name="item" placeholder="項目">
 	          			  </td>
-	          			  <td>
+	          			  <td class="tdclass1">
 	          			    <input type="text" name="content" placeholder="内容">
 	          			  </td>
 	          			  <td>

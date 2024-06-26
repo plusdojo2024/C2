@@ -54,9 +54,10 @@
 		border-bottom: 4px solid #F3B4AB;
 	}
 
+
 	input[name=content] {
-		width: 30em;
-		height: 50px;
+		width: 100%;
+		height: 80px;
 		font-size:20px;
 		color:white;
 		margin-bottom:20px;
@@ -70,16 +71,28 @@
 		background-color: #F9E799;
 	}
 
+.tdclass{
+	width: 500px;
+	height: 30px;
+}
+
+.tdclass1{
+	margin-bottom: 0;
+	height: 30px;
+}
 	input[name=item]{
-		width: 12em;
-		height: 50px;
+		width: 400px;
+		height: 80px;
 		font-size:20px;
 		color:white;
-		margin-bottom:20px;
+		/*margin-bottom:20px;*/
 		border: none;
 		outline: none;
 		border-radius:10px;
 		background-color:#F3B4AB;
+		margin-left: 50px;
+		margin-right: 70px;
+		margin-bottom: 45px;
 	}
 
 	input[name=item]:hover{

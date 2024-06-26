@@ -107,6 +107,10 @@ input[name=item] {
 	width: 90%;
 }
 
+.items:hover{
+	background-color: #FAE2DE;
+	color: black;
+}
 .item-td{
 	text-align: center;
 }
@@ -114,13 +118,17 @@ input[name=item] {
 
 /*項目の内容*/
 input[name=content] {
-	background-color: #FAE2DE;
+	background-color: #F3B4AB;
 	border: none;
 	font-family:UD デジタル 教科書体 NP-B;
 	height: 80px;
 	border-radius:15px;
 	text-align: center;
 	font-size: 1.2rem;
+}
+
+.contents:hover{
+	background-color: #FAE2DE;
 }
 
 .contents{
