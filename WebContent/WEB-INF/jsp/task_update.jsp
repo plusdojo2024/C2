@@ -46,12 +46,16 @@
             <c:forEach var="e" items="${taskList}">
             <form id="form" method="post" action="/C2/TaskUpdateServlet">
             	<input type="hidden" name="id" value="${e.id}" >
+   					  <div class="dayLine">
                 <table>
                     <tr>
+
                         <td><input type="date" id="day" name="deadline" value="${e.deadline}"></td><!-- 期限 -->
                         <td><input type="text" name="task" value="${e.task}"></td>
                         <td><input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if>></td>
+
                     </tr>
+                    </div>
                     <tr>
                         <td><textarea name="contents">${e.contents}</textarea></td>
                     </tr>
