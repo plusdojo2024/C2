@@ -118,7 +118,7 @@ public class GroupUpdateServlet extends HttpServlet {
 
 
 		//"Update" == "更新"
-		if (post1.equals("登録")) {
+		if (post1.equals("OK")) {
 
 			if (sDao.update(new Groups(intGroupID, group_name, user_ID, editer, icon))) {		// 更新成功
 
@@ -128,7 +128,7 @@ public class GroupUpdateServlet extends HttpServlet {
 				request.setAttribute("result","内容を更新できませんでした。");
 			}
 		}
-		else if(post1.equals("招待")) {
+		else if(post1.equals("Invitation")) {
 			if(sDao.cheack(invite)) {
 				if(sDao.cheack2(intGroupID, invite)) {
 					if (sDao.invite(intGroupID, group_name, invite)) {		// 更新成功
