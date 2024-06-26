@@ -40,56 +40,61 @@
 			</div>
 		</header>
 		<main>
-		  <div id="updatetasktitle">
-            <h1 id="updatetask">task detail</h1>
-          </div>
-            <c:forEach var="e" items="${taskList}">
-            <form id="form" method="post" action="/C2/TaskUpdateServlet">
-            	<input type="hidden" name="id" value="${e.id}" >
-   					  <div class="dayLine">
-                <table>
-                    <tr>
+			<div id="updatetasktitle">
+            	<h1 id="updatetask">Task Detail</h1>
+          	</div>
+          	<div class="t-u-a">
+	          	<div class="task-update-all">
+		            <c:forEach var="e" items="${taskList}">
+			            <form id="form" method="post" action="/C2/TaskUpdateServlet">
+			            	<input type="hidden" name="id" value="${e.id}" >
+							<div class="dayLine">
+			           			<input type="date" id="day" name="deadline" value="${e.deadline}"><!-- 期限 -->
+			                    	<input type="text" name="task" value="${e.task}">
+			                    	<input type="checkbox" name="checkbox" class="check" style="accent-color: #7DE3A1;" value="yes"<c:if test="${e.checkbox}">checked</c:if>>
 
-                        <td><input type="date" id="day" name="deadline" value="${e.deadline}"></td><!-- 期限 -->
-                        <td><input type="text" name="task" value="${e.task}"></td>
-                        <td><input type="checkbox" name="checkbox" value="yes"<c:if test="${e.checkbox}">checked</c:if>></td>
+			                	</div>
+			                	<div class="blocka">
+									<textarea name="contents">${e.contents}</textarea>
+									<div class="tofrom">
+										&emsp;&emsp;To<input type="text" name="to" value="${e.to}">
+			                      		&emsp;&emsp;From<input type="text" name="register" value="${e.register}">
+			                		</div>
+								</div>
+				          		<!-- マニュアルリンク -->
+				          		<div class="blockb">
+					               	<select name="manual_id" >
+					                   	<option label="　">0</option>
+					     			    <c:forEach var="e" items="${manualList}">
+					      	        		<option label="${e.manual_name}">${e.id}</option>
+					          	  		</c:forEach>
+					              	</select>
+									<div class="formbox">
 
-                    </tr>
-                    </div>
-                    <tr>
-                        <td><textarea name="contents">${e.contents}</textarea></td>
-                    </tr>
-                    <tr>
-                        <td>To<input type="text" name="to" value="${e.to}"></td>
-                        <td>From<input type="text" name="register" value="${e.register}"></td>
-                    </tr>
-                </table>
-            	<!-- マニュアルリンク -->
-                	<select name="manual_id" >
-                    	<option label="　">0</option>
-                      <c:forEach var="e" items="${manualList}">
-                        <option label="${e.manual_name}">${e.id}</option>
-                	  </c:forEach>
-               	    </select>
-					  <div class="formbox">
-                        <input type="submit" name="submit" value="更新">
-                        <input type="submit" name="submit" value="削除">
-					  </div>
-            </form>
-            </c:forEach>
-            <!-- マニュアルボタン  -->
-            <form id="MB" method="post" action="/C2/ManualUpdateServlet">
-              <c:forEach var="e" items="${taskList}">
-              	<input type="hidden" name="id" value="${e.id}">
-			  </c:forEach>
-			  <c:forEach var="e" items="${taskList}">
-				<input type="hidden"  id="manual_id" name="manual_id" value="${e.manual_id}">
-				<input type="submit" value="${e.manual_link}">
-			  </c:forEach>
-	        </form>
-	        <p>
-				<span id="error_message"></span>
-			</p>
+					                     <input type="submit" name="submit" value="OK" class="button1">
+					                     <input type="submit" name="submit" value="Delete" class="button">
+									</div>
+								</div>
+				            </form>
+			            </c:forEach>
+
+			            <!-- マニュアルボタン  -->
+			            <div class="manual-link">
+				            <form id="MB" method="post" action="/C2/ManualUpdateServlet">
+				              <c:forEach var="e" items="${taskList}">
+				              	<input type="hidden" name="id" value="${e.id}">
+							  </c:forEach>
+							  <c:forEach var="e" items="${taskList}">
+								<input type="hidden"  id="manual_id" name="manual_id" value="${e.manual_id}">
+								<input type="submit" value="${e.manual_link}" class="manual-link-button">
+							  </c:forEach>
+					        </form>
+					     </div>
+				        <p>
+							<span id="error_message"></span>
+						</p>
+					</div>
+				</div>
     		</main>
 		<footer>
 			<p class="copyright">&copy; paraparaChahan(PLUS DOJO).ALL rights reserved.</p><!-- コピーライト -->

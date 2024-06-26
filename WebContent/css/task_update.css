@@ -11,6 +11,7 @@
 		margin: auto;
 		padding: 6px;
 		text-align: center;
+		font-family: Kristen ITC;
 	}
 
 	#updatetasktitle {
@@ -19,17 +20,21 @@
 	}
 
 /*フォームのボックス*/
-	#form {
-		width: 1300px;
-  		margin: 0px auto 80px auto;
- 		padding: 80px auto 30px auto;
-  		border: 5px solid #8AAEC9;
-  		background-color: white;
+
+.t-u-a{
+	display: flex;
+	justify-content: center;
+}
+	.task-update-all{
+		border-radius:50px;
+		border: 5px solid #8AAEC9;
+		width: 80%;
+
 	}
 
 	.boxradius {
 		border-radius:50px;
-		border:2px solid #8AAEC9;
+		/*border:2px solid #8AAEC9;*/
 	}
 
 /*テキストボックス全体*/
@@ -73,14 +78,22 @@
 
 }
 
+.check{
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	margin-top: 35px;
+	margin-bottom: 0;
+	background: white;
+}
 
 /*フォームのテキストボックスの大きさ*/
 	textarea[name=contents] {
-		width: 700px;
-		height: 120px;
+		width: 650px;
+		height: 145px;
 		font:22px UD デジタル 教科書体 NK-B;
 		color:#001746;
-		margin:15px 0px 20px 0px;
+		margin:20px 50px 20px 60px;
 		border:3px solid #7DE3A1;
 		outline: none;
 		text-align: left;
@@ -88,8 +101,17 @@
 		text-align: center;
 	}
 
+	.tofrom{
+		background-color:#8AAEC9;
+		width: 650px;
+		margin-left: 60px;
+		border-radius:15px;
+		color: white;
+		font-size: 25px;
+
+	}
 	input[name=to] {
-		width: 13em;
+		width: 10em;
 		height: 50px;
 		font:22px UD デジタル 教科書体 NK-B;
 		color:#001746;
@@ -101,7 +123,7 @@
 	}
 
 	input[name=register] {
-		width: 13em;
+		width: 10em;
 		height: 50px;
 		font:22px UD デジタル 教科書体 NK-B;
 		color:#001746;
@@ -111,3 +133,97 @@
 		background-color:#8AAEC9;
 		text-align:center;
 	}
+	select[name=manual_id] {
+		width: 320px;
+		height: 60px;
+		font-size:22px;
+		color:#EA7B6B;
+		border: none;
+		outline: none;
+		border-radius:15px;
+		background-color:#F8D5D0;
+		text-align:center;
+		margin-top: 100px;
+		margin-left: 70px;
+	}
+
+
+/*blockaとblockbを横に並べる*/
+div.blocka{
+	float: left;
+	width:60%;
+}
+
+div.blockb{
+	float: right;
+	width:40%;
+
+}
+
+	.button1 {
+		border-radius:20px;
+		background-color: white;
+    	border: 3px solid #001746;
+    	font: 25px UD デジタル 教科書体 NK-B;
+    	box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+		color: #001746;
+    	display: inline-block;
+    	font-weight: 700;
+		position: relative;
+    	text-align: center;
+    	text-decoration: none;
+    	transition: .3s;
+    	margin-top: 30px;
+    	margin-right: 20px;
+    	margin-bottom: 20px;
+    	width: 7em;
+    	height: 50px;
+	}
+
+	.button1:hover {
+		background-color: #001746;
+		color:white;
+
+	}
+
+
+	.button {
+		border-radius:20px;
+		background-color: #001746;
+    	border: 3px solid #001746;
+    	font: 25px UD デジタル 教科書体 NK-B;
+    	box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+		color: white;
+    	display: inline-block;
+    	font-weight: 700;
+		position: relative;
+    	text-align: center;
+    	text-decoration: none;
+    	transition: .3s;
+    	margin-top: 30px;
+    	margin-right: 20px;
+    	margin-bottom: 20px;
+    	width: 7em;
+    	height: 50px;
+	}
+
+	.button:hover {
+		background-color:white;
+		color:#001746;
+	}
+
+.manual-link{
+	position: absolute;
+	margin-left: 794px;
+	margin-top: 20px;
+}
+
+.manual-link-button{
+	border: none;
+	background-color:#EA7B6B;
+	width: 320px;
+	height: 60px;
+	border-radius:15px;
+	color: white;
+	font: 25px UD デジタル 教科書体 NK-B;
+}

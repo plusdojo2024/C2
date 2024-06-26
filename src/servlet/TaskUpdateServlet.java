@@ -111,7 +111,7 @@ public class TaskUpdateServlet extends HttpServlet {
 
 		TasksDAO bTask = new TasksDAO();
 		// 登録処理を行う
-		if (request.getParameter("submit").equals("更新") && manual_id!=0) {
+		if (request.getParameter("submit").equals("OK") && manual_id!=0) {
 			if (bTask.update(new Tasks(task, contents, deadline, register, to,
 				checkbox,manual_link,manual_id,id))) {	// 登録成功
 				request.setAttribute("result", "レコードを登録しました。");
@@ -120,16 +120,18 @@ public class TaskUpdateServlet extends HttpServlet {
 				request.setAttribute("result", "レコードを登録できませんでした。");
 			}
 		}
-		else if(request.getParameter("submit").equals("更新") && manual_id==0) {
+		else if(request.getParameter("submit").equals("OK") && manual_id==0) {
 			if (bTask.updateNoLink(new Tasks(task, contents, deadline, register, to,
 				checkbox,id))) {	// 登録成功
+				System.out.println("更新成功");
 				request.setAttribute("result", "レコードを登録しました。");
 			}
 			else {												// 登録失敗
+				System.out.println("更新失敗");
 				request.setAttribute("result", "レコードを登録できませんでした。");
 			}
 		}
-		else if(request.getParameter("submit").equals("削除")){
+		else if(request.getParameter("submit").equals("Delete")){
 			if (bTask.delete(id)) {	// 削除成功
 				request.setAttribute("result", "レコードを削除しました。");
 			}
