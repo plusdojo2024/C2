@@ -111,6 +111,12 @@ header {
     top: calc(50% - 5px);
 }
 
+/*グループネームボタン*/
+	#groupnamebutton {
+		margin-top:12px;
+	}
+
+
 /*メイン*/
 main {
   flex: 1;
