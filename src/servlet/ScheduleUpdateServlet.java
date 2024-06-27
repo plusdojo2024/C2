@@ -82,7 +82,7 @@ public class ScheduleUpdateServlet extends HttpServlet {
 		SchedulesDAO sDao = new SchedulesDAO();
 
 		//"Update" == "更新"
-		if (request.getParameter("submit").equals("更新")) {
+		if (request.getParameter("submit").equals("OK")) {
 
 		if (sDao.update(new Schedules(task, contents, register,deadline,id))) {		// 更新成功
 
@@ -94,7 +94,7 @@ public class ScheduleUpdateServlet extends HttpServlet {
 				System.out.println("スケジュール更新失敗");
 		}
 		}
-		else if(request.getParameter("submit").equals("削除")) {
+		else if(request.getParameter("submit").equals("Delete")) {
 			if (sDao.delete(id)) {	// 削除成功
 				request.setAttribute("result", "削除しました。");
 			}
