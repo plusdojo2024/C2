@@ -4,6 +4,7 @@
 //JDBC URL
     jdbc:h2:file:C:/pleiades/workspace/data/famiLink
 //
+/*以下のSQL文を実行していただければユーザーID:guest/pw:aaaでログインできます。*/
 
 /* アカウントDB */
 CREATE TABLE accounts ( 
@@ -80,3 +81,6 @@ CREATE TABLE items (
   regist_day		Date		,
   PRIMARY KEY(ID)
 ); 
+
+INSERT INTO Accounts Values ('guest','guest.mail','aaa','ゲスト',1);
+INSERT INTO groups VALUES (NULL, 'ゲストグループ', '未使用');
