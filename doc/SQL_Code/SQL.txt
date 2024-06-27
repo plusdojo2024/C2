@@ -44,7 +44,8 @@ deadline date ,
 register varchar (20),
 to varchar(20),
 checkbox boolean ,
-manual_link varchar (30)
+manual_link varchar (30),
+MANUAL_ID  int
 );
 
 /* 予定DB */
